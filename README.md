@@ -13,4 +13,5 @@ Tavoitteena on saada aikaan ohjelma, joka tekee seuraavat asiat:
     
 ## Viikkopalautukset
 
-    1. [Viikkopalautus 1](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Viikkopalautukset/Viikkopalautus1.md)
+ [Viikkopalautus1](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Viikkopalautukset/Viikkopalautus1.md)
+
