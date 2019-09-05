@@ -1,6 +1,6 @@
-#RaSkaslabra
+# RaSkaslabra
 
-##Projektin kuvaus
+## Projektin kuvaus
 
 Tämä sovelluksen tarkoitus on implementoida RSA-salaus algoritmi Java-ohjelmointikielellä. 
 
