@@ -10,3 +10,7 @@ Tavoitteena on saada aikaan ohjelma, joka tekee seuraavat asiat:
 
     1. Saatuaan tekstisyötteen se salaa sen RSA-salauksella
     2. Tekstisyötteen voi purkaa yksityisellä avaimella.
+    
+## Viikkopalautukset
+
+    1. [Viikkopalautus 1](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Viikkopalautukset/Viikkopalautus1.md)
