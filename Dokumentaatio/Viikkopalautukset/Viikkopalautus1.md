@@ -20,3 +20,5 @@ Olen hieman epävarma siitä, mikä riittää projektin laajuudeksi. Jos toteuta
 ### Mitä teen seuraavaksi?
 
 Aloitan salausalgoritmin konkreettisen ohjelmoinnin. Ensimmäisenä tavoitteena on saada tehtyä algoritmi, joka saatuaan tekstisyötteen salaa sen. 
+
+Käytetty aika: 4 tuntia.
