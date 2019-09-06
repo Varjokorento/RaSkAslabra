@@ -7,7 +7,7 @@ tuntui minusta kiinnostavalta. Olen lisäksi tehnyt ensimmäisen viikon palautuk
 
 ### Miten ohjelma on edistynyt?
 
-Ohjelma ei ole edistynyt muuten kuin, että olen tehnyt Java-projektin sekä repositorion. 
+Ohjelma ei ole edistynyt muuten kuin, että olen tehnyt Java-projektin mavenilla sekä repositorion. 
 
 ### Mitä opin tällä viikolla?
 
