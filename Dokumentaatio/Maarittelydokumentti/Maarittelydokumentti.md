@@ -8,7 +8,8 @@ Toteutan RSA(Rivest-Shamir-Adleman)-algoritmin työssäni.
 
 Ongelma, joka ratkaistaan, on, miten saa salattua tietoa, niin, että sen lukeminen on mahdollista. Valitsin kyseisen algoritmin sen vuoksi, että minua henkilökohtaisesti on aina kiinnostanut kryptografia. 
 
-Ohjelma tekee kaksi asiaa:
+Ohjelma tekee kolme RSA-salauksen osiota.
+
   1. Generoi julkisen ja yksityisen avaimen
   2. Salaa annetun syötteen syötetyllä julkisella avaimella.
   3. Purkaa salauksen, kun ohjelmalle syötetään yksityinen avain.
@@ -21,7 +22,7 @@ Tämän jälkeen käyttäjä voi syöttää salatun tekstin sekä yksityisen ava
 
 ## Tavoitteena olevat aika- ja tilavaativuudet
 
-RSA-algoritmin aikavaativuus perustee sen eri osien aikavaativuuteen. RSA-algoritmin aikavaativuus on hieman lähteistä [riippuen](https://crypto.stackexchange.com/questions/6164/how-do-i-derive-the-time-complexity-of-encryption-and-decryption-based-on-modula) yleisesti O(log(N^3)), kun yksityinen avain generoidaan ja salaus puretaan ja O(log(N^2)), kun julkinen avain generoidaan ja teksti salataan. Näitä aikavaativuuksia itse tavoittelen. 
+RSA-algoritmi etenee osissa. Näin ollen RSA-algoritmin aikavaativuus perustee sen eri osien aikavaativuuteen. Osat ovat matemaattisia operaatioita, jotka voi toteuttaa eri tavoilla. RSA-algoritmin aikavaativuus on hieman lähteistä [riippuen](https://crypto.stackexchange.com/questions/6164/how-do-i-derive-the-time-complexity-of-encryption-and-decryption-based-on-modula) yleisesti O(log(N^3)), kun yksityinen avain generoidaan ja salaus puretaan ja O(log(N^2)), kun julkinen avain generoidaan ja teksti salataan. Näitä aikavaativuuksia itse tavoittelen. 
 
 RSA-algoritmin tilavaativuus on O(1), sillä lisätty syöte ei vaikuta siihen, montako muuttujaa täytyy varata. 
 
