@@ -5,6 +5,7 @@ import RSATool.RSATool;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
@@ -12,7 +13,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws InvalidKeyException, BadPaddingException, NoSuchPaddingException, IllegalBlockSizeException {
+    public static void main(String[] args) throws InvalidKeyException, BadPaddingException, NoSuchPaddingException, IllegalBlockSizeException, IOException {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter plain text");
@@ -23,6 +24,7 @@ public class Main {
             System.out.println("It has been encryptered");
             System.out.println(AsciiUtil.getStringFromByteArray(encryptedText));
             byte[] decipheredText = rsaTool.decrypt(encryptedText);
+            rsaTool.writeKeysToFile();
             System.out.println(AsciiUtil.getStringFromByteArray(decipheredText));
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();

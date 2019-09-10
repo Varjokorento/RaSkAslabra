@@ -14,34 +14,32 @@ public class KeyUtil {
     private static final String PRIVATE_KEY = "privateKey";
 
 
-    public void savePublicKeyToFile(KeyPair keyPair) throws IOException {
+    public void savePublicKeyToFile(PublicKey pubKey) throws IOException {
         try (FileOutputStream out = new FileOutputStream(PUBLIC_KEY + ".pub")) {
-            out.write(keyPair.getPublic().getEncoded());
+            out.write(pubKey.getEncoded());
         }
     }
 
-    public void savePrivateKeToFile(KeyPair keyPair) throws IOException {
-        try (FileOutputStream out = new FileOutputStream(PRIVATE_KEY + ".pub")) {
-            out.write(keyPair.getPrivate().getEncoded());
+    public void savePrivateKeyToFile(PrivateKey privateKey) throws IOException {
+        try (FileOutputStream out = new FileOutputStream(PRIVATE_KEY + ".key")) {
+            out.write(privateKey.getEncoded());
         }
     }
-    //TODO
-    public PublicKey readPublicKeyFile() throws NoSuchAlgorithmException, InvalidKeySpecException {
-    /*    byte[] bytes = Files.readAllBytes(Paths.get(pubKeyFile));
+
+    public static PublicKey readPublicKeyFile(String path) throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
+        byte[] bytes = Files.readAllBytes(Paths.get(path));
         X509EncodedKeySpec ks = new X509EncodedKeySpec(bytes);
         KeyFactory kf = KeyFactory.getInstance("RSA");
         PublicKey pub = kf.generatePublic(ks);
-        return pub;*/
-        return null;
+        return pub;
     }
     //TODO
-    public PrivateKey readPrivateKeyFile() throws NoSuchAlgorithmException, InvalidKeySpecException {
-        /*
-        byte[] bytes = Files.readAllBytes(Paths.get(pvtKeyFile));
+    public static PrivateKey readPrivateKeyFile(String path) throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
+        byte[] bytes = Files.readAllBytes(Paths.get(path));
         PKCS8EncodedKeySpec ks = new PKCS8EncodedKeySpec(bytes);
         KeyFactory kf = KeyFactory.getInstance("RSA");
-        PrivateKey pvt = kf.generatePrivate(ks);*/
-        return null;
+        PrivateKey pvt = kf.generatePrivate(ks);
+        return pvt;
     }
 
 }
