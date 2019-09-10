@@ -1,4 +1,16 @@
-package Encrypter;
+package encrypter;
+
+import keyGenerators.KeyGenerator;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import java.io.FileInputStream;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.util.Arrays;
 
 public class Encrypter {
 
@@ -6,16 +18,10 @@ public class Encrypter {
         //
     }
 
-    public char encrypt(String plainText) {
-        char[] charArray = plainText.toCharArray();
-        int[] intArray = new int[charArray.length];
-        for (int i = 0; i < charArray.length; i++) {
-             intArray[i] = (int) charArray[i];
-        }
-        double number = (double) intArray[0];
-        double powered = Math.pow(number, 5);
-        double remainder = (int) powered % 14;
-        char r = (char) remainder;
-        return r;
+    public byte[] encrypt(String plainText, PrivateKey privateKey) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
+        Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+        cipher.init(Cipher.ENCRYPT_MODE, privateKey);
+        byte[] ciphered = cipher.doFinal(plainText.getBytes());
+        return ciphered;
     }
 }
