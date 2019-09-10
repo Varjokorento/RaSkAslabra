@@ -20,5 +20,8 @@ Tavoitteena on saada aikaan ohjelma, joka tekee seuraavat asiat:
 
  [Viikkopalautus1](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Viikkopalautukset/Viikkopalautus1.md)
  
+ [Viikkopalautus2](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Viikkopalautukset/Viikkopalautus2.md)
+ 
+ 
 
 
