@@ -14,18 +14,26 @@ public class KeyUtil {
     private static final String PRIVATE_KEY = "privateKey";
 
 
+    /**
+     * Saves public Key to .pub file
+     */
     public void savePublicKeyToFile(PublicKey pubKey) throws IOException {
         try (FileOutputStream out = new FileOutputStream(PUBLIC_KEY + ".pub")) {
             out.write(pubKey.getEncoded());
         }
     }
-
+    /**
+     * Saves private Key to .key file
+     */
     public void savePrivateKeyToFile(PrivateKey privateKey) throws IOException {
         try (FileOutputStream out = new FileOutputStream(PRIVATE_KEY + ".key")) {
             out.write(privateKey.getEncoded());
         }
     }
-
+    /**
+     * Reads publicKey from file
+     * @return PublicKey
+     */
     public static PublicKey readPublicKeyFile(String path) throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
         byte[] bytes = Files.readAllBytes(Paths.get(path));
         X509EncodedKeySpec ks = new X509EncodedKeySpec(bytes);
@@ -33,7 +41,11 @@ public class KeyUtil {
         PublicKey pub = kf.generatePublic(ks);
         return pub;
     }
-    //TODO
+
+    /**
+     * Reads privateKey from file
+     * @return privateKey
+     */
     public static PrivateKey readPrivateKeyFile(String path) throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
         byte[] bytes = Files.readAllBytes(Paths.get(path));
         PKCS8EncodedKeySpec ks = new PKCS8EncodedKeySpec(bytes);

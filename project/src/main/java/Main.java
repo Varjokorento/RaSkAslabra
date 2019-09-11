@@ -20,6 +20,7 @@ public class Main {
         String plainText = scanner.nextLine();
         try {
             RSATool rsaTool = new RSATool();
+            rsaTool.generateKeys();
             byte[] encryptedText = rsaTool.encrypt(plainText);
             System.out.println("It has been encryptered");
             System.out.println(AsciiUtil.getStringFromByteArray(encryptedText));

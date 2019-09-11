@@ -12,6 +12,12 @@ import java.util.Arrays;
 
 public class Decrypter {
 
+
+    /**
+     * Decrypts a given byteArray with given public key
+     * @return decrypted byteArray
+     */
+
     public byte[] decrypt(byte[] cyphered, PublicKey publicKey) throws
             NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");

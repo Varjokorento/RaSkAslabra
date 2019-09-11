@@ -14,10 +14,12 @@ import java.util.Arrays;
 
 public class Encrypter {
 
-    public Encrypter() {
-        //
-    }
 
+
+    /**
+     * Encrypts a given byteArray with given privateKey
+     * @return encrypted byteArray
+     */
     public byte[] encrypt(String plainText, PrivateKey privateKey) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
         cipher.init(Cipher.ENCRYPT_MODE, privateKey);
