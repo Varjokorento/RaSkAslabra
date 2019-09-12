@@ -2,9 +2,9 @@ package decrypterTest;
 
 import decrypter.Decrypter;
 import encrypter.Encrypter;
-import keyGenerators.KeyUtil;
+import keygenerators.KeyUtil;
+import org.junit.Test;
 
-import org.junit.jupiter.api.Test;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -16,7 +16,8 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
+
 
 public class DecrypterTest {
 

@@ -1,4 +1,4 @@
-package asciiUtil;
+package asciiutil;
 
 import java.nio.charset.StandardCharsets;
 

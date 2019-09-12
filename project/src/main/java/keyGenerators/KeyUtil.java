@@ -1,4 +1,4 @@
-package keyGenerators;
+package keygenerators;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

@@ -1,7 +1,7 @@
 package asciiUtilTest;
 
-import asciiUtil.AsciiUtil;
-import org.junit.jupiter.api.Test;
+import asciiutil.AsciiUtil;
+import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

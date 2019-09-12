@@ -1,6 +1,5 @@
-import asciiUtil.AsciiUtil;
-import decrypter.Decrypter;
-import RSATool.RSATool;
+import asciiutil.AsciiUtil;
+import rsatool.RSATool;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -8,7 +7,6 @@ import javax.crypto.NoSuchPaddingException;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {

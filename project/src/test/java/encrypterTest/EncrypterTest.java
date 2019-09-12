@@ -2,8 +2,8 @@ package encrypterTest;
 
 import decrypter.Decrypter;
 import encrypter.Encrypter;
-import keyGenerators.KeyUtil;
-import org.junit.jupiter.api.Test;
+import keygenerators.KeyUtil;
+import org.junit.Test;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;

@@ -1,9 +1,9 @@
-package RSATool;
+package rsatool;
 
 import decrypter.Decrypter;
 import encrypter.Encrypter;
-import keyGenerators.KeyGenerator;
-import keyGenerators.KeyUtil;
+import keygenerators.KeyGenerator;
+import keygenerators.KeyUtil;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;

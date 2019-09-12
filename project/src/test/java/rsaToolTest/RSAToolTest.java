@@ -1,33 +1,25 @@
 package rsaToolTest;
 
-import asciiUtil.AsciiUtil;
+import asciiutil.AsciiUtil;
 import decrypter.Decrypter;
 import encrypter.Encrypter;
-import keyGenerators.KeyGenerator;
-import keyGenerators.KeyUtil;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import keygenerators.KeyGenerator;
+import org.junit.Before;
+import org.junit.Test;
 import org.mockito.Mock;
 
-import RSATool.RSATool;
+import rsatool.RSATool;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
-import java.security.spec.InvalidKeySpecException;
-
-import static org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 public class RSAToolTest {
@@ -49,7 +41,7 @@ public class RSAToolTest {
 
     private PrivateKey testPrivateKey;
 
-    @BeforeEach
+    @Before
     public void setUp() {
         initMocks(this);
         try {
@@ -64,15 +56,7 @@ public class RSAToolTest {
         try {
             rsaTool.encrypt(testString);
             verify(encrypter).encrypt(anyString(), any(PrivateKey.class));
-        } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
-        } catch (BadPaddingException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (NoSuchPaddingException e) {
+        } catch (IllegalBlockSizeException | NoSuchPaddingException | NoSuchAlgorithmException | BadPaddingException | InvalidKeyException e) {
             e.printStackTrace();
         }
     }
@@ -81,15 +65,7 @@ public class RSAToolTest {
         try {
             rsaTool.decrypt(testString.getBytes());
             verify(decrypter.decrypt(any(byte[].class), any(PublicKey.class)));
-        } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
-        } catch (BadPaddingException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (NoSuchPaddingException e) {
+        } catch (IllegalBlockSizeException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | NoSuchPaddingException e) {
             e.printStackTrace();
         }
 

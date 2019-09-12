@@ -1,10 +1,10 @@
-package keyGenerators;
+package keygenerators;
 
 import java.security.*;
 
 public class KeyGenerator {
 
-    private KeyPairGenerator keyGenerator;
+    private KeyPairGenerator keyPairGenerator;
     private KeyPair keyPair;
 
 
@@ -12,20 +12,20 @@ public class KeyGenerator {
     /**
      * Constructor for Keygenerator.
      * Gets a keySize as a parameter.
-     * Initializes a keyGenerator with the keySize
+     * Initializes a keyPairGenerator with the keySize
      */
     public KeyGenerator(int keySize) throws NoSuchAlgorithmException {
-        this.keyGenerator = KeyPairGenerator.getInstance("RSA");
-        keyGenerator.initialize(keySize);
+        this.keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+        keyPairGenerator.initialize(keySize);
     }
 
 
     /**
-     * Generates keyPar with keyGenerator.
+     * Generates keyPar with keyPairGenerator.
      *
      */
     public void generateKeyPair() {
-        keyPair = keyGenerator.generateKeyPair();
+        keyPair = keyPairGenerator.generateKeyPair();
     }
 
     /**
