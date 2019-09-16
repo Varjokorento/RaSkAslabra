@@ -4,8 +4,8 @@ import java.security.*;
 
 public class KeyGenerator {
 
-    private KeyPairGenerator keyPairGenerator;
-    private KeyPair keyPair;
+    private KeyPairGeneratorImpl keyPairGenerator;
+    private KeyPairImpl keyPair;
 
 
 
@@ -14,9 +14,8 @@ public class KeyGenerator {
      * Gets a keySize as a parameter.
      * Initializes a keyPairGenerator with the keySize
      */
-    public KeyGenerator(int keySize) throws NoSuchAlgorithmException {
-        this.keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-        keyPairGenerator.initialize(keySize);
+    public KeyGenerator(int keySize) {
+        this.keyPairGenerator= new KeyPairGeneratorImpl();
     }
 
 
@@ -25,22 +24,22 @@ public class KeyGenerator {
      *
      */
     public void generateKeyPair() {
-        keyPair = keyPairGenerator.generateKeyPair();
+        keyPair = keyPairGenerator.generateKeyPair(2);
     }
 
     /**
      * Returns generated public key
      * @return PublicKey
      */
-    public PublicKey getPublicKey() {
-        return keyPair.getPublic();
+    public PublicKeyImpl getPublicKey() {
+        return keyPair.getPublicKey();
     }
     /**
      * Returns generated private key
      * @return PrivateKey
      */
-    public PrivateKey getPrivateKey() {
-        return keyPair.getPrivate();
+    public PrivateKeyImpl getPrivateKey() {
+        return keyPair.getPrivateKey();
     }
 
 
