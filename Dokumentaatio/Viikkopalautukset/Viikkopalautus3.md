@@ -3,17 +3,22 @@
 ### Mitä olen tehnyt?
 
 Olen taas lukenut lisää RSA-algoritmista ja siitä, miten se toimii. Olen korvannut avainten generoinnin omilla implementaatioilla, jotka
-generiovat suuria alkulukuja. 
+generiovat suuria alkulukuja ja laskevat niiden perusteella julkisen sekä yksityisen avaimen. Tämä vei huomattavasti aikaa minulta. 
 
 ### Miten ohjelma on edistynyt?
 
-Olen toteuttanut avainten generoimisen omien implementaatioiden kanssa. Tähän mennessä olen implementoinut potenssit ja alkulukujen generoimisen.
+Olen toteuttanut avainten generoimisen omien implementaatioiden kanssa. Tähän mennessä olen implementoinut potenssit ja alkulukujen generoimisen. Ohjelma on ottanut tietyssä mielessä takapakkia viime viikkoisesta, sillä nyt tekstiä ei pysty vielä kryptaamaan. Tämä ei ole kuitenkaan todellista takapakkia, sillä edellisen viikon implementaatiossa käytettiin valmiita krypto- ja securitykirjastoja, joilla tämä RSA-algoritmi oli triviaali toteuttaa. 
+
+Ohjelma nyt mielestäni oikeaoppisesti generoi avaimet. Tällä hetkellä avaimien kokoon ei voi vaikuttaa, mutta tämän toteutan myöhemmillä viikoilla. 
 
 ### Mitä opin tällä viikolla?
 
+Opin huomattavasti RSA-algoritmin matemaattisesta taustasta sekä siitä, miten se toteutetaan suhteellisen tehokkaasti Javalla. 
 
 ### Mitä jäi epäselväksi?
 
 ### Mitä teen seuraavaksi?
 
-Käytetty aika: 2 tuntia. 
+Seuraavaksi aion tehdä itse kryptauksen ja dekryptauksen. Tämä vaihe myös validoi sen, että toimivatko avaimeni todella. Sen jälkeen, kun tämä on tehty, aion implementoida omat tietorakenteeni (linkkilista ja tavallinen lista), jonka jälkeen hioa ja kaunistella koodiani. 
+
+Käytetty aika: 6 tuntia. 
