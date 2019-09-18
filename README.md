@@ -20,6 +20,11 @@ Testit suoritetaan komennolla
 ```
 mvn test
 ```
+Jacoco generoidaan seuraavalla komennolla (Sijaitsee target/site-kansiossa)
+```
+mvn jacoco:report
+```
+
 
 ### Checkstyle
 
