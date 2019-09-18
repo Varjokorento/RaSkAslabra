@@ -16,17 +16,13 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter plain text");
         String plainText = scanner.nextLine();
-        try {
-            RSATool rsaTool = new RSATool();
-            rsaTool.generateKeys();
-            byte[] encryptedText = rsaTool.encrypt(plainText);
-            System.out.println("It has been encryptered");
-            System.out.println(AsciiUtil.getStringFromByteArray(encryptedText));
-            byte[] decipheredText = rsaTool.decrypt(encryptedText);
-            rsaTool.writeKeysToFile();
-            System.out.println(AsciiUtil.getStringFromByteArray(decipheredText));
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
+        RSATool rsaTool = new RSATool();
+        rsaTool.generateKeys();
+            //byte[] encryptedText = rsaTool.encrypt(plainText);
+        System.out.println("It has been encryptered");
+           // System.out.println(AsciiUtil.getStringFromByteArray(encryptedText));
+            //byte[] decipheredText = rsaTool.decrypt(encryptedText);
+        rsaTool.writeKeysToFile();
+           // System.out.println(AsciiUtil.getStringFromByteArray(decipheredText));
     }
 }

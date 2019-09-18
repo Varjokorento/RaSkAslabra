@@ -23,9 +23,6 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.0</version>
                 <configuration>
-                    <excludes>
-                        <exclude>com/mycompany/escapetrain/controller/*</exclude>
-                    </excludes>
                 </configuration>
                 <executions>
                     <execution>

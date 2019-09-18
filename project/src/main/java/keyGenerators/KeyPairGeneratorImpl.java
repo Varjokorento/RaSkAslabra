@@ -1,50 +1,83 @@
 package keygenerators;
 
 
-import utils.RandomImpl;
+import utils.PrimeNumberGenerator;
 
 import java.math.BigInteger;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.security.SecureRandom;
+import java.util.Random;
 
 public class KeyPairGeneratorImpl {
 
     public KeyPairImpl generateKeyPair(int keySize) {
-        BigInteger p = generateLargePrime();
-        BigInteger q = generateLargePrime();
-        return new KeyPairImpl(new PublicKeyImpl(p), new PrivateKeyImpl(q));
-    }
-
-    public BigInteger generateLargePrime() {
-        int randomInteger = RandomImpl.generateRandomInteger();
-        BigInteger largePrime = sieveOfEratosthenes(randomInteger);
-        return largePrime;
+        BigInteger p = PrimeNumberGenerator.generateLargePrime();
+        BigInteger q = PrimeNumberGenerator.generateLargePrime();
+        BigInteger n = findN(p, q);
+        BigInteger phi = getPhi(p, q);
+        BigInteger e = genE(phi);
+        BigInteger d = extEuclid(e, phi)[1];
+        return new KeyPairImpl(new PublicKeyImpl(e), new PrivateKeyImpl(d));
     }
 
     /**
-     * Generates a large prime from int n using sieve of eratosthenes algorithm
-     *  O(n log n).
-     * @param n
-     * @return BigInteger
+     * Find mod n from keys
+     * @param p publicKey
+     * @param q privateKey
+     * @return mod n
      */
-    private BigInteger sieveOfEratosthenes(int n) {
-        boolean prime[] = new boolean[n + 1];
-        Arrays.fill(prime, true);
-        for (int p = 2; p * p <= n; p++) {
-            if (prime[p]) {
-                for (int i = p * 2; i <= n; i += p) {
-                    prime[i] = false;
-                }
-            }
+
+    private BigInteger findN(BigInteger p, BigInteger q) {
+        return p.multiply(q);
+    }
+
+
+    /** Compute phi(n) (Euler's totient function)
+     *  phi(n) = (p-1)(q-1)
+     * @return phi
+     */
+    private BigInteger getPhi(BigInteger p, BigInteger q) {
+        return (p.subtract(BigInteger.ONE)).multiply(q.subtract(BigInteger.ONE));
+    }
+
+    /**
+     * Generate e by finding a Phi such that the greatest common denominator is one
+     * @param phi
+     * @return
+     */
+
+    static BigInteger genE(BigInteger phi) {
+        Random rand = new SecureRandom();
+        BigInteger e;
+        do e = new BigInteger(phi.bitLength(), rand);
+        while (e.compareTo(BigInteger.ONE) <= 0
+                || e.compareTo(phi) >= 0
+                || !greatestCommonDenominator(phi, e).equals(BigInteger.ONE));
+        return e;
+    }
+
+    static BigInteger greatestCommonDenominator(BigInteger a, BigInteger b) {
+        if (b.equals(BigInteger.ZERO)) {
+            return a;
+        } else {
+            return greatestCommonDenominator(b, a.mod(b));
         }
-        List<Integer> primeNumbers = new LinkedList<>();
-        for (int i = 2; i <= n; i++) {
-            if (prime[i]) {
-                primeNumbers.add(i);
-            }
-        }
-        Integer bigPrime = primeNumbers.get(primeNumbers.size()-1);
-        return BigInteger.valueOf(bigPrime.intValue());
+    }
+
+    /** Extended Euclidean algorithm to solve Bezout's identity (ax + by = gcd(a,b))
+     * and finds the multiplicative inverse which is the solution to ax ≡ 1 (mod m)
+     * @return [d, p, q] where d = gcd(a,b) and ap + bq = d
+     */
+
+    static BigInteger[] extEuclid(BigInteger a, BigInteger b) {
+        if (b.equals(BigInteger.ZERO)) return new BigInteger[] {
+                a, BigInteger.ONE, BigInteger.ZERO
+        };
+        BigInteger[] values = extEuclid(b, a.mod(b));
+        BigInteger d = values[0];
+        BigInteger p = values[2];
+        BigInteger q = values[1].subtract(a.divide(b).multiply(values[2]));
+        return new BigInteger[] {
+                d, p, q
+        };
     }
 }

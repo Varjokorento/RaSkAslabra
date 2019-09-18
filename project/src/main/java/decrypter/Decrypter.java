@@ -1,5 +1,7 @@
 package decrypter;
 
+import keygenerators.PublicKeyImpl;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -12,6 +14,12 @@ import java.util.Arrays;
 
 public class Decrypter {
 
+
+
+    public byte[] decrypt(byte[] cyphere, PublicKeyImpl publicKey) {
+        // TODO Implement
+        return null;
+    }
 
     /**
      * Decrypts a given byteArray with given public key

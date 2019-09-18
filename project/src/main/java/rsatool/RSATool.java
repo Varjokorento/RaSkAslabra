@@ -11,7 +11,6 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import java.io.IOException;
-import java.math.BigInteger;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
@@ -22,14 +21,12 @@ public class RSATool {
     private Encrypter encrypter;
     private Decrypter decrypter;
     private KeyUtil keyUtil;
-    private BigInteger n;
-    private BigInteger phi;
 
     /**
      * Constructor for RSATool.
      * RSATool functions as a sort of facade for the algorithm
      */
-    public RSATool() throws NoSuchAlgorithmException {
+    public RSATool() {
         this.keyGenerator = new KeyGenerator(2024);
         this.encrypter = new Encrypter();
         this.decrypter = new Decrypter();
@@ -43,24 +40,24 @@ public class RSATool {
         keyGenerator.generateKeyPair();
         this.publicKey = keyGenerator.getPublicKey();
         this.privateKey = keyGenerator.getPrivateKey();
-        this.n = findN(publicKey.getPublicKey(), privateKey.getPrivateKey());
-        this.phi = getPhi(publicKey.getPublicKey(), privateKey.getPrivateKey());
     }
 
     /**
      * Calls encrypter to encrypt a plaintext String.
      * @return encrypted byteArray of String.
      */
-    public byte[] encrypt(String plainText) throws IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException {
-        //return encrypter.encrypt(plainText, this.privateKey);
+    public byte[] encrypt(String plainText) {
+        byte[] encrypted = encrypter.encrypt(plainText, this.privateKey);
+        return encrypted;
     }
 
     /**
      * Calls decrypter to decipher a cryptedByteArray
      * @return decrypted byteArray of String.
      */
-    public byte[] decrypt(byte[] cryptedByteArray) throws IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException {
-        //return decrypter.decrypt(cryptedByteArray, this.publicKey);
+    public byte[] decrypt(byte[] cryptedByteArray) {
+        byte[] decrypted = decrypter.decrypt(cryptedByteArray, this.publicKey);
+        return decrypted;
     }
 
     /**
@@ -72,24 +69,5 @@ public class RSATool {
        // keyUtil.savePrivateKeyToFile(this.privateKey);
     }
 
-    /**
-     * Find mod n from keys
-     * @param p publicKey
-     * @param q privateKey
-     * @return mod n
-     */
-
-    private BigInteger findN(BigInteger p, BigInteger q) {
-        return p.multiply(q);
-    }
-
-
-    /** Compute Phi(n) (Euler's totient function)
-     *  Phi(n) = (p-1)(q-1)
-     * @return phi
-     */
-    public BigInteger getPhi(BigInteger p, BigInteger q) {
-        return (p.subtract(BigInteger.ONE)).multiply(q.subtract(BigInteger.ONE));
-    }
 
 }

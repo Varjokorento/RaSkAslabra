@@ -1,5 +1,7 @@
 package encrypter;
 
+import keygenerators.PrivateKeyImpl;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -11,6 +13,11 @@ import java.security.PrivateKey;
 public class Encrypter {
 
 
+
+    public byte[] encrypt(String plainText, PrivateKeyImpl privateKey) {
+        //TODO Implement
+        return null;
+    }
 
     /**
      * Encrypts a given byteArray with given privateKey
