@@ -9,7 +9,6 @@ import static junit.framework.TestCase.assertTrue;
 
 public class PrimeNumberGeneratorTest {
 
-
     @Test
     public void generatorNumbersArePrimes() {
         BigInteger number = PrimeNumberGenerator.generateLargePrime();

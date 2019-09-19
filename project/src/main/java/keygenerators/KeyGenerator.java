@@ -15,7 +15,7 @@ public class KeyGenerator {
      * Initializes a keyPairGenerator with the keySize
      */
     public KeyGenerator(int keySize) {
-        this.keyPairGenerator= new KeyPairGeneratorImpl();
+        this.keyPairGenerator = new KeyPairGeneratorImpl();
     }
 
 

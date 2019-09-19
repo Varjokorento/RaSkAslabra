@@ -45,7 +45,7 @@ public class PrimeNumberGenerator {
                 primeNumbers.add(i);
             }
         }
-        Integer bigPrime = primeNumbers.get(primeNumbers.size()-1);
+        Integer bigPrime = primeNumbers.get(primeNumbers.size() - 1);
         return BigInteger.valueOf(bigPrime);
     }
 

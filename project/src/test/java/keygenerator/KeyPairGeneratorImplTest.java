@@ -7,12 +7,9 @@ import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static junit.framework.TestCase.assertNotNull;
-import static junit.framework.TestCase.assertTrue;
 
 @RunWith(MockitoJUnitRunner.class)
 public class KeyPairGeneratorImplTest {
-
-
 
     @Test
     public void generateKeyPairGeneratesALargePrivateKey() {

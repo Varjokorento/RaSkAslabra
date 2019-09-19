@@ -7,7 +7,6 @@ import static org.junit.Assert.assertEquals;
 
 public class MathImplTest {
 
-
     @Test
     public void powerFunctionWorks() {
         double result1 = MathImpl.pow(2, 30);

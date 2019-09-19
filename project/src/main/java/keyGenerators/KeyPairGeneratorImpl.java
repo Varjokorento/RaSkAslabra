@@ -55,10 +55,12 @@ public class KeyPairGeneratorImpl {
     static BigInteger genE(BigInteger phi) {
         Random rand = new SecureRandom();
         BigInteger e;
-        do e = new BigInteger(phi.bitLength(), rand);
+        do {
+            e = new BigInteger(phi.bitLength(), rand);
+        }
         while (e.compareTo(BigInteger.ONE) <= 0
-                || e.compareTo(phi) >= 0
-                || !greatestCommonDenominator(phi, e).equals(BigInteger.ONE));
+                    || e.compareTo(phi) >= 0
+                    || !greatestCommonDenominator(phi, e).equals(BigInteger.ONE));
         return e;
     }
 
@@ -76,15 +78,13 @@ public class KeyPairGeneratorImpl {
      */
 
     static BigInteger[] extEuclid(BigInteger a, BigInteger b) {
-        if (b.equals(BigInteger.ZERO)) return new BigInteger[] {
-                a, BigInteger.ONE, BigInteger.ZERO
-        };
+        if (b.equals(BigInteger.ZERO)) {
+            return new BigInteger[] {a, BigInteger.ONE, BigInteger.ZERO};
+        }
         BigInteger[] values = extEuclid(b, a.mod(b));
         BigInteger d = values[0];
         BigInteger p = values[2];
         BigInteger q = values[1].subtract(a.divide(b).multiply(values[2]));
-        return new BigInteger[] {
-                d, p, q
-        };
+        return new BigInteger[] {d, p, q};
     }
 }
