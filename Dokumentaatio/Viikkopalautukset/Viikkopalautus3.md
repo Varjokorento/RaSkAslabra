@@ -13,12 +13,14 @@ Ohjelma nyt mielestäni oikeaoppisesti generoi avaimet. Tällä hetkellä avaimi
 
 ### Mitä opin tällä viikolla?
 
-Opin huomattavasti RSA-algoritmin matemaattisesta taustasta sekä siitä, miten se toteutetaan suhteellisen tehokkaasti Javalla. 
+Opin huomattavasti RSA-algoritmin matemaattisesta taustasta sekä siitä, miten avainten generointi toteutetaan suhteellisen tehokkaasti Javalla. 
 
 ### Mitä jäi epäselväksi?
+
+Minulle jäi muutama asia epäselväksi. 1. Mitä kirjastoja saa käyttää? Esimerkiksi voiko Javan Randomia käyttää vai tulisiko se itse implementoida ja 2. Voinko hieman muuttaa projektini scopea siten, että toteutan sekä RSA:n omilla kirjastoilla ja sitten vertaan sitä Javan valmiilla kirjastoilla toteutettuun? Näkisin tämän mielekkääksi. 
 
 ### Mitä teen seuraavaksi?
 
 Seuraavaksi aion tehdä itse kryptauksen ja dekryptauksen. Tämä vaihe myös validoi sen, että toimivatko avaimeni todella. Sen jälkeen, kun tämä on tehty, aion implementoida omat tietorakenteeni (linkkilista ja tavallinen lista), jonka jälkeen hioa ja kaunistella koodiani. 
 
-Käytetty aika: 6 tuntia. 
+Käytetty aika: 8 tuntia. 
