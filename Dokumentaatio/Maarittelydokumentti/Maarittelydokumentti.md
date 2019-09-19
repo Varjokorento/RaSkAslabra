@@ -13,6 +13,22 @@ Ohjelma tekee kolme RSA-salauksen osiota.
   1. Generoi julkisen ja yksityisen avaimen
   2. Salaa annetun syötteen syötetyllä julkisella avaimella.
   3. Purkaa salauksen, kun ohjelmalle syötetään yksityinen avain.
+  
+### 1. Julkisen ja yksityisen avaimen generointi
+
+Ohjelma toteuttaa avainten generoinnin seuraavasti:
+
+1. Ohjelman PrimeNumberGenerator-luokka generoi kaksi alkulukua p ja q. Alkuluvut generoidaan käyttäen satunnaista lukua, josta generoidaan Eratostheneen seula -algoritmilla kaksi erillistä alkulukua. 
+
+2. Ohjelman KeyPairGeneratorImpl-luokka tekee tämän jälkeen seuraavat laskutoimitukset.
+    1. Etsii n laskemalla p*q. (Tämä on avainten modulo).
+    2. Laskee Eulerin  φ-funktiolla λ(n).*
+    3. Laskee e:n niin, että 1 < e < λ(n)  ja suurin yhteinen nimittäjä e, λ(n) on yksi, eli luvut ovat keskenään jaottomia.
+    4. Laskee d niin, että d ≡ e−1 
+    
+* Usein tässä käytetään myös Carmichaelin φ-funktiota. Alkuperäisessä patentissa käytetään kuitenkin Euleria. 
+
+Laskun tuloksena saadaan julkinen avain, joka on modulus n ja exponentti e. Yksityinen avain on exponentti d. 
 
 ## Mitä syötteitä ohjelma saa ja miten näitä käytetään
 

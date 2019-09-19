@@ -20,6 +20,11 @@ Testit suoritetaan komennolla
 ```
 mvn test
 ```
+Jacoco generoidaan seuraavalla komennolla (Sijaitsee target/site-kansiossa)
+```
+mvn jacoco:report
+```
+
 
 ### Checkstyle
 
@@ -48,6 +53,8 @@ src-kansiossa:
  [Viikkopalautus1](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Viikkopalautukset/Viikkopalautus1.md)
  
  [Viikkopalautus2](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Viikkopalautukset/Viikkopalautus2.md)
+ 
+ [Viikkopalautus3](https://github.com/Varjokorento/RaSkAslabra/edit/master/Dokumentaatio/Viikkopalautukset/Viikkopalautus3.md)
  
  
 
