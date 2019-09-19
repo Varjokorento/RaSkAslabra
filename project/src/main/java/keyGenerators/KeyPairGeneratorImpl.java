@@ -9,6 +9,12 @@ import java.util.Random;
 
 public class KeyPairGeneratorImpl {
 
+    /**
+     * Generates two public keys e,n and d.
+     * @param keySize
+     * @return
+     */
+
     public KeyPairImpl generateKeyPair(int keySize) {
         BigInteger p = PrimeNumberGenerator.generateLargePrime();
         BigInteger q = PrimeNumberGenerator.generateLargePrime();
@@ -16,13 +22,13 @@ public class KeyPairGeneratorImpl {
         BigInteger phi = getPhi(p, q);
         BigInteger e = genE(phi);
         BigInteger d = extEuclid(e, phi)[1];
-        return new KeyPairImpl(new PublicKeyImpl(e), new PrivateKeyImpl(d));
+        return new KeyPairImpl(new PublicKeyImpl(e, n), new PrivateKeyImpl(d));
     }
 
     /**
-     * Find mod n from keys
-     * @param p publicKey
-     * @param q privateKey
+     * Find mod n from large prime numbers
+     * @param p a large prime number
+     * @param q a large prime number
      * @return mod n
      */
 
@@ -32,6 +38,7 @@ public class KeyPairGeneratorImpl {
 
 
     /** Compute phi(n) (Euler's totient function)
+     * (Modern version uses Carmichael totient function.)
      *  phi(n) = (p-1)(q-1)
      * @return phi
      */

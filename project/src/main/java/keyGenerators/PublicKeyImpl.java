@@ -3,13 +3,27 @@ package keygenerators;
 import java.math.BigInteger;
 
 public class PublicKeyImpl {
-    private BigInteger publicKey;
+    private BigInteger e;
+    private BigInteger n;
 
-    public PublicKeyImpl(BigInteger publicKey) {
-        this.publicKey = publicKey;
+    public PublicKeyImpl(BigInteger e, BigInteger n) {
+        this.e = e;
+        this.n = n;
     }
 
-    public BigInteger getPublicKey() {
-        return publicKey;
+    public BigInteger getE() {
+        return e;
+    }
+
+    public void setE(BigInteger e) {
+        this.e = e;
+    }
+
+    public BigInteger getN() {
+        return n;
+    }
+
+    public void setN(BigInteger n) {
+        this.n = n;
     }
 }

@@ -25,7 +25,7 @@ public class KeyPairGeneratorImplTest {
     public void generateKeyPairGeneratesALargePublicKey() {
         KeyPairGeneratorImpl keyPairGenerator = new KeyPairGeneratorImpl();
         KeyPairImpl kp = keyPairGenerator.generateKeyPair(2024);
-        assertNotNull((kp.getPublicKey().getPublicKey().isProbablePrime(100)));
+        assertNotNull((kp.getPublicKey().getN()));
     }
 
 
