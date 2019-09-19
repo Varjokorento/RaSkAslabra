@@ -13,6 +13,15 @@ Ohjelma tekee kolme RSA-salauksen osiota.
   1. Generoi julkisen ja yksityisen avaimen
   2. Salaa annetun syötteen syötetyllä julkisella avaimella.
   3. Purkaa salauksen, kun ohjelmalle syötetään yksityinen avain.
+  
+### 1. Julkisen ja yksityisen avaimen generointi
+
+Ohjelma toteuttaa avainten generoinnin seuraavasti:
+
+1. Ohjelman PrimeNumberGenerator-luokka generoi kaksi alkulukua p ja q. Alkuluvut generoidaan käyttäen satunnaista lukua, josta generoidaan Eratostheneen seula -algoritmilla kaksi erillistä alkulukua. 
+
+2. Ohjelman KeyPairGeneratorImpl-luokka tekee tämän jälkeen seuraavat laskutoimitukset: 
+
 
 ## Mitä syötteitä ohjelma saa ja miten näitä käytetään
 
