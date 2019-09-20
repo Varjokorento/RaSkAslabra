@@ -59,7 +59,7 @@ src-kansiossa:
  
  [Viikkopalautus2](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Viikkopalautukset/Viikkopalautus2.md)
  
- [Viikkopalautus3](https://github.com/Varjokorento/RaSkAslabra/edit/master/Dokumentaatio/Viikkopalautukset/Viikkopalautus3.md)
+ [Viikkopalautus3](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Viikkopalautukset/Viikkopalautus3.md)
  
  
 
