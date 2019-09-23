@@ -16,7 +16,7 @@ public class KeyGenerator {
      * Gets a keySize as a parameter.
      * Initializes a keyPairGenerator with the keySize
      */
-    public KeyGenerator(int keySize) {
+    public KeyGenerator() {
         this.keyPairGenerator = new KeyPairGeneratorImpl();
     }
 
@@ -25,7 +25,7 @@ public class KeyGenerator {
      * Generates keyPar with keyPairGenerator.
      *
      */
-    public void generateKeyPair(int keySize) {
+    public void generateKeyPair() {
         keyPair = keyPairGenerator.generateKeyPair();
     }
 

@@ -18,7 +18,7 @@ public class Decrypter {
 
     public static BigInteger[] decrypt(BigInteger[] array, PrivateKeyImpl privateKey, PublicKeyImpl publicKey) {
         BigInteger[] decrypted = new BigInteger[array.length];
-        for(int i = 0; i < array.length; i++) {
+        for (int i = 0; i < array.length; i++) {
             decrypted[i] = array[i].modPow(privateKey.getPrivateKey(), publicKey.getN());
         }
         return decrypted;

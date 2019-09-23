@@ -22,7 +22,7 @@ public class RSATool {
      * RSATool functions as a sort of facade for the algorithm
      */
     public RSATool() {
-        this.keyGenerator = new KeyGenerator(2024);
+        this.keyGenerator = new KeyGenerator();
         this.keyUtil = new KeyUtil();
     }
 
@@ -38,8 +38,8 @@ public class RSATool {
      * Generates keys for the tool
      *
      */
-    public void generateKeys(int keySize) {
-        keyGenerator.generateKeyPair(keySize);
+    public void generateKeys() {
+        keyGenerator.generateKeyPair();
         this.publicKey = keyGenerator.getPublicKey();
         this.privateKey = keyGenerator.getPrivateKey();
     }
@@ -77,7 +77,7 @@ public class RSATool {
      *
      */
     public void writeKeysToFile() throws IOException {
-       keyUtil.savePublicKeyToFile(this.publicKey);
+        keyUtil.savePublicKeyToFile(this.publicKey);
         keyUtil.savePrivateKeyToFile(this.privateKey);
     }
 
