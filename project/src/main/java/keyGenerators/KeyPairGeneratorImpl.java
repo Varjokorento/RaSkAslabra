@@ -14,11 +14,10 @@ public class KeyPairGeneratorImpl {
 
     /**
      * Generates two public keys e,n and d.
-     * @param keySize
      * @return
      */
 
-    public KeyPairImpl generateKeyPair(int keySize) {
+    public KeyPairImpl generateKeyPair() {
         BigInteger p = PrimeNumberGenerator.generateLargePrime();
         BigInteger q = PrimeNumberGenerator.generateLargePrime();
         BigInteger n = findN(p, q);

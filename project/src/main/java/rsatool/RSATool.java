@@ -15,8 +15,6 @@ public class RSATool {
     private KeyGenerator keyGenerator;
     private PublicKeyImpl publicKey;
     private PrivateKeyImpl privateKey;
-    private Encrypter encrypter;
-    private Decrypter decrypter;
     private KeyUtil keyUtil;
 
     /**
@@ -25,8 +23,6 @@ public class RSATool {
      */
     public RSATool() {
         this.keyGenerator = new KeyGenerator(2024);
-        this.encrypter = new Encrypter();
-        this.decrypter = new Decrypter();
         this.keyUtil = new KeyUtil();
     }
 
@@ -42,8 +38,8 @@ public class RSATool {
      * Generates keys for the tool
      *
      */
-    public void generateKeys() {
-        keyGenerator.generateKeyPair();
+    public void generateKeys(int keySize) {
+        keyGenerator.generateKeyPair(keySize);
         this.publicKey = keyGenerator.getPublicKey();
         this.privateKey = keyGenerator.getPrivateKey();
     }
@@ -81,8 +77,8 @@ public class RSATool {
      *
      */
     public void writeKeysToFile() throws IOException {
-       // keyUtil.savePublicKeyToFile(this.publicKey);
-       // keyUtil.savePrivateKeyToFile(this.privateKey);
+       keyUtil.savePublicKeyToFile(this.publicKey);
+        keyUtil.savePrivateKeyToFile(this.privateKey);
     }
 
 

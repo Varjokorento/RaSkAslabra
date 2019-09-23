@@ -1,8 +1,5 @@
 package keyimpl;
 
-import keyimpl.PrivateKeyImpl;
-import keyimpl.PublicKeyImpl;
-
 public class KeyPairImpl {
     private PublicKeyImpl publicKey;
     private PrivateKeyImpl privateKey;

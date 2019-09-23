@@ -17,7 +17,7 @@ public class PrimeNumberGenerator {
         //TODO fix randomImpl
         //int randomInteger = RandomImpl.generateRandomInteger();
         Random random = new Random();
-        int randomInteger = random.nextInt(10000);
+        int randomInteger = random.nextInt(10000000);
         return sieveOfEratosthenes(randomInteger);
     }
 
@@ -45,8 +45,10 @@ public class PrimeNumberGenerator {
                 primeNumbers.add(i);
             }
         }
+
         Integer bigPrime = primeNumbers.get(primeNumbers.size() - 1);
-        return BigInteger.valueOf(bigPrime);
+        BigInteger retVal = BigInteger.valueOf(bigPrime);
+        return retVal;
     }
 
 

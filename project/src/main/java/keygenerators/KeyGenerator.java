@@ -25,8 +25,8 @@ public class KeyGenerator {
      * Generates keyPar with keyPairGenerator.
      *
      */
-    public void generateKeyPair() {
-        keyPair = keyPairGenerator.generateKeyPair(2);
+    public void generateKeyPair(int keySize) {
+        keyPair = keyPairGenerator.generateKeyPair();
     }
 
     /**
