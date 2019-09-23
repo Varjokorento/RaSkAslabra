@@ -16,6 +16,9 @@ public class RSATool {
     private PublicKeyImpl publicKey;
     private PrivateKeyImpl privateKey;
     private KeyUtil keyUtil;
+    private AsciiUtil asciiUtil;
+    private Encrypter encrypter;
+    private Decrypter decrypter;
 
     /**
      * Constructor for RSATool.
@@ -24,6 +27,10 @@ public class RSATool {
     public RSATool() {
         this.keyGenerator = new KeyGenerator();
         this.keyUtil = new KeyUtil();
+        this.asciiUtil = new AsciiUtil();
+        this.decrypter = new Decrypter();
+        this.encrypter = new Encrypter();
+
     }
 
     private PublicKeyImpl getPublicKey() {
@@ -49,11 +56,11 @@ public class RSATool {
      * @return encrypted byteArray of String.
      */
     public BigInteger[] encrypt(String plainText) {
-        BigInteger[] cipherAsIntArray = AsciiUtil.stringToCipher(plainText);
+        BigInteger[] cipherAsIntArray = asciiUtil.stringToCipher(plainText);
         for (BigInteger i: cipherAsIntArray) {
             System.out.println(i);
         }
-        return Encrypter.encrypt(cipherAsIntArray, this.getPublicKey());
+        return encrypter.encrypt(cipherAsIntArray, this.getPublicKey());
     }
 
     /**
@@ -61,7 +68,7 @@ public class RSATool {
      * @return decrypted byteArray of String.
      */
     public BigInteger[] decrypt(BigInteger[] encrypted) {
-        return Decrypter.decrypt(encrypted, this.getPrivateKey(), this.getPublicKey());
+        return decrypter.decrypt(encrypted, this.getPrivateKey(), this.getPublicKey());
     }
 
     /**
@@ -69,7 +76,7 @@ public class RSATool {
      * @return deciphered message
      */
     public String cipherToString(BigInteger[] decrypted) {
-        return AsciiUtil.cipherToString(decrypted);
+        return asciiUtil.cipherToString(decrypted);
     }
 
     /**

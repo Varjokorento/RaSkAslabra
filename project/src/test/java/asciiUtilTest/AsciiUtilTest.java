@@ -20,7 +20,7 @@ public class AsciiUtilTest {
 
     @Test
     public void stringToCipherWorksCorrectly() {
-        BigInteger[] abc = AsciiUtil.stringToCipher("abc");
+        BigInteger[] abc = asciiUtil.stringToCipher("abc");
         BigInteger[] asciiValues = new BigInteger[]{new BigInteger("97"), new BigInteger("98"), new BigInteger("99")};
         for(int i = 0; i < abc.length; i++) {
             assertEquals(asciiValues[i], abc[i]);
@@ -30,8 +30,7 @@ public class AsciiUtilTest {
     @Test
     public void cipherToStringWorksCorrectly() {
         BigInteger[] asciiValues = new BigInteger[]{new BigInteger("97"), new BigInteger("98"), new BigInteger("99")};
-        String abc = AsciiUtil.cipherToString(asciiValues);
-        assertEquals("abc", abc);
+        assertEquals("abc",  asciiUtil.cipherToString(asciiValues));
     }
 
 

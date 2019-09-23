@@ -9,11 +9,13 @@ import static junit.framework.TestCase.assertTrue;
 
 public class PrimeNumberGeneratorTest {
 
+    private PrimeNumberGenerator primeNumberGenerator = new PrimeNumberGenerator();
+
     @Test
     public void generatorNumbersArePrimes() {
-        BigInteger number = PrimeNumberGenerator.generateLargePrime();
+        BigInteger number = primeNumberGenerator.generateLargePrime();
         assertTrue((number.isProbablePrime(100)));
-        BigInteger number2 = PrimeNumberGenerator.generateLargePrime();
+        BigInteger number2 = primeNumberGenerator.generateLargePrime();
         assertTrue((number2.isProbablePrime(100)));
     }
 

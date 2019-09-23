@@ -21,7 +21,7 @@ public class Encrypter {
      * @param publicKey
      * @return encrypted BigInteger-array
      */
-    public static BigInteger[] encrypt(BigInteger[] array, PublicKeyImpl publicKey) {
+    public BigInteger[] encrypt(BigInteger[] array, PublicKeyImpl publicKey) {
         BigInteger[] encrypted = new BigInteger[array.length];
         for (int i = 0; i < array.length; i++) {
             encrypted[i] = array[i].modPow(publicKey.getE(), publicKey.getN());

@@ -14,8 +14,6 @@ public class PrimeNumberGenerator {
      */
 
     public static BigInteger generateLargePrime() {
-        //TODO fix randomImpl
-        //int randomInteger = RandomImpl.generateRandomInteger();
         Random random = new Random();
         int randomInteger = random.nextInt(10000000);
         return sieveOfEratosthenes(randomInteger);
