@@ -3,7 +3,9 @@
 ### Mitä olen tehnyt?
 
 Olen taas lukenut lisää RSA-algoritmista ja siitä, miten se toimii. Olen korvannut avainten generoinnin omilla implementaatioilla, jotka
-generiovat suuria alkulukuja ja laskevat niiden perusteella julkisen sekä yksityisen avaimen. Tämä vei huomattavasti aikaa minulta. 
+generiovat suuria alkulukuja ja laskevat niiden perusteella julkisen sekä yksityisen avaimen. Tämä vei huomattavasti aikaa minulta tällä viikolla.
+
+Tämän lisäksi olen kirjoittanut dokumentaatioon selityksen siitä, miten ohjelma generoi julkisen ja yksityisen avaimen. 
 
 ### Miten ohjelma on edistynyt?
 

@@ -14,6 +14,8 @@ Ohjelma tekee kolme RSA-salauksen osiota.
   2. Salaa annetun syötteen syötetyllä julkisella avaimella.
   3. Purkaa salauksen, kun ohjelmalle syötetään yksityinen avain.
   
+Tämän lisäksi ohjelma vertailee ilman kirjastoja tehtyä toteutusta sekä kirjastojen kanssa tehtyä toteutusta.   
+  
 ### 1. Julkisen ja yksityisen avaimen generointi
 
 Ohjelma toteuttaa avainten generoinnin seuraavasti:
@@ -22,11 +24,11 @@ Ohjelma toteuttaa avainten generoinnin seuraavasti:
 
 2. Ohjelman KeyPairGeneratorImpl-luokka tekee tämän jälkeen seuraavat laskutoimitukset.
     1. Etsii n laskemalla p*q. (Tämä on avainten modulo).
-    2. Laskee Eulerin  φ-funktiolla λ(n).*
-    3. Laskee e:n niin, että 1 < e < λ(n)  ja suurin yhteinen nimittäjä e, λ(n) on yksi, eli luvut ovat keskenään jaottomia.
-    4. Laskee d niin, että d ≡ e−1 
-    
-* Usein tässä käytetään myös Carmichaelin φ-funktiota. Alkuperäisessä patentissa käytetään kuitenkin Euleria. 
+    2. Laskee Eulerin  φ-funktiolla λ(n)
+        1. Usein tässä käytetään myös Carmichaelin φ-funktiota. Alkuperäisessä patentissa käytetään kuitenkin Euleria. 
+    3. Laskee e:n niin, että 1 < e < λ(n)  ja e:n ja λ(n) suurin yhteinen nimittäjä on yksi, eli luvut ovat keskenään jaottomia.
+    4. Laskee d niin, että d ≡ e−1 (mod λ(n))
+        1. Tämä lasketaan Euclideanin algoritmin laajennetulla versiolla (Extended Euclidean Algorithm).
 
 Laskun tuloksena saadaan julkinen avain, joka on modulus n ja exponentti e. Yksityinen avain on exponentti d. 
 
