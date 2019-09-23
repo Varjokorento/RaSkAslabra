@@ -1,6 +1,9 @@
 package keygenerators;
 
 
+import keyimpl.KeyPairImpl;
+import keyimpl.PrivateKeyImpl;
+import keyimpl.PublicKeyImpl;
 import utils.PrimeNumberGenerator;
 
 import java.math.BigInteger;

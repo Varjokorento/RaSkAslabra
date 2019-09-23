@@ -1,6 +1,8 @@
 package keygenerators;
 
-import java.security.*;
+import keyimpl.KeyPairImpl;
+import keyimpl.PrivateKeyImpl;
+import keyimpl.PublicKeyImpl;
 
 public class KeyGenerator {
 

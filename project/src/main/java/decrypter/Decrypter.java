@@ -1,24 +1,27 @@
 package decrypter;
 
-import keygenerators.PublicKeyImpl;
+import keyimpl.PrivateKeyImpl;
+import keyimpl.PublicKeyImpl;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
-import java.util.Arrays;
 
 public class Decrypter {
 
 
 
-    public byte[] decrypt(byte[] cyphere, PublicKeyImpl publicKey) {
-        // TODO Implement
-        return null;
+    public static BigInteger[] decrypt(BigInteger[] array, PrivateKeyImpl privateKey, PublicKeyImpl publicKey) {
+        BigInteger[] decrypted = new BigInteger[array.length];
+        for(int i = 0; i < array.length; i++) {
+            decrypted[i] = array[i].modPow(privateKey.getPrivateKey(), publicKey.getN());
+        }
+        return decrypted;
     }
 
     /**

@@ -1,5 +1,8 @@
 package keygenerators;
 
+import keyimpl.PrivateKeyImpl;
+import keyimpl.PublicKeyImpl;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,17 +20,18 @@ public class KeyUtil {
     /**
      * Saves public Key to .pub file
      */
-    public void savePublicKeyToFile(PublicKey pubKey) throws IOException {
+    public void savePublicKeyToFile(PublicKeyImpl pubKey) throws IOException {
         try (FileOutputStream out = new FileOutputStream(PUBLIC_KEY + ".pub")) {
-            out.write(pubKey.getEncoded());
+            out.write(pubKey.getN().toByteArray());
+            out.write(pubKey.getE().toByteArray());
         }
     }
     /**
      * Saves private Key to .key file
      */
-    public void savePrivateKeyToFile(PrivateKey privateKey) throws IOException {
+    public void savePrivateKeyToFile(PrivateKeyImpl privateKey) throws IOException {
         try (FileOutputStream out = new FileOutputStream(PRIVATE_KEY + ".key")) {
-            out.write(privateKey.getEncoded());
+            out.write(privateKey.getPrivateKey().toByteArray());
         }
     }
     /**

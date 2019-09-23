@@ -1,18 +1,15 @@
 package rsatool;
 
+import asciiutil.AsciiUtil;
 import decrypter.Decrypter;
 import encrypter.Encrypter;
 import keygenerators.KeyGenerator;
 import keygenerators.KeyUtil;
-import keygenerators.PrivateKeyImpl;
-import keygenerators.PublicKeyImpl;
+import keyimpl.PrivateKeyImpl;
+import keyimpl.PublicKeyImpl;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import java.io.IOException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
+import java.math.BigInteger;
 
 public class RSATool {
     private KeyGenerator keyGenerator;
@@ -32,6 +29,15 @@ public class RSATool {
         this.decrypter = new Decrypter();
         this.keyUtil = new KeyUtil();
     }
+
+    private PublicKeyImpl getPublicKey() {
+        return publicKey;
+    }
+
+    private PrivateKeyImpl getPrivateKey() {
+        return privateKey;
+    }
+
     /**
      * Generates keys for the tool
      *
@@ -46,18 +52,28 @@ public class RSATool {
      * Calls encrypter to encrypt a plaintext String.
      * @return encrypted byteArray of String.
      */
-    public byte[] encrypt(String plainText) {
-        byte[] encrypted = encrypter.encrypt(plainText, this.privateKey);
-        return encrypted;
+    public BigInteger[] encrypt(String plainText) {
+        BigInteger[] cipherAsIntArray = AsciiUtil.stringToCipher(plainText);
+        for (BigInteger i: cipherAsIntArray) {
+            System.out.println(i);
+        }
+        return Encrypter.encrypt(cipherAsIntArray, this.getPublicKey());
     }
 
     /**
      * Calls decrypter to decipher a cryptedByteArray
      * @return decrypted byteArray of String.
      */
-    public byte[] decrypt(byte[] cryptedByteArray) {
-        byte[] decrypted = decrypter.decrypt(cryptedByteArray, this.publicKey);
-        return decrypted;
+    public BigInteger[] decrypt(BigInteger[] encrypted) {
+        return Decrypter.decrypt(encrypted, this.getPrivateKey(), this.getPublicKey());
+    }
+
+    /**
+     * Converts decrypted BigInteger-array to String
+     * @return deciphered message
+     */
+    public String cipherToString(BigInteger[] decrypted) {
+        return AsciiUtil.cipherToString(decrypted);
     }
 
     /**
