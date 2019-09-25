@@ -8,17 +8,27 @@ import keygenerators.KeyUtil;
 import keyimpl.PrivateKeyImpl;
 import keyimpl.PublicKeyImpl;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import java.io.IOException;
 import java.math.BigInteger;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 
 public class RSATool {
     private KeyGenerator keyGenerator;
+    private KeyGenerator libraryKeyGenerator;
     private PublicKeyImpl publicKey;
     private PrivateKeyImpl privateKey;
     private KeyUtil keyUtil;
     private AsciiUtil asciiUtil;
     private Encrypter encrypter;
     private Decrypter decrypter;
+    private PublicKey libraryPublicKey;
+    private PrivateKey libraryPrivateKey;
 
     /**
      * Constructor for RSATool.
@@ -52,6 +62,17 @@ public class RSATool {
     }
 
     /**
+     * Generates privateKeys using libraries
+     */
+
+    public void generateKeysWithLibraries() throws NoSuchAlgorithmException {
+        libraryKeyGenerator = new KeyGenerator(true);
+        libraryPublicKey = libraryKeyGenerator.getLibPublicKey();
+        libraryPrivateKey = libraryKeyGenerator.getLibPrivateKey();
+
+    }
+
+    /**
      * Calls encrypter to encrypt a plaintext String.
      * @return encrypted byteArray of String.
      */
@@ -64,13 +85,28 @@ public class RSATool {
     }
 
     /**
+     * Library encrypt
+     */
+
+    public byte[] encryptWithLibraries(String message) throws IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException {
+        return encrypter.encrypt(message, libraryPrivateKey);
+    }
+
+    /**
      * Calls decrypter to decipher a cryptedByteArray
      * @return decrypted byteArray of String.
      */
     public BigInteger[] decrypt(BigInteger[] encrypted) {
         return decrypter.decrypt(encrypted, this.getPrivateKey(), this.getPublicKey());
     }
+    /**
+     * Decrypt with libraries
+     */
 
+    public String decryptWithLibraries(byte[] encrypted) throws IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException {
+        byte[] decrypted = decrypter.decrypt(encrypted, libraryPublicKey);
+        return asciiUtil.getStringFromByteArray(decrypted);
+    }
     /**
      * Converts decrypted BigInteger-array to String
      * @return deciphered message

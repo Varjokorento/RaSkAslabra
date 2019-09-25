@@ -15,6 +15,12 @@ public class AsciiUtil {
         return new String(byteArray, StandardCharsets.UTF_8);
     }
 
+    /**
+     * Converts plainText message to bigIntegerArray.
+     * @param message
+     * @return BigInteger[] decipheredArray
+     */
+
     public BigInteger[] stringToCipher(String message) {
         BigInteger[] cipherString = new BigInteger[message.length()];
         int i = 0;
@@ -27,6 +33,11 @@ public class AsciiUtil {
         return cipherString;
     }
 
+    /**
+     * Converts cipher BigInteger[] to a plainText String
+     * @param message
+     * @return message
+     */
 
     public String cipherToString(BigInteger[] message) {
         String output = "";

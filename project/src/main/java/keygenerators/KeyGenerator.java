@@ -4,11 +4,34 @@ import keyimpl.KeyPairImpl;
 import keyimpl.PrivateKeyImpl;
 import keyimpl.PublicKeyImpl;
 
+import java.security.*;
+
 public class KeyGenerator {
 
     private KeyPairGeneratorImpl keyPairGenerator;
     private KeyPairImpl keyPair;
 
+    private KeyPair libraryKeyPair;
+
+    /**
+     * RSA using libraries
+     */
+    public KeyGenerator(boolean libraryImplementation) throws NoSuchAlgorithmException {
+        if (libraryImplementation) {
+            KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
+            kpg.initialize(2048);
+            KeyPair kp = kpg.generateKeyPair();
+            libraryKeyPair = kp;
+        }
+    }
+
+    public PublicKey getLibPublicKey() {
+        return libraryKeyPair.getPublic();
+    }
+
+    public PrivateKey getLibPrivateKey() {
+        return libraryKeyPair.getPrivate();
+    }
 
 
     /**

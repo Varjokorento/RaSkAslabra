@@ -1,5 +1,11 @@
 import rsatool.RSATool;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import java.math.BigInteger;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
 public class Main {
@@ -21,6 +27,21 @@ public class Main {
         printArray(decrypted);
         System.out.println("\n");
         System.out.println("Restored: " + restoredMessage);
+        try {
+            libraryRSA(message, rsaTool);
+        } catch (Exception e) {
+            System.out.println("An error occurred");
+        }
+    }
+
+    private static void libraryRSA(String message, RSATool rsaTool) throws NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, NoSuchPaddingException, IllegalBlockSizeException {
+        rsaTool.generateKeysWithLibraries();
+        byte[] encrypted = rsaTool.encryptWithLibraries(message);
+        System.out.println("Has been encryptered");
+        String plainText = rsaTool.decryptWithLibraries(encrypted);
+        System.out.println("Has been decrypted:");
+        System.out.println(plainText);
+
     }
 
     private static void printArray(BigInteger[] array) {

@@ -39,4 +39,6 @@ public class Encrypter {
         byte[] ciphered = cipher.doFinal(plainText.getBytes());
         return ciphered;
     }
+
+
 }
