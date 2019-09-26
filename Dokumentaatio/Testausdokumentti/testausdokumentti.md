@@ -1,6 +1,6 @@
 # Testaus
 
-## Yksikkötestasus
+## Yksikkötestaus
  
 Tällä hetkellä ohjelman testaus on toteutettu enimmäkseen yksikkötesteillä. Yksikkötestit testaavat ohjelman eri ominaisuuksia. Testaus
 on kattava ja rivikohtainen kattavuus on 70 prosenttia ja haarakohtainen 80 prosenttia.
@@ -15,4 +15,4 @@ on RSAToolTest.java luokka, joka generoiduilla avaimilla kryptaa ja dekryptaa sy
 ## Suorituskykytestaus
 
 Suorituskykytestaus on aloitettu. Suorituskykytestausta tehdään PerformanceTest-luokalla joka ottaa aikaa metodien suorituksista. Metodit ajetaan 10 kertaa
-ja sen perusteella vertaillaan. 
+ja sen perusteella vertaillaan suorituskykyä. 
