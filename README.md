@@ -48,7 +48,8 @@ src-kansiossa:
  [Määritysdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Maarittelydokumentti/Maarittelydokumentti.md)       
  
  
- [Toteutusdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Toteutusdokumentti/toteutusdokumentti.md)       
+ [Toteutusdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Toteutusdokumentti/toteutusdokumentti.md)    
+[Testausdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Testausdokumentti/testausdokumentti.md)
  
  
     
@@ -60,6 +61,8 @@ src-kansiossa:
  [Viikkopalautus2](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Viikkopalautukset/Viikkopalautus2.md)
  
  [Viikkopalautus3](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Viikkopalautukset/Viikkopalautus3.md)
+ 
+ [Viikkopalautus4](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Viikkopalautukset/Viikkopalautus4.md)
  
  
 
