@@ -78,9 +78,6 @@ public class RSATool {
      */
     public BigInteger[] encrypt(String plainText) {
         BigInteger[] cipherAsIntArray = asciiUtil.stringToCipher(plainText);
-        for (BigInteger i: cipherAsIntArray) {
-            System.out.println(i);
-        }
         return encrypter.encrypt(cipherAsIntArray, this.getPublicKey());
     }
 

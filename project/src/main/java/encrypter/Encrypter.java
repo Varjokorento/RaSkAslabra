@@ -11,7 +11,6 @@ import java.math.BigInteger;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
-import java.security.PublicKey;
 
 public class Encrypter {
 
@@ -39,6 +38,7 @@ public class Encrypter {
         byte[] ciphered = cipher.doFinal(plainText.getBytes());
         return ciphered;
     }
+
 
 
 }
