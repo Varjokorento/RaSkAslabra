@@ -21,8 +21,7 @@ Tällä viikolla ei jäänyt epäselväksi asioita.
 
 ### Mitä teen seuraavaksi?
 
-Aion viilata omaa algoritmiani niin, että saan generoitua isompia avaimia. Aion myös toteuttaa Javan linkedList tietorakenteen, jota käytetään yhdessä 
-kohdassa. Aion jatkaa dokumentaation kirjoittamista sekä testaamista.
+Aion viilata omaa algoritmiani niin, että saan generoitua isompia avaimia. Aion myös toteuttaa Javan BigInteger ja linkedList tietorakenteen, jota käytetään algoritmissa. Aion jatkaa dokumentaation kirjoittamista sekä testaamista.
 
 
 Käytetty aika: 10 tuntia. 
