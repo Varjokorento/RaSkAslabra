@@ -13,7 +13,7 @@ Olen toteuttanut RSA-algoritmin viestin salaamisen avaimilla. Olen toteuttanut k
 
 Opin, että ohjelmani generoi aivan liian lyhyitä avaimia. Tämä on tämänhetkisen ohjelman ongelmallisin kohta. Minun täytyy jotenkin viilata
 alkulukujen generointi -toiminnallisuutta. Oikeassa RSA-algoritmissa avaimet ovat ainakin 1024 bittisiä, eli 300 merkkisiä. Nyt minun avaimeni ovat 
-hädin tuskin 30 bittisiä. 
+hädin tuskin 30 bittisiä. Tästä syystä minun algoritmi on hyvin nopea verrattuna kirjastoalgoritmiin. Omissa performanssitesteissäni ero on jo niin huomattava, että minun on pakko lähteä selvittämään, että mikä kirjastoversiolla kestää niin pitkään. Taustalla on varmasti se, että kirjastoalgoritmi tekee asiat huomattavasti tietoturvallisemmin. 
 
 ### Mitä jäi epäselväksi?
 
