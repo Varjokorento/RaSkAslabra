@@ -13,7 +13,7 @@ public class KeyGenerator {
 
     private KeyPair libraryKeyPair;
 
-    /**
+    /**LIBRARY IMPLEMENTATION
      * RSA using libraries
      */
     public KeyGenerator(boolean libraryImplementation) throws NoSuchAlgorithmException {
@@ -35,6 +35,7 @@ public class KeyGenerator {
 
 
     /**
+     * OWN IMPLEMENTATION
      * Constructor for Keygenerator.
      * Gets a keySize as a parameter.
      * Initializes a keyPairGenerator with the keySize
@@ -45,6 +46,7 @@ public class KeyGenerator {
 
 
     /**
+     * OWN IMPLEMENTATION
      * Generates keyPar with keyPairGenerator.
      *
      */
@@ -53,6 +55,7 @@ public class KeyGenerator {
     }
 
     /**
+     * OWN IMPLEMENTATION
      * Returns generated public key
      * @return PublicKey
      */
@@ -60,6 +63,7 @@ public class KeyGenerator {
         return keyPair.getPublicKey();
     }
     /**
+     * OWN IMPLEMENTATION
      * Returns generated private key
      * @return PrivateKey
      */

@@ -13,9 +13,13 @@ import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
 
 public class Decrypter {
-
-
-
+    /**
+     * OWN IMPLEMENTATION
+     * @param array
+     * @param privateKey
+     * @param publicKey
+     * @return
+     */
     public BigInteger[] decrypt(BigInteger[] array, PrivateKeyImpl privateKey, PublicKeyImpl publicKey) {
         BigInteger[] decrypted = new BigInteger[array.length];
         for (int i = 0; i < array.length; i++) {
@@ -25,6 +29,7 @@ public class Decrypter {
     }
 
     /**
+     * LIBRARY IMPLEMENTATION
      * Decrypts a given byteArray with given public key
      * @return decrypted byteArray
      */

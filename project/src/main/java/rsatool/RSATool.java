@@ -51,7 +51,7 @@ public class RSATool {
         return privateKey;
     }
 
-    /**
+    /** OWN IMPLEMENTATION
      * Generates keys for the tool
      *
      */
@@ -62,6 +62,7 @@ public class RSATool {
     }
 
     /**
+     * LIBRARY IMPLEMENTATION
      * Generates privateKeys using libraries
      */
 
@@ -73,6 +74,7 @@ public class RSATool {
     }
 
     /**
+     * OWN IMPLEMENTATION
      * Calls encrypter to encrypt a plaintext String.
      * @return encrypted byteArray of String.
      */
@@ -82,6 +84,7 @@ public class RSATool {
     }
 
     /**
+     * LIBRARY IMPLEMENTATION
      * Library encrypt
      */
 
@@ -90,6 +93,7 @@ public class RSATool {
     }
 
     /**
+     * OWN IMPLEMENTATION
      * Calls decrypter to decipher a cryptedByteArray
      * @return decrypted byteArray of String.
      */
@@ -97,6 +101,7 @@ public class RSATool {
         return decrypter.decrypt(encrypted, this.getPrivateKey(), this.getPublicKey());
     }
     /**
+     * LIBRARY IMPLEMENTATION
      * Decrypt with libraries
      */
 
@@ -105,6 +110,7 @@ public class RSATool {
         return asciiUtil.getStringFromByteArray(decrypted);
     }
     /**
+     * OWN IMPLEMENTATION
      * Converts decrypted BigInteger-array to String
      * @return deciphered message
      */
@@ -112,7 +118,7 @@ public class RSATool {
         return asciiUtil.cipherToString(decrypted);
     }
 
-    /**
+    /**LIBRARY IMPLEMENTATION
      * Calls keyUtil that writes the generated keys to file
      *
      */

@@ -15,6 +15,7 @@ import java.security.PrivateKey;
 public class Encrypter {
 
     /**
+     * OWN IMPLEMENTATION
      * Encrypts a given BigInteger-array with
      * @param array
      * @param publicKey
@@ -29,6 +30,7 @@ public class Encrypter {
     }
 
     /**
+     * LIBRARY IMPLEMENTATION
      * Encrypts a given byteArray with given privateKey
      * @return encrypted byteArray
      */

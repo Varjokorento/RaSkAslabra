@@ -4,9 +4,6 @@ import javaLibImplementations.ArraysImpl;
 import javaLibImplementations.LinkedListImpl;
 
 import java.math.BigInteger;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Random;
 
 public class PrimeNumberGenerator {
@@ -30,7 +27,7 @@ public class PrimeNumberGenerator {
      */
     private static BigInteger sieveOfEratosthenes(int n) {
         boolean prime[] = new boolean[n + 1];
-        //TODO make own implementation of arrays fill
+
         ArraysImpl.fill(prime, true);
         for (int p = 2; p * p <= n; p++) {
             if (prime[p]) {
