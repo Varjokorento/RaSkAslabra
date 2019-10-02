@@ -4,6 +4,14 @@
 
 Tämä sovelluksen tarkoitus on implementoida RSA-salaus algoritmi Java-ohjelmointikielellä. 
 
+## Omat toteutukset v Kirjasto-toteutukset
+
+Projektissa implementoidaan RSA-salaus Javan valmiilla kirjastoilla sekä omilla implementaatioilla. Tämä tehdään sen vuoksi, että voidaan vertailla näiden kahden toteututuksen eroja. RSA-algoritmi on hyvin vanha algoritmi ja sen "klassinen" toteutus eroaa mahdollisesti sen nykyisestä kirjastototeutuksesta. 
+
+Koodin lukemiseen on kaksi nyrkkisääntöä:
+1. Jos metodin kommentissa lukee OWN IMPLEMENTATION, on kyse omasta implementaatiosta. Jos siinä lukee LIBRARY IMPLEMENTATION niin kyse on kirjastojen käyttämisestä.
+2. Jokainen luokka, jonka perässä on sana "Impl" on oma toteutus kyseisestä luokasta. Esimerkiksi LinkedListImpl on toteutus LinkedList-luokasta. Impl-luokat eivät välttämättä toteuta kaikkia mahdollisia metodeja, vaan ainoastaan ne, joita käytetään projektissa.
+
 ## Projektin tavoite:
 
 Tavoitteena on saada aikaan ohjelma, joka tekee seuraavat asiat: 
