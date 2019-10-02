@@ -27,6 +27,12 @@ public class Main {
         printArray(decrypted);
         System.out.println("\n");
         System.out.println("Restored: " + restoredMessage);
+        encryptWithLibraries(scanner, rsaTool);
+    }
+
+    private static void encryptWithLibraries(Scanner scanner, RSATool rsaTool) {
+        System.out.println("Please enter a new plain text message. Maximum length 200 characters.");
+        String message = scanner.nextLine();
         try {
             libraryRSA(message, rsaTool);
         } catch (Exception e) {
@@ -35,13 +41,14 @@ public class Main {
     }
 
     private static void libraryRSA(String message, RSATool rsaTool) throws NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, NoSuchPaddingException, IllegalBlockSizeException {
-        rsaTool.generateKeysWithLibraries();
-        byte[] encrypted = rsaTool.encryptWithLibraries(message);
-        System.out.println("Has been encryptered");
-        String plainText = rsaTool.decryptWithLibraries(encrypted);
-        System.out.println("Has been decrypted:");
-        System.out.println(plainText);
 
+        if (message.length() <= 239) {
+            rsaTool.generateKeysWithLibraries();
+            byte[] encrypted = rsaTool.encryptWithLibraries(message);
+            String plainText = rsaTool.decryptWithLibraries(encrypted);
+            System.out.println("Has been decrypted:");
+            System.out.println(plainText);
+        }
     }
 
     private static void printArray(BigInteger[] array) {
