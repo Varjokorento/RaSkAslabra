@@ -15,3 +15,13 @@ Ohjelma toteuttaa avainten generoinnin seuraavasti:
         1. Tämä lasketaan Euclideanin algoritmin laajennetulla versiolla (Extended Euclidean Algorithm).
 
 Laskun tuloksena saadaan julkinen avain, joka on jakojäännös n ja exponentti e. Yksityinen avain on exponentti d.
+
+## 2. Tekstin salaaminen 
+
+1. Käyttäjä syöttää merkkijonon. 
+2. RSATool-luokka purkaa merkkijonot puretaan sen merkkien ASCII-arvoon, josta tehdään BigInteger-array. Esimerkiksi abc = {97, 98, 99}
+3. Tämän jälkeen Encrypter-luokka kryptaa BigInteger-arrayn niin, että jokainen numero nostetaan a^e mod n. e ja n ovat julkisen avaimen osia. Lopputuloksena saadaan kryptattu versio BigInteger-arraystä.
+
+## 3. Salauksen purkaminen
+1. Kryptattu BigInteger-array annetaan Decrypter-luokalle, joka saa syötteenään myös julkisen avaimen ja yksityisen avaimen. 
+2. Jokaiselle alkiolle tehdään seuraava operaatio: a^d mod n. Tässä d on yksityinen avain ja n saadaan julkisesta avaimesta. 
