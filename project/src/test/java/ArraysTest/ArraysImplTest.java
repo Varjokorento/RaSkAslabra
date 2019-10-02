@@ -1,6 +1,6 @@
 package ArraysTest;
 
-import javaLibImplementations.ArraysImpl;
+import javalibimplementations.ArraysImpl;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertFalse;

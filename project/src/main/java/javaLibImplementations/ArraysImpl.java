@@ -1,4 +1,4 @@
-package javaLibImplementations;
+package javalibimplementations;
 
 public class ArraysImpl {
 

@@ -1,6 +1,6 @@
 package LinkedListTest;
 
-import javaLibImplementations.Node;
+import javalibimplementations.Node;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertNull;

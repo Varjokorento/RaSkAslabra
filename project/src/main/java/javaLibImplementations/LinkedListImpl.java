@@ -1,4 +1,4 @@
-package javaLibImplementations;
+package javalibimplementations;
 
 public class LinkedListImpl {
     Node head;
@@ -7,23 +7,19 @@ public class LinkedListImpl {
      * Method to insert a new node to list.
      * @param data
      */
-    public void insert(int data)
-    {
+    public void insert(int data) {
 
-        Node new_node = new Node(data);
-        new_node.next = null;
+        Node newNode = new Node(data);
+        newNode.next = null;
 
         if (this.head == null) {
-            this.head = new_node;
-        }
-
-        else {
+            this.head = newNode;
+        } else {
             Node last = this.head;
             while (last.next != null) {
                 last = last.next;
             }
-
-            last.next = new_node;
+            last.next = newNode;
         }
     }
 
@@ -33,7 +29,7 @@ public class LinkedListImpl {
      */
     public int getLast() {
         Node head = this.head;
-        while(head.next != null) {
+        while (head.next != null) {
             head = head.next;
         }
         return head.data;

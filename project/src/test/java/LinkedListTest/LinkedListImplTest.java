@@ -1,6 +1,6 @@
 package LinkedListTest;
 
-import javaLibImplementations.LinkedListImpl;
+import javalibimplementations.LinkedListImpl;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;

@@ -1,7 +1,7 @@
 package utils;
 
-import javaLibImplementations.ArraysImpl;
-import javaLibImplementations.LinkedListImpl;
+import javalibimplementations.ArraysImpl;
+import javalibimplementations.LinkedListImpl;
 
 import java.math.BigInteger;
 import java.util.Random;
@@ -43,13 +43,16 @@ public class PrimeNumberGenerator {
                 latestPrime = i;
             }
         }
-        // this is actually an unnecessary operation and only done to try out linkedListImplementation
+        return getLastPrimeNumber(primeNumbers, latestPrime);
+
+    }
+
+    private static BigInteger getLastPrimeNumber(LinkedListImpl primeNumbers, int latestPrime) {
         primeNumbers.insert(latestPrime);
         Integer bigPrime = primeNumbers.getLast();
         BigInteger retVal = BigInteger.valueOf(bigPrime);
         return retVal;
     }
-
 
 
 }
