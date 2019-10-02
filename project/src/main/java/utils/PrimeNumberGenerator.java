@@ -1,5 +1,8 @@
 package utils;
 
+import javaLibImplementations.ArraysImpl;
+import javaLibImplementations.LinkedListImpl;
+
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -28,7 +31,7 @@ public class PrimeNumberGenerator {
     private static BigInteger sieveOfEratosthenes(int n) {
         boolean prime[] = new boolean[n + 1];
         //TODO make own implementation of arrays fill
-        Arrays.fill(prime, true);
+        ArraysImpl.fill(prime, true);
         for (int p = 2; p * p <= n; p++) {
             if (prime[p]) {
                 for (int i = p * 2; i <= n; i += p) {
@@ -36,15 +39,16 @@ public class PrimeNumberGenerator {
                 }
             }
         }
-        //TODO Make own implementation of LinkedList
-        List<Integer> primeNumbers = new LinkedList<>();
+        LinkedListImpl primeNumbers = new LinkedListImpl();
+        int latestPrime = 3;
         for (int i = 2; i <= n; i++) {
             if (prime[i]) {
-                primeNumbers.add(i);
+                latestPrime = i;
             }
         }
-
-        Integer bigPrime = primeNumbers.get(primeNumbers.size() - 1);
+        // this is actually an unnecessary operation and only done to try out linkedListImplementation
+        primeNumbers.insert(latestPrime);
+        Integer bigPrime = primeNumbers.getLast();
         BigInteger retVal = BigInteger.valueOf(bigPrime);
         return retVal;
     }

@@ -1,6 +1,6 @@
 package asciiUtilTest;
 
-import asciiutil.AsciiUtil;
+import utils.asciiutil.AsciiUtil;
 import org.junit.Test;
 
 import java.math.BigInteger;

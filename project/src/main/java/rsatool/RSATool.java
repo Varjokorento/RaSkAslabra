@@ -1,6 +1,6 @@
 package rsatool;
 
-import asciiutil.AsciiUtil;
+import utils.asciiutil.AsciiUtil;
 import decrypter.Decrypter;
 import encrypter.Encrypter;
 import keygenerators.KeyGenerator;
