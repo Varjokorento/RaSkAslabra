@@ -43,14 +43,14 @@ public class PrimeNumberGenerator {
      * @return boolean isPrime
      */
     public static boolean millerRabinPrimality(BigInteger possiblePrime, int iterations) {
-        BigInteger TWO = new BigInteger("2");
-        BigInteger THREE = new BigInteger("3");
-        BigInteger FOUR = new BigInteger("4");
-        if (possiblePrime.compareTo(BigInteger.ONE) <= 0 || possiblePrime.compareTo(FOUR) == 0 || possiblePrime.compareTo(THREE) <= 0) {
+        BigInteger two = new BigInteger("2");
+        BigInteger three = new BigInteger("3");
+        BigInteger four = new BigInteger("4");
+        if (possiblePrime.compareTo(BigInteger.ONE) <= 0 || possiblePrime.compareTo(four) == 0 || possiblePrime.compareTo(three) <= 0) {
             return false;
         }
         BigInteger d = possiblePrime.subtract(BigInteger.ONE);
-        while (d.mod(TWO).equals(BigInteger.ZERO)) {
+        while (d.mod(two).equals(BigInteger.ZERO)) {
             d = d.shiftRight(1);
         }
         for (int i = 0; i < iterations; i++) {

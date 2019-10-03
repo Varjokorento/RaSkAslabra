@@ -21,7 +21,7 @@ public class PerformanceTest {
         }
         long endTime = System.nanoTime();
         long duration = (endTime - startTime);
-        System.out.println("It took " + duration/1000000 + " milliseconds with libraries");
+        System.out.println("It took " + duration/(1000000*10) + " milliseconds with libraries");
 
         startTime = System.nanoTime();
         for(int i = 0; i < 10; i++) {
@@ -29,7 +29,7 @@ public class PerformanceTest {
         }
         endTime = System.nanoTime();
         duration = (endTime - startTime);
-        System.out.println("It took " + duration/1000000 + " milliseconds without libraries");
+        System.out.println("It took " + duration/(1000000*10) + " milliseconds without libraries");
 
     }
 
@@ -44,7 +44,7 @@ public class PerformanceTest {
         }
         long endTime = System.nanoTime();
         long duration = (endTime - startTime);
-        System.out.println("It took " + duration/1000000 + " milliseconds with libraries");
+        System.out.println("It took " + duration/(1000000*10) + " milliseconds with libraries");
 
         startTime = System.nanoTime();
         for(int i = 0; i < 10; i++) {
@@ -52,7 +52,7 @@ public class PerformanceTest {
         }
         endTime = System.nanoTime();
         duration = (endTime - startTime);
-        System.out.println("It took " + duration/1000000 + " milliseconds without libraries");
+        System.out.println("It took " + duration/(1000000*10) + " milliseconds without libraries");
 
     }
 
@@ -68,7 +68,7 @@ public class PerformanceTest {
         }
         long endTime = System.nanoTime();
         long duration = (endTime - startTime);
-        System.out.println("It took " + duration/1000000 + " milliseconds with libraries");
+        System.out.println("It took " + duration/(1000000*10) + " milliseconds with libraries");
 
         startTime = System.nanoTime();
         for(int i = 0; i < 10; i++) {
@@ -77,7 +77,7 @@ public class PerformanceTest {
         }
         endTime = System.nanoTime();
         duration = (endTime - startTime);
-        System.out.println("It took " + duration/1000000 + " milliseconds without libraries");
+        System.out.println("It took " + duration/(1000000*10) + " milliseconds without libraries");
 
     }
 
