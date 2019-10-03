@@ -25,3 +25,7 @@ Laskun tuloksena saadaan julkinen avain, joka on jakojäännös n ja exponentti 
 ## 3. Salauksen purkaminen
 1. Kryptattu BigInteger-array annetaan Decrypter-luokalle, joka saa syötteenään myös julkisen avaimen ja yksityisen avaimen. 
 2. Jokaiselle alkiolle tehdään seuraava operaatio: a^d mod n. Tässä d on yksityinen avain ja n saadaan julkisesta avaimesta. 
+
+Lähteet:
+https://www.geeksforgeeks.org/primality-test-set-3-miller-rabin/
+https://en.wikipedia.org/wiki/RSA_(cryptosystem)
