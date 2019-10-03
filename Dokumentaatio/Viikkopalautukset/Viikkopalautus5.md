@@ -11,7 +11,7 @@ Kävi kuitenkin niin, että johtuen edellisen viikon kriittisestä ongelmasta --
 
 Ohjelma ei ole näkyvästi edistynyt tällä viikolla. Koska ohjelman runko on valmis ja algoritmi toimii, keskityn nyt sen parantamiseen ja omiin implementointeihin.
 
-Miller-Rabin -alkulukugenerointi toimii nyt jotenkuten. Tosin nyt ohjelman performanssi kärsii merkittävästi. 
+Miller-Rabin -alkulukugenerointi toimii nyt jotenkuten. Tosin nyt ohjelman performanssi kärsii merkittävästi. Nyt kirjastoversio generoi avaimet keskimäärin 34 ms kun taas minun implementaationi kestää 209 millisekuntia. Toisaalta tämä oli odotettavissa. 
  
 ### Mitä opin tällä viikolla?
 
@@ -25,4 +25,4 @@ Tällä viikolla ei jäänyt epäselväksi asioita.
 
 Seuraavaksi aion alkaa toteuttamaan BigInteger-luokkaa. Uskoisin tämän olevan melkoisen hankala vaihe työtä.
 
-Käytetty aika: 10 tuntia. 
+Käytetty aika: 9 tuntia. 
