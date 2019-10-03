@@ -1,7 +1,5 @@
 package utils;
 
-import javalibimplementations.ArraysImpl;
-import javalibimplementations.LinkedListImpl;
 
 import java.math.BigInteger;
 import java.util.Random;
@@ -10,48 +8,76 @@ public class PrimeNumberGenerator {
 
     /**
      * Generates a large prime number
-     * @return BigIntegerThatIsPrime
+     * @return BigInteger that is a prime
      */
-
-    public static BigInteger generateLargePrime() {
-        Random random = new Random();
-        int randomInteger = random.nextInt(10000000);
-        return sieveOfEratosthenes(randomInteger);
+    public static BigInteger generateLargePrime(int bitLength) {
+        return generatePrime(bitLength);
     }
 
     /**
-     * Generates a large prime from int n using sieve of eratosthenes algorithm
-     *  O(n log n).
-     * @param n
-     * @return BigInteger
+     * Generates a prime number with a specified length with Miller-Rabin primality test
+     * @param bitLength
+     * @return a BigInteger that should be a prime
      */
-    private static BigInteger sieveOfEratosthenes(int n) {
-        boolean prime[] = new boolean[n + 1];
-
-        ArraysImpl.fill(prime, true);
-        for (int p = 2; p * p <= n; p++) {
-            if (prime[p]) {
-                for (int i = p * 2; i <= n; i += p) {
-                    prime[i] = false;
-                }
+    private static BigInteger generatePrime(int bitLength) {
+        //TODO Implement BigInteger
+        BigInteger prime = new BigInteger(bitLength, 2, new Random());
+        boolean isPrime = true;
+        while (true) {
+            if (!isPrime) {
+                prime = prime.add(BigInteger.valueOf(2));
+            }
+            if (!millerRabinPrimality(prime, 4)) {
+                isPrime = false;
+                continue;
+            } else {
+                return prime;
             }
         }
-        LinkedListImpl primeNumbers = new LinkedListImpl();
-        int latestPrime = 3;
-        for (int i = 2; i <= n; i++) {
-            if (prime[i]) {
-                latestPrime = i;
-            }
-        }
-        return getLastPrimeNumber(primeNumbers, latestPrime);
-
     }
 
-    private static BigInteger getLastPrimeNumber(LinkedListImpl primeNumbers, int latestPrime) {
-        primeNumbers.insert(latestPrime);
-        Integer bigPrime = primeNumbers.getLast();
-        BigInteger retVal = BigInteger.valueOf(bigPrime);
-        return retVal;
+    /**
+     * Miller-Rabin test for primality
+     * @param possiblePrime
+     * @param iterations
+     * @return boolean isPrime
+     */
+    public static boolean millerRabinPrimality(BigInteger possiblePrime, int iterations) {
+        BigInteger TWO = new BigInteger("2");
+        BigInteger THREE = new BigInteger("3");
+        BigInteger FOUR = new BigInteger("4");
+        if (possiblePrime.compareTo(BigInteger.ONE) <= 0 || possiblePrime.compareTo(FOUR) == 0 || possiblePrime.compareTo(THREE) <= 0) {
+            return false;
+        }
+        BigInteger d = possiblePrime.subtract(BigInteger.ONE);
+        while (d.mod(TWO).equals(BigInteger.ZERO)) {
+            d = d.shiftRight(1);
+        }
+        for (int i = 0; i < iterations; i++) {
+            if (millerRabinTest(d, possiblePrime)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean millerRabinTest(BigInteger d, BigInteger n) {
+        BigInteger a = new BigInteger(n.bitLength(), 2, new Random());
+        BigInteger x = a.modPow(d, n);
+        if (x.compareTo(BigInteger.ONE) == 0 || x.compareTo(n.subtract(BigInteger.ONE)) == 0) {
+            return true;
+        }
+        while (d.compareTo(n.subtract(BigInteger.ONE)) != 0) {
+            x = x.multiply(x).mod(n);
+            d = d.shiftLeft(1);
+            if (x.compareTo(BigInteger.ONE) == 0) {
+                return false;
+            }
+            if (x.compareTo(n.subtract(BigInteger.ONE)) == 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

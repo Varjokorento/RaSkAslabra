@@ -50,8 +50,8 @@ public class KeyGenerator {
      * Generates keyPar with keyPairGenerator.
      *
      */
-    public void generateKeyPair() {
-        keyPair = keyPairGenerator.generateKeyPair();
+    public void generateKeyPair(int bitLength) {
+        keyPair = keyPairGenerator.generateKeyPair(bitLength);
     }
 
     /**

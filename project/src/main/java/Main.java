@@ -15,7 +15,7 @@ public class Main {
         System.out.println("Please enter plain text");
         String message = scanner.nextLine();
         RSATool rsaTool = new RSATool();
-        rsaTool.generateKeys();
+        rsaTool.generateKeys(1024);
         BigInteger[] encrypted = rsaTool.encrypt(message);
         BigInteger[] decrypted = rsaTool.decrypt(encrypted);
         String restoredMessage = rsaTool.cipherToString(decrypted);

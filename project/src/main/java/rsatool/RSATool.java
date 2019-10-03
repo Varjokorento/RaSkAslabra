@@ -55,8 +55,8 @@ public class RSATool {
      * Generates keys for the tool
      *
      */
-    public void generateKeys() {
-        keyGenerator.generateKeyPair();
+    public void generateKeys(int bitLength) {
+        keyGenerator.generateKeyPair(bitLength);
         this.publicKey = keyGenerator.getPublicKey();
         this.privateKey = keyGenerator.getPrivateKey();
     }

@@ -21,7 +21,7 @@ public class RSAToolTest {
     @Before
     public void setUp() {
         this.rsaTool = new RSATool();
-        rsaTool.generateKeys();
+        rsaTool.generateKeys(100);
     }
 
     @Test

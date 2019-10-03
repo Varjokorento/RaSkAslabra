@@ -16,7 +16,7 @@ public class KeyPairGeneratorImplTest {
     @Test
     public void generateKeyPairGeneratesKeysThatAreKeysToEachOther() {
         KeyPairGeneratorImpl keyPairGenerator = new KeyPairGeneratorImpl();
-        KeyPairImpl kp = keyPairGenerator.generateKeyPair();
+        KeyPairImpl kp = keyPairGenerator.generateKeyPair(1024);
         BigInteger test = new BigInteger("97");
         BigInteger eModN = test.modPow(kp.getPublicKey().getE(), kp.getPublicKey().getN());
         BigInteger dModN = eModN.modPow(kp.getPrivateKey().getPrivateKey(), kp.getPublicKey().getN());

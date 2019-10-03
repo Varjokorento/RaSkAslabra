@@ -13,9 +13,9 @@ public class PrimeNumberGeneratorTest {
 
     @Test
     public void generatorNumbersArePrimes() {
-        BigInteger number = primeNumberGenerator.generateLargePrime();
+        BigInteger number = primeNumberGenerator.generateLargePrime(1024);
         assertTrue((number.isProbablePrime(100)));
-        BigInteger number2 = primeNumberGenerator.generateLargePrime();
+        BigInteger number2 = primeNumberGenerator.generateLargePrime(1024);
         assertTrue((number2.isProbablePrime(100)));
     }
 

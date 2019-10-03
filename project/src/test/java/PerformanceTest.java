@@ -25,7 +25,7 @@ public class PerformanceTest {
 
         startTime = System.nanoTime();
         for(int i = 0; i < 10; i++) {
-            rsaTool.generateKeys();
+            rsaTool.generateKeys(1024);
         }
         endTime = System.nanoTime();
         duration = (endTime - startTime);
@@ -37,7 +37,7 @@ public class PerformanceTest {
     @Test
     public void comparingEncryptionPerformance() throws NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, NoSuchPaddingException, IllegalBlockSizeException {
         rsaTool.generateKeysWithLibraries();
-        rsaTool.generateKeys();
+        rsaTool.generateKeys(1024);
         long startTime = System.nanoTime();
         for(int i = 0; i < 10; i++) {
             rsaTool.encryptWithLibraries("message");
@@ -59,7 +59,7 @@ public class PerformanceTest {
     @Test
     public void comparingEndToEndPerformance() throws NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, NoSuchPaddingException, IllegalBlockSizeException {
         rsaTool.generateKeysWithLibraries();
-        rsaTool.generateKeys();
+        rsaTool.generateKeys(1024);
         long startTime = System.nanoTime();
         for(int i = 0; i < 10; i++) {
             byte[] array = rsaTool.encryptWithLibraries("message");

@@ -17,9 +17,9 @@ public class KeyPairGeneratorImpl {
      * @return
      */
 
-    public KeyPairImpl generateKeyPair() {
-        BigInteger p = PrimeNumberGenerator.generateLargePrime();
-        BigInteger q = PrimeNumberGenerator.generateLargePrime();
+    public KeyPairImpl generateKeyPair(int bitLength) {
+        BigInteger p = PrimeNumberGenerator.generateLargePrime(bitLength);
+        BigInteger q = PrimeNumberGenerator.generateLargePrime(bitLength);
         BigInteger n = findN(p, q);
         BigInteger phi = getPhi(p, q);
         BigInteger e = genE(phi);
