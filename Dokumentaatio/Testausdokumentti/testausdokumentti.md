@@ -5,7 +5,7 @@
 Tällä hetkellä ohjelman testaus on toteutettu enimmäkseen yksikkötesteillä. Yksikkötestit testaavat ohjelman eri ominaisuuksia. Testaus
 on kattava ja rivikohtainen kattavuus on 70 prosenttia ja haarakohtainen 80 prosenttia.
 
-![alt text](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Testausdokumentti/testausraportti.PNG "Raportti")
+![alt text](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Testausdokumentti/testaus2.PNG "Raportti")
 
 ## Integraatiotestaus
 
