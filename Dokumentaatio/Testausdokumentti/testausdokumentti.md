@@ -10,7 +10,7 @@ on kattava ja rivikohtainen kattavuus on 72 prosenttia ja haarakohtainen 77 pros
 ## Integraatiotestaus
 
 Tällä hetkellä integraatiotestausta on tehty käsin kokeilemalla eri syötteitä ja katsomalla toimivatko ne oikein halutulla tavalla. Tämän lisäksi
-on RSAToolTest.java luokka, joka generoiduilla avaimilla kryptaa ja dekryptaa syötteen oikein. 
+on RSAToolTest.java luokka, joka generoiduilla avaimilla kryptaa ja dekryptaa syötteen oikein. Tämä on oikeastaan samalla end-to-end-testausta. 
 
 ## Suorituskykytestaus
 
