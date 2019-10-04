@@ -20,7 +20,7 @@ Tämän lisäksi ohjelma vertailee ilman kirjastoja tehtyä toteutusta sekä kir
 
 Ohjelma toteuttaa avainten generoinnin seuraavasti:
 
-1. Ohjelman PrimeNumberGenerator-luokka generoi kaksi alkulukua p ja q. Alkuluvut generoidaan käyttäen satunnaista lukua, josta generoidaan Eratostheneen seula -algoritmilla kaksi erillistä alkulukua. 
+1. Ohjelman PrimeNumberGenerator-luokka generoi kaksi alkulukua p ja q. Alkuluvut generoidaan käyttäen satunnaista lukua, josta generoidaan Miller-Rabin -algoritmiin perustuvalla metodilla kaksi erillistä suurta alkulukua. 
 
 2. Ohjelman KeyPairGeneratorImpl-luokka tekee tämän jälkeen seuraavat laskutoimitukset.
     1. Etsii n laskemalla p*q. (Tämä on avainten modulo).
