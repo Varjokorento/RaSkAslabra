@@ -25,7 +25,7 @@ public class PerformanceTest {
 
         startTime = System.nanoTime();
         for(int i = 0; i < 10; i++) {
-            rsaTool.generateKeys(1024);
+            rsaTool.generateKeys(100);
         }
         endTime = System.nanoTime();
         duration = (endTime - startTime);

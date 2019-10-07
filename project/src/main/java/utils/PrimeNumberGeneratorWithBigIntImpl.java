@@ -4,13 +4,13 @@ package utils;
 import java.math.BigInteger;
 import java.util.Random;
 
-public class PrimeNumberGenerator {
+public class PrimeNumberGeneratorWithBigIntImpl {
 
     /**
      * Generates a large prime number
      * @return BigInteger that is a prime
      */
-    public static BigInteger generateLargePrime(int bitLength) {
+    public static BigIntegerImpl generateLargePrime(int bitLength) {
         return generatePrime(bitLength);
     }
 
@@ -19,12 +19,12 @@ public class PrimeNumberGenerator {
      * @param bitLength
      * @return a BigInteger that should be a prime
      */
-    private static BigInteger generatePrime(int bitLength) {
+    private static BigIntegerImpl generatePrime(int bitLength) {
         //TODO Implement BigInteger
-        BigInteger prime = new BigInteger(bitLength, new Random());
+        BigIntegerImpl prime = new BigIntegerImpl(bitLength, new Random());
         while (true) {
             if (!millerRabinPrimality(prime, 4)) {
-                prime = prime.add(BigInteger.valueOf(1));
+                prime = prime.add(new BigIntegerImpl("1"));
                 continue;
             } else {
                 return prime;
@@ -38,14 +38,15 @@ public class PrimeNumberGenerator {
      * @param iterations
      * @return boolean isPrime
      */
-    public static boolean millerRabinPrimality(BigInteger possiblePrime, int iterations) {
-        BigInteger two = new BigInteger("2");
-        BigInteger three = new BigInteger("3");
-        BigInteger four = new BigInteger("4");
-        if (possiblePrime.compareTo(BigInteger.ONE) <= 0 || possiblePrime.compareTo(four) == 0 || possiblePrime.compareTo(three) <= 0) {
+    public static boolean millerRabinPrimality(BigIntegerImpl possiblePrime, int iterations) {
+        BigIntegerImpl one = new BigIntegerImpl("1");
+        BigIntegerImpl two = new BigIntegerImpl("2");
+        BigIntegerImpl three = new BigIntegerImpl("3");
+        BigIntegerImpl four = new BigIntegerImpl("4");
+        if (possiblePrime.compareTo(one) <= 0 || possiblePrime.compareTo(four) == 0 || possiblePrime.compareTo(three) <= 0) {
             return false;
         }
-        BigInteger d = possiblePrime.subtract(BigInteger.ONE);
+        BigIntegerImpl d = possiblePrime.subtract(one);
         while (d.mod(two).equals(BigInteger.ZERO)) {
             d = d.shiftRight(1);
         }
@@ -57,19 +58,20 @@ public class PrimeNumberGenerator {
         return false;
     }
 
-    private static boolean millerRabinTest(BigInteger d, BigInteger n) {
-        BigInteger a = new BigInteger(n.bitLength(), new Random());
-        BigInteger x = a.modPow(d, n);
-        if (x.compareTo(BigInteger.ONE) == 0 || x.compareTo(n.subtract(BigInteger.ONE)) == 0) {
+    private static boolean millerRabinTest(BigIntegerImpl d, BigIntegerImpl n) {
+        BigIntegerImpl one = new BigIntegerImpl("1");
+        BigIntegerImpl a = new BigIntegerImpl(211, new Random());
+        BigIntegerImpl x = a.modPow(d, n);
+        if (x.compareTo(one) == 0 || x.compareTo(n.subtract(one)) == 0) {
             return true;
         }
-        while (d.compareTo(n.subtract(BigInteger.ONE)) != 0) {
+        while (d.compareTo(n.subtract(one)) != 0) {
             x = x.multiply(x).mod(n);
             d = d.shiftLeft(1);
-            if (x.compareTo(BigInteger.ONE) == 0) {
+            if (x.compareTo(one) == 0) {
                 return false;
             }
-            if (x.compareTo(n.subtract(BigInteger.ONE)) == 0) {
+            if (x.compareTo(n.subtract(one)) == 0) {
                 return true;
             }
         }
