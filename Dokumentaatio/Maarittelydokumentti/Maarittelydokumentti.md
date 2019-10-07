@@ -20,7 +20,7 @@ Tämän lisäksi ohjelma vertailee ilman kirjastoja tehtyä toteutusta sekä kir
 
 Ohjelma toteuttaa avainten generoinnin seuraavasti:
 
-1. Ohjelman PrimeNumberGenerator-luokka generoi kaksi alkulukua p ja q. Alkuluvut generoidaan käyttäen satunnaista lukua, josta generoidaan Eratostheneen seula -algoritmilla kaksi erillistä alkulukua. 
+1. Ohjelman PrimeNumberGenerator-luokka generoi kaksi alkulukua p ja q. Alkuluvut generoidaan käyttäen satunnaista lukua, josta generoidaan Miller-Rabin -algoritmiin perustuvalla metodilla kaksi erillistä suurta alkulukua. 
 
 2. Ohjelman KeyPairGeneratorImpl-luokka tekee tämän jälkeen seuraavat laskutoimitukset.
     1. Etsii n laskemalla p*q. (Tämä on avainten modulo).
@@ -49,3 +49,4 @@ RSA-algoritmin tilavaativuus on O(1), sillä lisätty syöte ei vaikuta siihen, 
 - Paloja, J. "RSA-salausalgoritmi ja alkuluvut", https://trepo.tuni.fi/handle/10024/78940
 - Rivest, Shamir, Adleman, "Cryptographic communications system and method" https://patents.google.com/patent/US4405829
 - Ireland D, "RSA Algorithm", https://www.di-mgt.com.au/rsa_alg.html
+- https://www.geeksforgeeks.org/primality-test-set-3-miller-rabin/
