@@ -10,7 +10,7 @@ Projektissa implementoidaan RSA-salaus Javan valmiilla kirjastoilla sekä omilla
 
 Koodin lukemiseen on kaksi nyrkkisääntöä:
 1. Jos metodin kommentissa lukee OWN IMPLEMENTATION, on kyse omasta implementaatiosta. Jos siinä lukee LIBRARY IMPLEMENTATION niin kyse on kirjastojen käyttämisestä.
-2. Jokainen luokka, jonka perässä on sana "Impl" on oma toteutus kyseisestä luokasta. Esimerkiksi LinkedListImpl on toteutus LinkedList-luokasta. Impl-luokat eivät välttämättä toteuta kaikkia mahdollisia metodeja, vaan ainoastaan ne, joita käytetään projektissa.
+2. Jokainen luokka, jonka edessä on sana "OWN", on on oma toteutus kyseisestä luokasta. Esimerkiksi OwnLinkedList on toteutus LinkedList-luokasta. Own-luokat eivät välttämättä toteuta kaikkia mahdollisia metodeja, vaan ainoastaan ne, joita käytetään projektissa.
 
 ## Projektin tavoite:
 
