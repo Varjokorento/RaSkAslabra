@@ -169,7 +169,20 @@ public class BigIntegerImpl implements Comparable<BigIntegerImpl> {
                 carry = 0;
             }
         }
-        return new BigIntegerImpl(resultString.reverse().toString());
+        String resultedString = resultString.reverse().toString();
+        char[] array = resultedString.toCharArray();
+        StringBuilder toBuild = new StringBuilder();
+        boolean numberHasStarted = false;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == '0' && !numberHasStarted) {
+                array[i] = 'X';
+             } else {
+                numberHasStarted = true;
+                toBuild.append(array[i]);
+            }
+        }
+
+        return new BigIntegerImpl(toBuild.toString());
     }
 
 
@@ -231,14 +244,29 @@ public class BigIntegerImpl implements Comparable<BigIntegerImpl> {
         numberAsString += '0';
     }
 
-    public BigIntegerImpl mod(BigIntegerImpl bigInteger) {
+    public BigIntegerImpl mod( BigIntegerImpl divisor) {
         //TODO implement....'
-        return new BigIntegerImpl("1");
+        BigIntegerImpl bigInteger = this;
+        while(bigInteger.compareTo(divisor) > 0) {
+            bigInteger = bigInteger.subtract(divisor);
+        }
+        return bigInteger;
     }
 
-    public BigIntegerImpl modPow(BigIntegerImpl bigInteger, BigIntegerImpl bigInteger2) {
+    public BigIntegerImpl modPow(BigIntegerImpl mod, BigIntegerImpl pow) {
         //todo implement....
-        return new BigIntegerImpl("1");
+        BigIntegerImpl modulus =  this.mod(mod);
+        return this.pow(modulus, pow);
+    }
+
+    public BigIntegerImpl pow(BigIntegerImpl number, BigIntegerImpl power) {
+        BigIntegerImpl times = new BigIntegerImpl("1");
+        BigIntegerImpl originalNumber = number;
+        while(times.compareTo(power) != 0) {
+            number = number.multiply(originalNumber);
+            times = times.add(new BigIntegerImpl("1"));
+        }
+        return number;
     }
 
     @Override

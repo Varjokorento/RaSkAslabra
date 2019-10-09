@@ -1,15 +1,15 @@
-package keygenerators;
+package keys;
 
-import keyimpl.KeyPairImpl;
-import keyimpl.PrivateKeyImpl;
-import keyimpl.PublicKeyImpl;
+import keys.keyimpl.OwnKeyPair;
+import keys.keyimpl.OwnPrivateKey;
+import keys.keyimpl.OwnPublicKey;
 
 import java.security.*;
 
 public class KeyGenerator {
 
-    private KeyPairGeneratorImpl keyPairGenerator;
-    private KeyPairImpl keyPair;
+    private OwnKeyPairGenerator keyPairGenerator;
+    private OwnKeyPair keyPair;
 
     private KeyPair libraryKeyPair;
 
@@ -41,7 +41,7 @@ public class KeyGenerator {
      * Initializes a keyPairGenerator with the keySize
      */
     public KeyGenerator() {
-        this.keyPairGenerator = new KeyPairGeneratorImpl();
+        this.keyPairGenerator = new OwnKeyPairGenerator();
     }
 
 
@@ -59,7 +59,7 @@ public class KeyGenerator {
      * Returns generated public key
      * @return PublicKey
      */
-    public PublicKeyImpl getPublicKey() {
+    public OwnPublicKey getPublicKey() {
         return keyPair.getPublicKey();
     }
     /**
@@ -67,7 +67,7 @@ public class KeyGenerator {
      * Returns generated private key
      * @return PrivateKey
      */
-    public PrivateKeyImpl getPrivateKey() {
+    public OwnPrivateKey getPrivateKey() {
         return keyPair.getPrivateKey();
     }
 

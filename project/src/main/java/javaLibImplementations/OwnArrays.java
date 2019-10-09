@@ -1,6 +1,6 @@
 package javalibimplementations;
 
-public class ArraysImpl {
+public class OwnArrays {
 
     /**
      * Fills an given boolean array with wanted value

@@ -1,7 +1,7 @@
 package decrypter;
 
-import keyimpl.PrivateKeyImpl;
-import keyimpl.PublicKeyImpl;
+import keys.keyimpl.OwnPrivateKey;
+import keys.keyimpl.OwnPublicKey;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -20,7 +20,7 @@ public class Decrypter {
      * @param publicKey
      * @return
      */
-    public BigInteger[] decrypt(BigInteger[] array, PrivateKeyImpl privateKey, PublicKeyImpl publicKey) {
+    public BigInteger[] decrypt(BigInteger[] array, OwnPrivateKey privateKey, OwnPublicKey publicKey) {
         BigInteger[] decrypted = new BigInteger[array.length];
         for (int i = 0; i < array.length; i++) {
             decrypted[i] = array[i].modPow(privateKey.getPrivateKey(), publicKey.getN());

@@ -1,30 +1,30 @@
-package keygenerators;
+package keys;
 
 
-import keyimpl.KeyPairImpl;
-import keyimpl.PrivateKeyImpl;
-import keyimpl.PublicKeyImpl;
+import keys.keyimpl.OwnKeyPair;
+import keys.keyimpl.OwnPrivateKey;
+import keys.keyimpl.OwnPublicKey;
 import utils.PrimeNumberGenerator;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.Random;
 
-public class KeyPairGeneratorImpl {
+public class OwnKeyPairGenerator {
 
     /**
      * Generates two public keys e,n and d.
      * @return
      */
 
-    public KeyPairImpl generateKeyPair(int bitLength) {
+    public OwnKeyPair generateKeyPair(int bitLength) {
         BigInteger p = PrimeNumberGenerator.generateLargePrime(bitLength);
         BigInteger q = PrimeNumberGenerator.generateLargePrime(bitLength);
         BigInteger n = findN(p, q);
         BigInteger phi = getPhi(p, q);
         BigInteger e = genE(phi);
         BigInteger d = extEuclid(e, phi)[1];
-        return new KeyPairImpl(new PublicKeyImpl(e, n), new PrivateKeyImpl(d));
+        return new OwnKeyPair(new OwnPublicKey(e, n), new OwnPrivateKey(d));
     }
 
     /**

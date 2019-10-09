@@ -1,10 +1,10 @@
-package decrypterTest;
+package decryptertest;
 
 import decrypter.Decrypter;
 import encrypter.Encrypter;
-import keygenerators.KeyUtil;
-import keyimpl.PrivateKeyImpl;
-import keyimpl.PublicKeyImpl;
+import keys.KeyUtil;
+import keys.keyimpl.OwnPrivateKey;
+import keys.keyimpl.OwnPublicKey;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
@@ -42,8 +42,8 @@ public class DecrypterTest {
 
     @Test
     public void encryptedStringIsDecryptedCorrectlyWithImplementation() {
-        PublicKeyImpl publicKey = new PublicKeyImpl(new BigInteger("10400312739031"), new BigInteger("21423684981763"));
-        PrivateKeyImpl privateKey = new PrivateKeyImpl(new BigInteger("4860493505831"));
+        OwnPublicKey publicKey = new OwnPublicKey(new BigInteger("10400312739031"), new BigInteger("21423684981763"));
+        OwnPrivateKey privateKey = new OwnPrivateKey(new BigInteger("4860493505831"));
         BigInteger[] encryptedByteArray = {new BigInteger("3547036742032"),
                 new BigInteger("7533585362812"),
                 new BigInteger("10644284804799") };

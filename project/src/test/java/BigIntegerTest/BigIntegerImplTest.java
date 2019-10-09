@@ -1,4 +1,4 @@
-package BigIntegerTest;
+package bigintegertest;
 
 import org.junit.Test;
 import utils.BigIntegerImpl;
@@ -49,10 +49,25 @@ public class BigIntegerImplTest {
 
     @Test
     public void shiftLeft() {
-        BigIntegerImpl bigInteger = new BigIntegerImpl("106051560997741464980169234474");
+        BigIntegerImpl bigInteger = new BigIntegerImpl("2");
         BigIntegerImpl impl2 = bigInteger.shiftLeft(1);
-        BigInteger integer = new BigInteger("106051560997741464980169234474");
+        BigInteger integer = new BigInteger("2");
         System.out.println(impl2);
         System.out.println(integer.shiftLeft(1));
+    }
+
+    @Test
+    public void moduloTest() {
+        BigIntegerImpl impl = new BigIntegerImpl("1311313232323232323232323232323");
+        BigIntegerImpl divisor = new BigIntegerImpl("23232323232323232323322323");
+        assertEquals("11212121212121207041355234", impl.mod(divisor).valueOf());
+    }
+
+    @Test
+    public void powerTest() {
+        BigIntegerImpl two = new BigIntegerImpl("3");
+        BigIntegerImpl four = new BigIntegerImpl("2");
+        BigIntegerImpl newNumber = two.pow(two, four);
+        assertEquals("9", newNumber.valueOf());
     }
 }

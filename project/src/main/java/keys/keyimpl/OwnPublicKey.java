@@ -1,12 +1,12 @@
-package keyimpl;
+package keys.keyimpl;
 
 import java.math.BigInteger;
 
-public class PublicKeyImpl {
+public class OwnPublicKey {
     private BigInteger e;
     private BigInteger n;
 
-    public PublicKeyImpl(BigInteger e, BigInteger n) {
+    public OwnPublicKey(BigInteger e, BigInteger n) {
         this.e = e;
         this.n = n;
     }

@@ -1,4 +1,4 @@
-package asciiUtilTest;
+package asciiutiltest;
 
 import utils.asciiutil.AsciiUtil;
 import org.junit.Test;

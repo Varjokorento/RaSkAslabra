@@ -1,10 +1,8 @@
-package encrypterTest;
+package encryptertest;
 
-import decrypter.Decrypter;
 import encrypter.Encrypter;
-import keygenerators.KeyUtil;
-import keyimpl.PrivateKeyImpl;
-import keyimpl.PublicKeyImpl;
+import keys.KeyUtil;
+import keys.keyimpl.OwnPublicKey;
 import org.junit.Test;
 
 import javax.crypto.BadPaddingException;
@@ -36,7 +34,7 @@ public class EncrypterTest {
 
     @Test
     public void encrypterEncryptsCorrectlyWithoutLibraries() {
-        PublicKeyImpl publicKey = new PublicKeyImpl(new BigInteger("10400312739031"), new BigInteger("21423684981763"));
+        OwnPublicKey publicKey = new OwnPublicKey(new BigInteger("10400312739031"), new BigInteger("21423684981763"));
         BigInteger[] bigIntArray = {new BigInteger("97"), new BigInteger("98"), new BigInteger("99")};
         BigInteger[] encrypted = encrypter.encrypt(bigIntArray, publicKey);
         assertEquals(new BigInteger("3547036742032"), encrypted[0]);

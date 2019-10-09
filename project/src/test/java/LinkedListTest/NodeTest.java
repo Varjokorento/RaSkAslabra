@@ -1,4 +1,4 @@
-package LinkedListTest;
+package linkedlisttest;
 
 import javalibimplementations.Node;
 import org.junit.Test;

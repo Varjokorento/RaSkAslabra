@@ -1,12 +1,12 @@
-package LinkedListTest;
+package linkedlisttest;
 
-import javalibimplementations.LinkedListImpl;
+import javalibimplementations.OwnLinkedList;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
 
 public class LinkedListImplTest {
-    LinkedListImpl linkedList = new LinkedListImpl();
+    OwnLinkedList linkedList = new OwnLinkedList();
 
     @Test
     public void insertToLinkedListWorks() {

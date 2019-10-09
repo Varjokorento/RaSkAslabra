@@ -1,6 +1,6 @@
 package javalibimplementations;
 
-public class LinkedListImpl {
+public class OwnLinkedList {
     Node head;
 
     /**

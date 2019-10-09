@@ -4,7 +4,7 @@ package utils;
 import java.math.BigInteger;
 import java.util.Random;
 
-public class PrimeNumberGeneratorWithBigIntImpl {
+public class PrimeNumberGeneratorWithBigInt {
 
     /**
      * Generates a large prime number

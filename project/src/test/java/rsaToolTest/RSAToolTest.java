@@ -1,4 +1,4 @@
-package rsaToolTest;
+package rsatooltest;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package mathImplTest;
+package mathimpltest;
 
 import utils.MathImpl;
 import org.junit.Test;

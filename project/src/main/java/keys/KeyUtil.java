@@ -1,7 +1,7 @@
-package keygenerators;
+package keys;
 
-import keyimpl.PrivateKeyImpl;
-import keyimpl.PublicKeyImpl;
+import keys.keyimpl.OwnPrivateKey;
+import keys.keyimpl.OwnPublicKey;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -20,7 +20,7 @@ public class KeyUtil {
     /**
      * Saves public Key to .pub file
      */
-    public void savePublicKeyToFile(PublicKeyImpl pubKey) throws IOException {
+    public void savePublicKeyToFile(OwnPublicKey pubKey) throws IOException {
         try (FileOutputStream out = new FileOutputStream(PUBLIC_KEY + ".pub")) {
             out.write(pubKey.getN().toByteArray());
             out.write(pubKey.getE().toByteArray());
@@ -29,7 +29,7 @@ public class KeyUtil {
     /**
      * Saves private Key to .key file
      */
-    public void savePrivateKeyToFile(PrivateKeyImpl privateKey) throws IOException {
+    public void savePrivateKeyToFile(OwnPrivateKey privateKey) throws IOException {
         try (FileOutputStream out = new FileOutputStream(PRIVATE_KEY + ".key")) {
             out.write(privateKey.getPrivateKey().toByteArray());
         }

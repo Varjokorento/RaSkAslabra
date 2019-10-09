@@ -3,10 +3,10 @@ package rsatool;
 import utils.asciiutil.AsciiUtil;
 import decrypter.Decrypter;
 import encrypter.Encrypter;
-import keygenerators.KeyGenerator;
-import keygenerators.KeyUtil;
-import keyimpl.PrivateKeyImpl;
-import keyimpl.PublicKeyImpl;
+import keys.KeyGenerator;
+import keys.KeyUtil;
+import keys.keyimpl.OwnPrivateKey;
+import keys.keyimpl.OwnPublicKey;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -21,8 +21,8 @@ import java.security.PublicKey;
 public class RSATool {
     private KeyGenerator keyGenerator;
     private KeyGenerator libraryKeyGenerator;
-    private PublicKeyImpl publicKey;
-    private PrivateKeyImpl privateKey;
+    private OwnPublicKey publicKey;
+    private OwnPrivateKey privateKey;
     private KeyUtil keyUtil;
     private AsciiUtil asciiUtil;
     private Encrypter encrypter;
@@ -43,11 +43,11 @@ public class RSATool {
 
     }
 
-    private PublicKeyImpl getPublicKey() {
+    private OwnPublicKey getPublicKey() {
         return publicKey;
     }
 
-    private PrivateKeyImpl getPrivateKey() {
+    private OwnPrivateKey getPrivateKey() {
         return privateKey;
     }
 
