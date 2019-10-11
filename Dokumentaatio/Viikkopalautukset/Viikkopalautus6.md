@@ -18,6 +18,8 @@ Opin, miten BigInteger-luokka periaatteessa toimii.
 
 ### Mitä jäi epäselväksi?
 
+Tällä hetkellä on hieman epävarmaa saanko järkevää BigInteger-luokkaa tehtyä. BigIntegerin lähdekoodi käyttää bittioperaatioita, jotka ovat minulle hieman tuntemattomia. Uskoisin, että jos saan oman versioni toimimaan, tulee se olemaan hyvin epätehokas ja aikaavievä. Kuinka kriittinen puute on siis jättää BigInteger pois ja käyttää Javan kirjastoa?
+
 ### Mitä teen seuraavaksi?
 
 Yritän saada BigIntegerin modPow-toiminnallisuuden toimimaan. Tämän jälkeen integroin sen minun muuhun toteutukseen. Jos tämä onnistuu, niin ohjelma on käytännössä valmis. 
