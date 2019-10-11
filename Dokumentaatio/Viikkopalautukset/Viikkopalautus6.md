@@ -22,6 +22,8 @@ Tällä hetkellä on hieman epävarmaa saanko järkevää BigInteger-luokkaa teh
 
 ### Mitä teen seuraavaksi?
 
-Yritän saada BigIntegerin modPow-toiminnallisuuden toimimaan. Tämän jälkeen integroin sen minun muuhun toteutukseen. Jos tämä onnistuu, niin ohjelma on käytännössä valmis. 
+Yritän saada BigIntegerin modPow-toiminnallisuuden toimimaan. Tämän jälkeen integroin sen minun muuhun toteutukseen. Jos tämä onnistuu, niin ohjelma on käytännössä valmis.
+
+Aion myös refaktoroida koodia niin, että poistan turhat luokat jotka toteutin jossain vaiheessa. Aion myös siirtää kaikki hieman sekavasti tehdyt "withLibraries"-kirjastometodit omiksi selkeiksi luokikseen. Tästä on tullut koodikatselmoinnissa täysin aiheellista palautetta.
 
 Käytetty aika: 11 tuntia. 
