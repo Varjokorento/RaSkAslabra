@@ -10,6 +10,7 @@ public class BigIntegerImpl implements Comparable<BigIntegerImpl> {
     private int[] digits;
 
 
+
     public BigIntegerImpl(int bitLength, Random random) {
         this(String.valueOf(random.nextInt()));
 
@@ -24,87 +25,37 @@ public class BigIntegerImpl implements Comparable<BigIntegerImpl> {
         }
     }
 
+    /**
+     * Shifts BigInt by n bytes
+     * @param n
+     * @return BigIntegerImpl that has been shifted left
+     */
 
     public BigIntegerImpl shiftLeft(int n) {
         return new BigIntegerImpl(shiftLeft(this.digits, n));
     }
 
-    private String shiftLeft(int[] mag, int n) {
-        int nInts = n >>> 5;
-        int nBits = n & 31;
-        int magLen = mag.length;
-        int[] newMag = null;
-        if (nBits == 0) {
-            newMag = new int[magLen + nInts];
-            System.arraycopy(mag, 0, newMag, 0, magLen);
-        } else {
-            int i = 0;
-            int nBits2 = 32 - nBits;
-            int highBits = mag[0] >>> nBits2;
-            if (highBits != 0) {
-                newMag = new int[magLen + nInts + 1];
-                newMag[i++] = highBits;
-            } else {
-                newMag = new int[magLen + nInts];
-            }
 
-            int j;
-            for(j = 0; j < magLen - 1; newMag[i++] = mag[j++] << nBits | mag[j] >>> nBits2) {
-            }
-
-            newMag[i] = mag[j] << nBits;
-        }
-        StringBuilder number = new StringBuilder();
-        for (int i: newMag) {
-            number.append(String.valueOf(i));
-        }
-       return number.toString();
-    }
+    /**
+     * Bit operation that shifts a number n to the right
+     * @param n
+     * @return BigInteger that has been shifted n to the right
+     */
 
     public BigIntegerImpl shiftRight(int n) {
         return new BigIntegerImpl(this.shiftRightImpl(n));
     }
 
-    private String shiftRightImpl(int n) {
-        int nInts = n >>> 5;
-        int nBits = n & 31;
-        int magLen = this.digits.length;
-        int[] newMag = null;
-        if (nInts >= magLen) {
-        } else {
-            int newMagLen;
-            int i;
-            int nBits2;
-            if (nBits == 0) {
-                newMagLen = magLen - nInts;
-                newMag = Arrays.copyOf(this.digits, newMagLen);
-            } else {
-                newMagLen = 0;
-                i = this.digits[0] >>> nBits;
-                if (i != 0) {
-                    newMag = new int[magLen - nInts];
-                    newMag[newMagLen++] = i;
-                } else {
-                    newMag = new int[magLen - nInts - 1];
-                }
-                nBits2 = 32 - nBits;
-                for(int j = 0; j < magLen - nInts - 1; newMag[newMagLen++] = this.digits[j++] << nBits2 | this.digits[j] >>> nBits) {
-                }
-            }
-            StringBuilder number = new StringBuilder();
-            for (int a: newMag) {
-                number.append(String.valueOf(a));
-            }
-            return number.toString();
-        }
-        return "";
-    }
-
+  
     public String valueOf() {
         return this.toString();
     }
 
-
+    /**
+     * Adds a bigInteger to another BigInteger
+     * @param otherNumber
+     * @return sum of two bigIntegers
+     */
     public BigIntegerImpl add(BigIntegerImpl otherNumber) {
         int[] longerNumber;
         int[] shorterNumber;
@@ -144,6 +95,11 @@ public class BigIntegerImpl implements Comparable<BigIntegerImpl> {
         return new BigIntegerImpl(resultString.reverse().toString());
     }
 
+    /**
+     * Subtracts a BigInteger from BigInteger
+     * @param otherNumber
+     * @return subtracted bigInteger
+     */
     public BigIntegerImpl subtract(BigIntegerImpl otherNumber){
         int lengthsDifferences = digits.length - otherNumber.digits.length;
         StringBuilder resultString = new StringBuilder();
@@ -185,6 +141,12 @@ public class BigIntegerImpl implements Comparable<BigIntegerImpl> {
         return new BigIntegerImpl(toBuild.toString());
     }
 
+    /**
+     * Multiplies a BigInteger with another BigInteger
+     * @param otherNumber
+     * @return product of BigInteger
+     */
+
 
     public BigIntegerImpl multiply(BigIntegerImpl otherNumber) {
         BigIntegerImpl finalResult = new BigIntegerImpl("0");
@@ -210,12 +172,11 @@ public class BigIntegerImpl implements Comparable<BigIntegerImpl> {
         return finalResult;
     }
 
-    private BigIntegerImpl MultiplyUnit(int majorUnits){
-        String majorUnitsString = String.valueOf(majorUnits);
-        String newNumber = majorUnitsString + numberAsString.substring(1);
-        return new BigIntegerImpl(newNumber);
-    }
-
+    /**
+     * Divides a BigInteger with BigInteger
+     * @param otherNumber
+     * @return result of division
+     */
     public BigIntegerImpl divide(BigIntegerImpl otherNumber) {
         if (otherNumber.valueOf().equals("0"))
             throw new ArithmeticException();
@@ -237,15 +198,14 @@ public class BigIntegerImpl implements Comparable<BigIntegerImpl> {
         return result;
     }
 
-    private void multiplyByTen() {
-        int[] newDigit = new int[this.digits.length +1];
-        newDigit[this.digits.length] = 0;
-        this.digits = newDigit;
-        numberAsString += '0';
-    }
-
+  
+    /**
+     * Returns a modulus of two numbers
+     * @param divisor
+     * @return modulus
+     */
     public BigIntegerImpl mod( BigIntegerImpl divisor) {
-        //TODO implement....'
+       
         BigIntegerImpl bigInteger = this;
         while(bigInteger.compareTo(divisor) > 0) {
             bigInteger = bigInteger.subtract(divisor);
@@ -253,11 +213,25 @@ public class BigIntegerImpl implements Comparable<BigIntegerImpl> {
         return bigInteger;
     }
 
+    /**
+     * First takes a modulus of the number and then raises it to power of pow
+     * @param mod
+     * @param pow
+     * @return this mod pow
+     */
+
     public BigIntegerImpl modPow(BigIntegerImpl mod, BigIntegerImpl pow) {
         //todo implement....
         BigIntegerImpl modulus =  this.mod(mod);
         return this.pow(modulus, pow);
     }
+
+    /**
+     * Raises a number to a power
+     * @param number
+     * @param power
+     * @return n^p
+     */
 
     public BigIntegerImpl pow(BigIntegerImpl number, BigIntegerImpl power) {
         BigIntegerImpl times = new BigIntegerImpl("1");
@@ -307,5 +281,89 @@ public class BigIntegerImpl implements Comparable<BigIntegerImpl> {
     public String toString() {
         return numberAsString;
     }
+
+    private BigIntegerImpl MultiplyUnit(int majorUnits){
+        String majorUnitsString = String.valueOf(majorUnits);
+        String newNumber = majorUnitsString + numberAsString.substring(1);
+        return new BigIntegerImpl(newNumber);
+    }
+
+
+    private void multiplyByTen() {
+        int[] newDigit = new int[this.digits.length +1];
+        newDigit[this.digits.length] = 0;
+        this.digits = newDigit;
+        numberAsString += '0';
+    }
+
+    private String shiftRightImpl(int n) {
+        int nInts = n >>> 5;
+        int nBits = n & 31;
+        int magLen = this.digits.length;
+        int[] newMag = null;
+        if (nInts >= magLen) {
+        } else {
+            int newMagLen;
+            int i;
+            int nBits2;
+            if (nBits == 0) {
+                newMagLen = magLen - nInts;
+                newMag = Arrays.copyOf(this.digits, newMagLen);
+            } else {
+                newMagLen = 0;
+                i = this.digits[0] >>> nBits;
+                if (i != 0) {
+                    newMag = new int[magLen - nInts];
+                    newMag[newMagLen++] = i;
+                } else {
+                    newMag = new int[magLen - nInts - 1];
+                }
+                nBits2 = 32 - nBits;
+                for(int j = 0; j < magLen - nInts - 1; newMag[newMagLen++] = this.digits[j++] << nBits2 | this.digits[j] >>> nBits) {
+                }
+            }
+            StringBuilder number = new StringBuilder();
+            for (int a: newMag) {
+                number.append(String.valueOf(a));
+            }
+            return number.toString();
+        }
+        return "";
+    }
+
+
+
+    private String shiftLeft(int[] mag, int n) {
+        int nInts = n >>> 5;
+        int nBits = n & 31;
+        int magLen = mag.length;
+        int[] newMag = null;
+        if (nBits == 0) {
+            newMag = new int[magLen + nInts];
+            System.arraycopy(mag, 0, newMag, 0, magLen);
+        } else {
+            int i = 0;
+            int nBits2 = 32 - nBits;
+            int highBits = mag[0] >>> nBits2;
+            if (highBits != 0) {
+                newMag = new int[magLen + nInts + 1];
+                newMag[i++] = highBits;
+            } else {
+                newMag = new int[magLen + nInts];
+            }
+
+            int j;
+            for(j = 0; j < magLen - 1; newMag[i++] = mag[j++] << nBits | mag[j] >>> nBits2) {
+            }
+
+            newMag[i] = mag[j] << nBits;
+        }
+        StringBuilder number = new StringBuilder();
+        for (int i: newMag) {
+            number.append(String.valueOf(i));
+        }
+       return number.toString();
+    }
+
 
 }
