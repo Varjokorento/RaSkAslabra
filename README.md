@@ -75,5 +75,8 @@ src-kansiossa:
  [Viikkopalautus5](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Viikkopalautukset/Viikkopalautus5.md)
  
  
+ [Viikkopalautus6](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Viikkopalautukset/Viikkopalautus6.md)
+ 
+ 
 
 
