@@ -104,7 +104,7 @@ public class BigIntegerImpl implements Comparable<BigIntegerImpl> {
         int lengthsDifferences = digits.length - otherNumber.digits.length;
         StringBuilder resultString = new StringBuilder();
         int carry = 0;
-        for (int index = otherNumber.digits.length - 1; index >=0 ; index--) {
+        for (int index = otherNumber.digits.length - 1;index >=0; index--) {
             int biggerNumDig = digits[index + lengthsDifferences] - carry;
             int smallerNumDig = otherNumber.digits[index];
             carry = 0;
@@ -130,7 +130,7 @@ public class BigIntegerImpl implements Comparable<BigIntegerImpl> {
         StringBuilder toBuild = new StringBuilder();
         boolean numberHasStarted = false;
         for (int i = 0; i < array.length; i++) {
-            if (array[i] == '0' && !numberHasStarted) {
+            if (array[i] == '0' && !numberHasStarted && array.length != 1) {
                 array[i] = 'X';
              } else {
                 numberHasStarted = true;
@@ -221,9 +221,8 @@ public class BigIntegerImpl implements Comparable<BigIntegerImpl> {
      */
 
     public BigIntegerImpl modPow(BigIntegerImpl mod, BigIntegerImpl pow) {
-        //todo implement....
-        BigIntegerImpl modulus =  this.mod(mod);
-        return this.pow(modulus, pow);
+        BigIntegerImpl power =  this.pow(this, pow);
+        return this.mod(mod);
     }
 
     /**
@@ -234,13 +233,15 @@ public class BigIntegerImpl implements Comparable<BigIntegerImpl> {
      */
 
     public BigIntegerImpl pow(BigIntegerImpl number, BigIntegerImpl power) {
-        BigIntegerImpl times = new BigIntegerImpl("1");
-        BigIntegerImpl originalNumber = number;
-        while(times.compareTo(power) != 0) {
-            number = number.multiply(originalNumber);
-            times = times.add(new BigIntegerImpl("1"));
+        BigIntegerImpl zero = new BigIntegerImpl("0");
+        BigIntegerImpl result = new BigIntegerImpl("1");
+        if (power.equals(zero)) {
+            return new BigIntegerImpl("1");
+        } else if (power.compareTo(zero) > 0 ) {
+            BigIntegerImpl newPower = power.subtract(new BigIntegerImpl("1"));
+            return number.multiply(pow(number, newPower));
         }
-        return number;
+        return result;
     }
 
     @Override

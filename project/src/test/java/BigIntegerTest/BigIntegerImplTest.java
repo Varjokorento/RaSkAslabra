@@ -32,6 +32,14 @@ public class BigIntegerImplTest {
     }
 
     @Test
+    public void subtractOneFromOneResultsInZero() {
+        BigIntegerImpl one = new BigIntegerImpl("1");
+        BigIntegerImpl result = one.subtract(one);
+        assertEquals(new BigIntegerImpl("0"), result);
+
+    }
+
+    @Test
     public void testMultiplication() {
         BigIntegerImpl int1 = new BigIntegerImpl("2");
         BigIntegerImpl int2 = new BigIntegerImpl("2000000000000000000000000");
@@ -65,9 +73,21 @@ public class BigIntegerImplTest {
 
     @Test
     public void powerTest() {
-        BigIntegerImpl two = new BigIntegerImpl("3");
-        BigIntegerImpl four = new BigIntegerImpl("2");
+        BigIntegerImpl two = new BigIntegerImpl("300000000000");
+        BigIntegerImpl four = new BigIntegerImpl("30");
+        BigInteger twoBI = new BigInteger("300000000000");
+        BigInteger result = twoBI.pow(30);
         BigIntegerImpl newNumber = two.pow(two, four);
-        assertEquals("9", newNumber.valueOf());
+        assertEquals(result.toString(), newNumber.valueOf());
+    }
+
+    @Test
+    public void modPow() {
+        BigIntegerImpl five = new BigIntegerImpl("20");
+        BigIntegerImpl mod = new BigIntegerImpl("3");
+        BigIntegerImpl pow = new BigIntegerImpl("5");
+        BigIntegerImpl modPow = five.modPow(mod, pow);
+        BigInteger modPowBI = new BigInteger("20").modPow(new BigInteger("5"), new BigInteger("3"));
+        assertEquals(modPowBI.toString(), modPow.valueOf());
     }
 }
