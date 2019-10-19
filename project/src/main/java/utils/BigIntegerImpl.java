@@ -12,7 +12,7 @@ public class BigIntegerImpl implements Comparable<BigIntegerImpl> {
 
 
     public BigIntegerImpl(int bitLength, Random random) {
-        this(String.valueOf(random.nextInt()));
+        this(String.valueOf(random.nextInt(100)));
 
     }
 
@@ -207,7 +207,7 @@ public class BigIntegerImpl implements Comparable<BigIntegerImpl> {
     public BigIntegerImpl mod( BigIntegerImpl divisor) {
        
         BigIntegerImpl bigInteger = this;
-        while(bigInteger.compareTo(divisor) > 0) {
+        while(bigInteger.compareTo(divisor) >= 0) {
             bigInteger = bigInteger.subtract(divisor);
         }
         return bigInteger;
@@ -222,7 +222,7 @@ public class BigIntegerImpl implements Comparable<BigIntegerImpl> {
 
     public BigIntegerImpl modPow(BigIntegerImpl mod, BigIntegerImpl pow) {
         BigIntegerImpl power =  this.pow(this, pow);
-        return this.mod(mod);
+        return power.mod(mod);
     }
 
     /**

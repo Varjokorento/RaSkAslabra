@@ -83,11 +83,11 @@ public class BigIntegerImplTest {
 
     @Test
     public void modPow() {
-        BigIntegerImpl five = new BigIntegerImpl("20");
-        BigIntegerImpl mod = new BigIntegerImpl("3");
+        BigIntegerImpl five = new BigIntegerImpl("30");
+        BigIntegerImpl mod = new BigIntegerImpl("4");
         BigIntegerImpl pow = new BigIntegerImpl("5");
         BigIntegerImpl modPow = five.modPow(mod, pow);
-        BigInteger modPowBI = new BigInteger("20").modPow(new BigInteger("5"), new BigInteger("3"));
+        BigInteger modPowBI = new BigInteger("30").modPow(new BigInteger("4"), new BigInteger("5"));
         assertEquals(modPowBI.toString(), modPow.valueOf());
     }
 }

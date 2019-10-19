@@ -20,7 +20,6 @@ public class PrimeNumberGenerator {
      * @return a BigInteger that should be a prime
      */
     private static BigInteger generatePrime(int bitLength) {
-        //TODO Implement BigInteger
         BigInteger prime = new BigInteger(bitLength, new Random());
         while (true) {
             if (!millerRabinPrimality(prime, 4)) {
