@@ -7,6 +7,7 @@ import keys.keyimpl.OwnPrivateKey;
 import keys.keyimpl.OwnPublicKey;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import utils.BigIntegerImpl;
 
 
 import javax.crypto.BadPaddingException;
@@ -42,12 +43,12 @@ public class DecrypterTest {
 
     @Test
     public void encryptedStringIsDecryptedCorrectlyWithImplementation() {
-        OwnPublicKey publicKey = new OwnPublicKey(new BigInteger("10400312739031"), new BigInteger("21423684981763"));
-        OwnPrivateKey privateKey = new OwnPrivateKey(new BigInteger("4860493505831"));
-        BigInteger[] encryptedByteArray = {new BigInteger("3547036742032"),
-                new BigInteger("7533585362812"),
-                new BigInteger("10644284804799") };
-        BigInteger[] decrypted = decrypter.decrypt(encryptedByteArray, privateKey, publicKey);
+        OwnPublicKey publicKey = new OwnPublicKey(new BigIntegerImpl("10400312739031"), new BigIntegerImpl("21423684981763"));
+        OwnPrivateKey privateKey = new OwnPrivateKey(new BigIntegerImpl("4860493505831"));
+        BigIntegerImpl[] encryptedByteArray = {new BigIntegerImpl("3547036742032"),
+                new BigIntegerImpl("7533585362812"),
+                new BigIntegerImpl("10644284804799") };
+        BigIntegerImpl[] decrypted = decrypter.decrypt(encryptedByteArray, privateKey, publicKey);
         Assertions.assertEquals(new BigInteger("97"), decrypted[0]);
         Assertions.assertEquals(new BigInteger("98"), decrypted[1]);
         Assertions.assertEquals(new BigInteger("99"), decrypted[2]);

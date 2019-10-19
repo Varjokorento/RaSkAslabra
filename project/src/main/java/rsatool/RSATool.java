@@ -1,5 +1,6 @@
 package rsatool;
 
+import utils.BigIntegerImpl;
 import utils.asciiutil.AsciiUtil;
 import decrypter.Decrypter;
 import encrypter.Encrypter;
@@ -78,8 +79,8 @@ public class RSATool {
      * Calls encrypter to encrypt a plaintext String.
      * @return encrypted byteArray of String.
      */
-    public BigInteger[] encrypt(String plainText) {
-        BigInteger[] cipherAsIntArray = asciiUtil.stringToCipher(plainText);
+    public BigIntegerImpl[] encrypt(String plainText) {
+        BigIntegerImpl[] cipherAsIntArray = asciiUtil.stringToCipher(plainText);
         return encrypter.encrypt(cipherAsIntArray, this.getPublicKey());
     }
 
@@ -97,7 +98,7 @@ public class RSATool {
      * Calls decrypter to decipher a cryptedByteArray
      * @return decrypted byteArray of String.
      */
-    public BigInteger[] decrypt(BigInteger[] encrypted) {
+    public BigIntegerImpl[] decrypt(BigIntegerImpl[] encrypted) {
         return decrypter.decrypt(encrypted, this.getPrivateKey(), this.getPublicKey());
     }
     /**
@@ -114,7 +115,7 @@ public class RSATool {
      * Converts decrypted BigInteger-array to String
      * @return deciphered message
      */
-    public String cipherToString(BigInteger[] decrypted) {
+    public String cipherToString(BigIntegerImpl[] decrypted) {
         return asciiUtil.cipherToString(decrypted);
     }
 

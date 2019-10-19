@@ -21,18 +21,18 @@ public class KeyUtil {
      * Saves public Key to .pub file
      */
     public void savePublicKeyToFile(OwnPublicKey pubKey) throws IOException {
-        try (FileOutputStream out = new FileOutputStream(PUBLIC_KEY + ".pub")) {
+        /*try (FileOutputStream out = new FileOutputStream(PUBLIC_KEY + ".pub")) {
             out.write(pubKey.getN().toByteArray());
             out.write(pubKey.getE().toByteArray());
-        }
+        }*/
     }
     /**
      * Saves private Key to .key file
      */
     public void savePrivateKeyToFile(OwnPrivateKey privateKey) throws IOException {
-        try (FileOutputStream out = new FileOutputStream(PRIVATE_KEY + ".key")) {
+       /* try (FileOutputStream out = new FileOutputStream(PRIVATE_KEY + ".key")) {
             out.write(privateKey.getPrivateKey().toByteArray());
-        }
+        }*/
     }
     /**
      * Reads publicKey from file

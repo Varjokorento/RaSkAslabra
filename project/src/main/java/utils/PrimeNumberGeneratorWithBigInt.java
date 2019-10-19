@@ -20,11 +20,10 @@ public class PrimeNumberGeneratorWithBigInt {
      * @return a BigInteger that should be a prime
      */
     private static BigIntegerImpl generatePrime(int bitLength) {
-       // BigIntegerImpl prime = new BigIntegerImpl(bitLength, new Random());
-        BigIntegerImpl prime = new BigIntegerImpl("8");
+        BigIntegerImpl prime = new BigIntegerImpl(bitLength, new Random());
         while (true) {
-            if (!millerRabinPrimality(prime, 2)) {
-                prime = prime.add(new BigIntegerImpl("1"));
+            if (!millerRabinPrimality(prime, 4)) {
+                prime = prime.add(BigIntegerImpl.ONE);
                 continue;
             } else {
                 return prime;
@@ -39,17 +38,16 @@ public class PrimeNumberGeneratorWithBigInt {
      * @return boolean isPrime
      */
     public static boolean millerRabinPrimality(BigIntegerImpl possiblePrime, int iterations) {
-        BigIntegerImpl one = new BigIntegerImpl("1");
         BigIntegerImpl two = new BigIntegerImpl("2");
         BigIntegerImpl three = new BigIntegerImpl("3");
         BigIntegerImpl four = new BigIntegerImpl("4");
-        if (possiblePrime.compareTo(one) <= 0 || possiblePrime.compareTo(four) == 0) {
+        if (possiblePrime.compareTo(BigIntegerImpl.ONE) <= 0 || possiblePrime.compareTo(four) == 0) {
             return false;
         }
         if (possiblePrime.compareTo(three) <= 0) {
             return true;
         }
-        BigIntegerImpl d = possiblePrime.subtract(one);
+        BigIntegerImpl d = possiblePrime.subtract(BigIntegerImpl.ONE);
         while (d.mod(two).equals(new BigIntegerImpl("0"))) {
             d = d.divide(new BigIntegerImpl("2"));
         }
@@ -103,8 +101,6 @@ public class PrimeNumberGeneratorWithBigInt {
 
     private static BigIntegerImpl generateA(BigIntegerImpl n) {
         BigIntegerImpl random = new BigIntegerImpl(211, new Random());
-        random = new BigIntegerImpl("20");
-        BigIntegerImpl two = new BigIntegerImpl("2");
         BigIntegerImpl nSubtracted = n.subtract(new BigIntegerImpl("4"));
         BigIntegerImpl moddedRandom = random.mod(nSubtracted);
         BigIntegerImpl a = new BigIntegerImpl("2").add(moddedRandom);
@@ -112,20 +108,18 @@ public class PrimeNumberGeneratorWithBigInt {
     }
 
     private static boolean millerRabinTest(BigIntegerImpl d, BigIntegerImpl n) {
-        BigIntegerImpl one = new BigIntegerImpl("1");
         BigIntegerImpl a = generateA(n);
         BigIntegerImpl x = a.modPow(n, d);
-        BigIntegerImpl y = new BigIntegerImpl("0");
-        if (x.compareTo(one) == 0 || x.compareTo(n.subtract(one)) == 0) {
+        if (x.compareTo(BigIntegerImpl.ONE) == 0 || x.compareTo(n.subtract(BigIntegerImpl.ONE)) == 0) {
             return true;
         }
-        while (d.compareTo(n.subtract(one)) != 0) {
+        while (d.compareTo(n.subtract(BigIntegerImpl.ONE)) != 0) {
             x = (x.multiply(x)).mod(n);
             d = d.multiply(new BigIntegerImpl("2"));
             if (x.compareTo(new BigIntegerImpl("1"))  == 0) {
                 return false;
             }
-            if (x.compareTo(n.subtract(one)) == 0) {
+            if (x.compareTo(n.subtract(BigIntegerImpl.ONE)) == 0) {
                 return true;
             }
         }

@@ -3,6 +3,7 @@ package rsatooltest;
 import org.junit.Before;
 import org.junit.Test;
 import rsatool.RSATool;
+import utils.BigIntegerImpl;
 
 import java.math.BigInteger;
 
@@ -26,8 +27,8 @@ public class RSAToolTest {
 
     @Test
     public void rsaToolEncryptsAndDecryptsAGivenString() {
-        BigInteger[] array = rsaTool.encrypt(testString);
-        BigInteger[] decrypted = rsaTool.decrypt(array);
+        BigIntegerImpl[] array = rsaTool.encrypt(testString);
+        BigIntegerImpl[] decrypted = rsaTool.decrypt(array);
         assertEquals(testString, rsaTool.cipherToString(decrypted));
     }
 

@@ -7,6 +7,7 @@ import utils.PrimeNumberGeneratorWithBigInt;
 
 import java.math.BigInteger;
 
+import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
 public class PrimeNumberGeneratorTest {
@@ -23,11 +24,37 @@ public class PrimeNumberGeneratorTest {
     }
 
     @Test
-    public void ownImplementationNumberArePrime() {
-        BigIntegerImpl number = PrimeNumberGeneratorWithBigInt.generateLargePrime(100);
-        BigInteger numberAsBigInt = new BigInteger(number.valueOf());
-        assertTrue(numberAsBigInt.isProbablePrime(100));
+    public void testMillerRabinPrimality() {
+        int errors = 0;
+        for (int i = 0; i < 1000; i++) {
+            String value = String.valueOf(i);
+            BigIntegerImpl possiblePrime = new BigIntegerImpl(value);
+            BigInteger bi = new BigInteger(value);
+            boolean answer = PrimeNumberGeneratorWithBigInt.millerRabinPrimality(possiblePrime, 1);
+            if (answer && !bi.isProbablePrime(100)) {
+              //  System.out.println(value);
+                errors++;
+               // System.out.println("------");
+            }
+        }
+        System.out.println(errors);
+    }
 
+    @Test
+    public void testSimple() {
+        BigIntegerImpl fourtyNine = new BigIntegerImpl("28");
+        boolean answer = PrimeNumberGeneratorWithBigInt.millerRabinPrimality(fourtyNine, 4);
+        assertFalse(answer);
+    }
+
+    @Test
+    public void ownImplementationNumberArePrime() {
+        for (int i = 0; i < 10; i++) {
+         //   System.out.println(i);
+            BigIntegerImpl number = PrimeNumberGeneratorWithBigInt.generateLargePrime(100);
+            BigInteger numberAsBigInt = new BigInteger(number.valueOf());
+            assertTrue(numberAsBigInt.isProbablePrime(100));
+        }
     }
 
 }

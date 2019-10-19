@@ -1,5 +1,6 @@
 import org.junit.Test;
 import rsatool.RSATool;
+import utils.BigIntegerImpl;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -72,7 +73,7 @@ public class PerformanceTest {
 
         startTime = System.nanoTime();
         for(int i = 0; i < 10; i++) {
-            BigInteger[] encrypted = rsaTool.encrypt("message");
+            BigIntegerImpl[] encrypted = rsaTool.encrypt("message");
             rsaTool.decrypt(encrypted);
         }
         endTime = System.nanoTime();

@@ -1,5 +1,6 @@
 package asciiutiltest;
 
+import utils.BigIntegerImpl;
 import utils.asciiutil.AsciiUtil;
 import org.junit.Test;
 
@@ -20,7 +21,7 @@ public class AsciiUtilTest {
 
     @Test
     public void stringToCipherWorksCorrectly() {
-        BigInteger[] abc = asciiUtil.stringToCipher("abc");
+        BigIntegerImpl[] abc = asciiUtil.stringToCipher("abc");
         BigInteger[] asciiValues = new BigInteger[]{new BigInteger("97"), new BigInteger("98"), new BigInteger("99")};
         for(int i = 0; i < abc.length; i++) {
             assertEquals(asciiValues[i], abc[i]);
@@ -29,7 +30,7 @@ public class AsciiUtilTest {
 
     @Test
     public void cipherToStringWorksCorrectly() {
-        BigInteger[] asciiValues = new BigInteger[]{new BigInteger("97"), new BigInteger("98"), new BigInteger("99")};
+        BigIntegerImpl[] asciiValues = new BigIntegerImpl[]{new BigIntegerImpl("97"), new BigIntegerImpl("98"), new BigIntegerImpl("99")};
         assertEquals("abc",  asciiUtil.cipherToString(asciiValues));
     }
 

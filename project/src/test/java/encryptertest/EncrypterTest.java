@@ -4,6 +4,7 @@ import encrypter.Encrypter;
 import keys.KeyUtil;
 import keys.keyimpl.OwnPublicKey;
 import org.junit.Test;
+import utils.BigIntegerImpl;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -34,9 +35,9 @@ public class EncrypterTest {
 
     @Test
     public void encrypterEncryptsCorrectlyWithoutLibraries() {
-        OwnPublicKey publicKey = new OwnPublicKey(new BigInteger("10400312739031"), new BigInteger("21423684981763"));
-        BigInteger[] bigIntArray = {new BigInteger("97"), new BigInteger("98"), new BigInteger("99")};
-        BigInteger[] encrypted = encrypter.encrypt(bigIntArray, publicKey);
+        OwnPublicKey publicKey = new OwnPublicKey(new BigIntegerImpl("10400312739031"), new BigIntegerImpl("21423684981763"));
+        BigIntegerImpl[] bigIntArray = {new BigIntegerImpl("97"), new BigIntegerImpl("98"), new BigIntegerImpl("99")};
+        BigIntegerImpl[] encrypted = encrypter.encrypt(bigIntArray, publicKey);
         assertEquals(new BigInteger("3547036742032"), encrypted[0]);
 
         assertEquals(new BigInteger("7533585362812"), encrypted[1]);

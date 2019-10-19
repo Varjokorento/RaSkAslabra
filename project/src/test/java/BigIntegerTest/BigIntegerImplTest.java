@@ -73,11 +73,12 @@ public class BigIntegerImplTest {
 
     @Test
     public void powerTest() {
-        BigIntegerImpl two = new BigIntegerImpl("300000000000");
-        BigIntegerImpl four = new BigIntegerImpl("30");
-        BigInteger twoBI = new BigInteger("300000000000");
-        BigInteger result = twoBI.pow(30);
-        BigIntegerImpl newNumber = two.pow(two, four);
+        BigIntegerImpl two = new BigIntegerImpl("22");
+        BigIntegerImpl four = new BigIntegerImpl("75");
+        BigInteger twoBI = new BigInteger("22");
+        BigInteger result = twoBI.pow(75);
+        BigIntegerImpl newNumber = two.pow(four);
+        BigIntegerImpl modulo = newNumber.mod(new BigIntegerImpl("22"));
         assertEquals(result.toString(), newNumber.valueOf());
     }
 

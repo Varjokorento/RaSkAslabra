@@ -1,6 +1,5 @@
 package utils;
 
-import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -9,10 +8,13 @@ public class BigIntegerImpl implements Comparable<BigIntegerImpl> {
     private String numberAsString;
     private int[] digits;
 
+    public static final BigIntegerImpl ONE = new BigIntegerImpl("1");
+    public static final BigIntegerImpl ZERO = new BigIntegerImpl("0");
+
 
 
     public BigIntegerImpl(int bitLength, Random random) {
-        this(String.valueOf(random.nextInt(100)));
+        this(String.valueOf(random.nextInt(1000)));
 
     }
 
@@ -23,6 +25,11 @@ public class BigIntegerImpl implements Comparable<BigIntegerImpl> {
                 int digitNumberValue = Character.getNumericValue(number.charAt(index));
                 digits[index] = digitNumberValue;
         }
+    }
+
+    public BigIntegerImpl(int[] digits) {
+        this.digits = filterZeroesFromBeginning(digits);
+        this.numberAsString = "";
     }
 
     /**
@@ -48,7 +55,16 @@ public class BigIntegerImpl implements Comparable<BigIntegerImpl> {
 
   
     public String valueOf() {
-        return this.toString();
+        StringBuilder sb = new StringBuilder();
+        if (numberAsString.length() > 1) {
+            return this.toString();
+        } else {
+            for (int digit : digits) {
+                sb.append(digit);
+            }
+            return sb.toString();
+        }
+
     }
 
     /**
@@ -57,42 +73,59 @@ public class BigIntegerImpl implements Comparable<BigIntegerImpl> {
      * @return sum of two bigIntegers
      */
     public BigIntegerImpl add(BigIntegerImpl otherNumber) {
-        int[] longerNumber;
-        int[] shorterNumber;
-        if (digits.length >= otherNumber.digits.length) {
-            longerNumber = digits;
-            shorterNumber = otherNumber.digits;
+        int[] biggerNumber;
+        int[] smallerNumber;
+        if (this.digits.length < otherNumber.digits.length) {
+            biggerNumber = new int[otherNumber.digits.length + 1];
+            System.arraycopy(otherNumber.digits, 0, biggerNumber, 1, otherNumber.digits.length);
+            smallerNumber = new int[this.digits.length];
+            System.arraycopy(this.digits, 0, smallerNumber, 0, this.digits.length);
+        } else {
+            biggerNumber = new int[this.digits.length + 1];
+            System.arraycopy(this.digits, 0, biggerNumber, 1, this.digits.length);
+            smallerNumber = new int[otherNumber.digits.length];
+            System.arraycopy(otherNumber.digits, 0, smallerNumber, 0, otherNumber.digits.length);
         }
-        else {
-            longerNumber = otherNumber.digits;
-            shorterNumber = digits;
-        }
-        int lengthsDifferences = longerNumber.length - shorterNumber.length;
-        StringBuilder resultString = new StringBuilder();
         int carry = 0;
-        for (int index = shorterNumber.length - 1; index >= 0; index--) {
-            int shorterNumberDigit = shorterNumber[index];
-            int longerNumberDigit = longerNumber[index + lengthsDifferences];
-            int newDigit = shorterNumberDigit + longerNumberDigit + carry;
-            carry = newDigit / 10;
-            newDigit = newDigit % 10;
-            resultString.append(newDigit);
-        }
-
-        for (int index = lengthsDifferences - 1; index >= 0; index--) {
-            int currDig = longerNumber[index];
-             if (currDig + carry == 10) {
-                resultString.append(0);
+        int biggerArrayIndex = 0;
+        for (int i = 0; i < smallerNumber.length; i++) {
+            biggerArrayIndex = biggerNumber.length - 1 - i;
+            biggerNumber[biggerArrayIndex] += carry;
+            biggerNumber[biggerArrayIndex] += smallerNumber[smallerNumber.length - 1 - i];
+            if (biggerNumber[biggerArrayIndex] > 9) {
                 carry = 1;
+                biggerNumber[biggerArrayIndex] -= 10;
             } else {
-                resultString.append(currDig + carry);
                 carry = 0;
             }
         }
-        if (carry > 0) {
-            resultString.append(carry);
+        biggerArrayIndex--;
+        while (carry == 1) {
+            biggerNumber[biggerArrayIndex] += 1;
+            if (biggerNumber[biggerArrayIndex] > 9) {
+                carry = 1;
+                biggerNumber[biggerArrayIndex] -= 10;
+            } else {
+                carry = 0;
+            }
+            biggerArrayIndex--;
         }
-        return new BigIntegerImpl(resultString.reverse().toString());
+        int[] finalArray = biggerNumber;
+        for (int i = 0; i < biggerNumber.length; i++) {
+            if (biggerNumber[i] != 0) {
+                if (i == 0) {
+                    break;
+                }
+                finalArray = new int[biggerNumber.length - i];
+                System.arraycopy(biggerNumber, i, finalArray, 0, finalArray.length);
+                break;
+            }
+            if (i == biggerNumber.length - 1) {
+                finalArray = new int[1];
+                finalArray[0] = biggerNumber[biggerNumber.length - 1];
+            }
+        }
+        return new BigIntegerImpl(finalArray);
     }
 
     /**
@@ -101,75 +134,107 @@ public class BigIntegerImpl implements Comparable<BigIntegerImpl> {
      * @return subtracted bigInteger
      */
     public BigIntegerImpl subtract(BigIntegerImpl otherNumber){
-        int lengthsDifferences = digits.length - otherNumber.digits.length;
-        StringBuilder resultString = new StringBuilder();
-        int carry = 0;
-        for (int index = otherNumber.digits.length - 1;index >=0; index--) {
-            int biggerNumDig = digits[index + lengthsDifferences] - carry;
-            int smallerNumDig = otherNumber.digits[index];
-            carry = 0;
-            if (biggerNumDig < smallerNumDig){
-                carry = 1;
-                biggerNumDig += 10;
-            }
-            resultString.append(biggerNumDig - smallerNumDig);
-        }
-
-        for (int index = lengthsDifferences - 1; index >=0 ; index--) {
-            int currDig = digits[index];
-            if (carry > currDig){
-                resultString.append(currDig + 10 - carry);
-                carry = 1;
+            int[] biggerArray;
+            int[] smallerArray;
+            if (this.digits.length < otherNumber.digits.length) {
+                biggerArray = new int[otherNumber.digits.length + 1];
+                System.arraycopy(otherNumber.digits, 0, biggerArray, 1, otherNumber.digits.length);
+                smallerArray = new int[this.digits.length];
+                System.arraycopy(this.digits, 0, smallerArray, 0, this.digits.length);
             } else {
-                resultString.append(currDig - carry);
-                carry = 0;
+                biggerArray = new int[this.digits.length + 1];
+                System.arraycopy(this.digits, 0, biggerArray, 1, this.digits.length);
+                smallerArray = new int[otherNumber.digits.length];
+                System.arraycopy(otherNumber.digits, 0, smallerArray, 0, otherNumber.digits.length);
             }
-        }
-        String resultedString = resultString.reverse().toString();
-        char[] array = resultedString.toCharArray();
-        StringBuilder toBuild = new StringBuilder();
-        boolean numberHasStarted = false;
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] == '0' && !numberHasStarted && array.length != 1) {
-                array[i] = 'X';
-             } else {
-                numberHasStarted = true;
-                toBuild.append(array[i]);
+            int carry = 0;
+            int biggerArrayIndex = 0;
+            biggerArray = filterZeroesFromBeginning(biggerArray);
+            for (int i = 0; i < smallerArray.length; i++) {
+                biggerArrayIndex = biggerArray.length - 1 - i;
+                biggerArray[biggerArrayIndex] -= carry;
+                biggerArray[biggerArrayIndex] -= smallerArray[smallerArray.length - 1 - i];
+                if (biggerArray[biggerArrayIndex] < 0) {
+                    carry = 1;
+                    biggerArray[biggerArrayIndex] += 10;
+                } else {
+                    carry = 0;
+                }
             }
-        }
-
-        return new BigIntegerImpl(toBuild.toString());
+            biggerArrayIndex--;
+            while (carry == 1) {
+                biggerArray[biggerArrayIndex] -= 1;
+                if (biggerArray[biggerArrayIndex] < 0) {
+                    carry = 1;
+                    biggerArray[biggerArrayIndex] += 10;
+                } else {
+                    carry = 0;
+                }
+                biggerArrayIndex--;
+            }
+            int[] finalArray = filterZeroesFromBeginning(biggerArray);
+            return new BigIntegerImpl(finalArray);
     }
 
     /**
      * Multiplies a BigInteger with another BigInteger
-     * @param otherNumber
+     * @param x
      * @return product of BigInteger
      */
 
 
-    public BigIntegerImpl multiply(BigIntegerImpl otherNumber) {
-        BigIntegerImpl finalResult = new BigIntegerImpl("0");
-        BigIntegerImpl currentUnit = new BigIntegerImpl("1");
-
-        for (int otherNumIndex = otherNumber.digits.length - 1; otherNumIndex >=0; otherNumIndex--){
-            int currentOtherNumDigit = otherNumber.digits[otherNumIndex];
-            BigIntegerImpl currentResult = new BigIntegerImpl("0");
-            BigIntegerImpl currentDigitUnit = new BigIntegerImpl(currentUnit.toString());
-
-            for (int index = digits.length - 1; index >=0; index--) {
-                int currentDigit = digits[index];
-                int digitsMultiplication = currentDigit * currentOtherNumDigit;
-
-                currentResult = currentDigitUnit.MultiplyUnit(digitsMultiplication);
-                currentDigitUnit.multiplyByTen();
-            }
-
-            currentUnit.multiplyByTen();
-            finalResult = finalResult.add(currentResult);
+    public BigIntegerImpl multiply(BigIntegerImpl x) {
+        int[] bigArr;
+        int[] smallArray;
+        if (this.digits.length < x.digits.length) {
+            bigArr = new int[x.digits.length];
+            System.arraycopy(x.digits, 0, bigArr, 0, x.digits.length);
+            smallArray = new int[this.digits.length];
+            System.arraycopy(this.digits, 0, smallArray, 0, this.digits.length);
+        } else {
+            bigArr = new int[this.digits.length];
+            System.arraycopy(this.digits, 0, bigArr, 0, this.digits.length);
+            smallArray = new int[x.digits.length];
+            System.arraycopy(x.digits, 0, smallArray, 0, x.digits.length);
         }
+        BigIntegerImpl bigger = new BigIntegerImpl(bigArr);
+        int[] result = new int[smallArray.length + bigArr.length + 1];
+        for (int i = 0; i < smallArray.length; i++) {
+            BigIntegerImpl total = BigIntegerImpl.ZERO;
+            for (int j = 0; j < smallArray[smallArray.length - 1 - i]; j++) {
+                total = total.add(bigger);
+            }
+            for (int j = 0; j < total.digits.length; j++) {
+                int resultIndex = result.length - i - j - 1;
+                int totalIndex = total.digits.length - j - 1;
+                result[resultIndex] += total.digits[totalIndex];
+                if (result[resultIndex] > 9) {
+                    result[resultIndex] -= 10;
+                    result[resultIndex - 1] += 1;
+                }
+            }
+        }
+        result = filterZeroesFromBeginning(result);
+        return new BigIntegerImpl(result);
+    }
 
-        return finalResult;
+    private int[] filterZeroesFromBeginning(int[] array) {
+        int[] finalArray = array;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] != 0) {
+                if (i == 0) {
+                    break;
+                }
+                finalArray = new int[array.length - i];
+                System.arraycopy(array, i, finalArray, 0, finalArray.length);
+                break;
+            }
+            if (i == array.length - 1) {
+                finalArray = new int[1];
+                finalArray[0] = array[array.length - 1];
+            }
+        }
+        return finalArray;
     }
 
     /**
@@ -178,39 +243,55 @@ public class BigIntegerImpl implements Comparable<BigIntegerImpl> {
      * @return result of division
      */
     public BigIntegerImpl divide(BigIntegerImpl otherNumber) {
-        if (otherNumber.valueOf().equals("0"))
-            throw new ArithmeticException();
         int compareResult = this.compareTo(otherNumber);
-        if (compareResult == 0) {
-            return new BigIntegerImpl("1");
+        if (compareResult < 0) {
+            return BigIntegerImpl.ZERO;
+        } else if (compareResult == 0) {
+            return BigIntegerImpl.ONE;
         }
+        int[] thisCopy = new int[this.digits.length];
+        System.arraycopy(this.digits, 0, thisCopy, 0, this.digits.length);
+        BigIntegerImpl dividend = new BigIntegerImpl(thisCopy);
+        int thisBeginIndex = 0;
+        int thisEndIndex = 1;
+        int[] result = new int[this.digits.length];
+        while (true) {
+            if (thisEndIndex > this.digits.length) {
+                break;
+            }
+            int[] longDividerArray = new int[thisEndIndex - thisBeginIndex];
+            System.arraycopy(dividend.digits, thisBeginIndex, longDividerArray, 0, thisEndIndex - thisBeginIndex);
+            BigIntegerImpl longDividend = new BigIntegerImpl(longDividerArray);
+            int times = 0;
+            if (longDividend.compareTo(otherNumber) >= 0) {
+                while (longDividend.compareTo(otherNumber) >= 0) {
+                    longDividend = longDividend.subtract(otherNumber);
+                    times++;
+                }
+                if (longDividend.compareTo(BigIntegerImpl.ZERO) == 0) {
+                    thisBeginIndex = thisEndIndex;
+                } else {
+                    int digitsLeftFromSubtract = longDividend.digits.length;
+                    thisBeginIndex = thisEndIndex - digitsLeftFromSubtract;
+                    System.arraycopy(longDividend.digits, 0, dividend.digits, thisBeginIndex, digitsLeftFromSubtract);
+                }
+            }
+            result[thisEndIndex - 1] = times;
+            thisEndIndex++;
 
-        else if (compareResult < 0) {
-            return new BigIntegerImpl("0");
         }
-        BigIntegerImpl result = new BigIntegerImpl("0");
-        BigIntegerImpl tempNumber = new BigIntegerImpl("0");
-
-        while (tempNumber.compareTo(this) < 0) {
-            tempNumber = tempNumber.add(otherNumber);
-            result = result.add(new BigIntegerImpl("1"));
-        }
-        return result;
+        result = filterZeroesFromBeginning(result);
+        return new BigIntegerImpl(result);
     }
-
   
     /**
      * Returns a modulus of two numbers
      * @param divisor
      * @return modulus
      */
-    public BigIntegerImpl mod( BigIntegerImpl divisor) {
-       
-        BigIntegerImpl bigInteger = this;
-        while(bigInteger.compareTo(divisor) >= 0) {
-            bigInteger = bigInteger.subtract(divisor);
-        }
-        return bigInteger;
+    public BigIntegerImpl mod (BigIntegerImpl divisor) {
+        BigIntegerImpl divided = this.divide(divisor);
+        return this.subtract(divided.multiply(divisor));
     }
 
     /**
@@ -221,7 +302,7 @@ public class BigIntegerImpl implements Comparable<BigIntegerImpl> {
      */
 
     public BigIntegerImpl modPow(BigIntegerImpl mod, BigIntegerImpl pow) {
-        BigIntegerImpl power =  this.pow(this, pow);
+        BigIntegerImpl power =  this.pow(pow);
         return power.mod(mod);
     }
 
@@ -240,6 +321,18 @@ public class BigIntegerImpl implements Comparable<BigIntegerImpl> {
         } else if (power.compareTo(zero) > 0 ) {
             BigIntegerImpl newPower = power.subtract(new BigIntegerImpl("1"));
             return number.multiply(pow(number, newPower));
+        }
+        return result;
+    }
+
+    public BigIntegerImpl pow(BigIntegerImpl power) {
+        BigIntegerImpl zero = new BigIntegerImpl("0");
+        BigIntegerImpl result = new BigIntegerImpl("1");
+        if (power.equals(zero)) {
+            return new BigIntegerImpl("1");
+        } else if (power.compareTo(zero) > 0 ) {
+            BigIntegerImpl newPower = power.subtract(new BigIntegerImpl("1"));
+            return this.multiply(pow(newPower));
         }
         return result;
     }
@@ -275,7 +368,17 @@ public class BigIntegerImpl implements Comparable<BigIntegerImpl> {
             return false;
 
         BigIntegerImpl other = (BigIntegerImpl) o;
-        return other.toString().equals(numberAsString);
+
+        if (this.digits.length != other.digits.length) {
+            return false;
+        }
+
+        for(int i = 0; i < this.digits.length; i++) {
+            if (this.digits[i] != other.digits[i]) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
@@ -283,19 +386,6 @@ public class BigIntegerImpl implements Comparable<BigIntegerImpl> {
         return numberAsString;
     }
 
-    private BigIntegerImpl MultiplyUnit(int majorUnits){
-        String majorUnitsString = String.valueOf(majorUnits);
-        String newNumber = majorUnitsString + numberAsString.substring(1);
-        return new BigIntegerImpl(newNumber);
-    }
-
-
-    private void multiplyByTen() {
-        int[] newDigit = new int[this.digits.length +1];
-        newDigit[this.digits.length] = 0;
-        this.digits = newDigit;
-        numberAsString += '0';
-    }
 
     private String shiftRightImpl(int n) {
         int nInts = n >>> 5;

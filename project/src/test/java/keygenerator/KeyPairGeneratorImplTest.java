@@ -5,6 +5,7 @@ import keys.keyimpl.OwnKeyPair;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
+import utils.BigIntegerImpl;
 
 import java.math.BigInteger;
 
@@ -17,9 +18,9 @@ public class KeyPairGeneratorImplTest {
     public void generateKeyPairGeneratesKeysThatAreKeysToEachOther() {
         OwnKeyPairGenerator keyPairGenerator = new OwnKeyPairGenerator();
         OwnKeyPair kp = keyPairGenerator.generateKeyPair(1024);
-        BigInteger test = new BigInteger("97");
-        BigInteger eModN = test.modPow(kp.getPublicKey().getE(), kp.getPublicKey().getN());
-        BigInteger dModN = eModN.modPow(kp.getPrivateKey().getPrivateKey(), kp.getPublicKey().getN());
+        BigIntegerImpl test = new BigIntegerImpl("97");
+        BigIntegerImpl eModN = test.modPow(kp.getPublicKey().getE(), kp.getPublicKey().getN());
+        BigIntegerImpl dModN = eModN.modPow(kp.getPrivateKey().getPrivateKey(), kp.getPublicKey().getN());
         assertEquals(test, dModN);
     }
 

@@ -1,4 +1,5 @@
 import rsatool.RSATool;
+import utils.BigIntegerImpl;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -16,8 +17,8 @@ public class Main {
         String message = scanner.nextLine();
         RSATool rsaTool = new RSATool();
         rsaTool.generateKeys(1024);
-        BigInteger[] encrypted = rsaTool.encrypt(message);
-        BigInteger[] decrypted = rsaTool.decrypt(encrypted);
+        BigIntegerImpl[] encrypted = rsaTool.encrypt(message);
+        BigIntegerImpl[] decrypted = rsaTool.decrypt(encrypted);
         String restoredMessage = rsaTool.cipherToString(decrypted);
         System.out.println("Original message: " + message);
         System.out.println("Encrypted:");
@@ -51,8 +52,8 @@ public class Main {
         }
     }
 
-    private static void printArray(BigInteger[] array) {
-        for (BigInteger a: array) {
+    private static void printArray(BigIntegerImpl[] array) {
+        for (BigIntegerImpl a: array) {
             System.out.print(a);
         }
     }

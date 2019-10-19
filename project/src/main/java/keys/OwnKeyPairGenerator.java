@@ -4,7 +4,9 @@ package keys;
 import keys.keyimpl.OwnKeyPair;
 import keys.keyimpl.OwnPrivateKey;
 import keys.keyimpl.OwnPublicKey;
+import utils.BigIntegerImpl;
 import utils.PrimeNumberGenerator;
+import utils.PrimeNumberGeneratorWithBigInt;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
@@ -18,12 +20,12 @@ public class OwnKeyPairGenerator {
      */
 
     public OwnKeyPair generateKeyPair(int bitLength) {
-        BigInteger p = PrimeNumberGenerator.generateLargePrime(bitLength);
-        BigInteger q = PrimeNumberGenerator.generateLargePrime(bitLength);
-        BigInteger n = findN(p, q);
-        BigInteger phi = getPhi(p, q);
-        BigInteger e = genE(phi);
-        BigInteger d = extEuclid(e, phi)[1];
+        BigIntegerImpl p = PrimeNumberGeneratorWithBigInt.generateLargePrime(bitLength);
+        BigIntegerImpl q = PrimeNumberGeneratorWithBigInt.generateLargePrime(bitLength);
+        BigIntegerImpl n = findN(p, q);
+        BigIntegerImpl phi = getPhi(p, q);
+        BigIntegerImpl e = genE(phi);
+        BigIntegerImpl d = extEuclid(e, phi)[1];
         return new OwnKeyPair(new OwnPublicKey(e, n), new OwnPrivateKey(d));
     }
 
@@ -34,7 +36,7 @@ public class OwnKeyPairGenerator {
      * @return mod n
      */
 
-    private BigInteger findN(BigInteger p, BigInteger q) {
+    private BigIntegerImpl findN(BigIntegerImpl p, BigIntegerImpl q) {
         return p.multiply(q);
     }
 
@@ -44,8 +46,8 @@ public class OwnKeyPairGenerator {
      *  phi(n) = (p-1)(q-1)
      * @return phi
      */
-    private BigInteger getPhi(BigInteger p, BigInteger q) {
-        return (p.subtract(BigInteger.ONE)).multiply(q.subtract(BigInteger.ONE));
+    private BigIntegerImpl getPhi(BigIntegerImpl p, BigIntegerImpl q) {
+        return (p.subtract(BigIntegerImpl.ONE)).multiply(q.subtract(BigIntegerImpl.ONE));
     }
 
     /**
@@ -54,20 +56,20 @@ public class OwnKeyPairGenerator {
      * @return
      */
 
-    static BigInteger genE(BigInteger phi) {
+    static BigIntegerImpl genE(BigIntegerImpl phi) {
         Random rand = new SecureRandom();
-        BigInteger e;
+        BigIntegerImpl e;
         do {
-            e = new BigInteger(phi.bitLength(), rand);
+            e = new BigIntegerImpl(100, rand);
         }
-        while (e.compareTo(BigInteger.ONE) <= 0
+        while (e.compareTo(BigIntegerImpl.ONE) <= 0
                     || e.compareTo(phi) >= 0
-                    || !greatestCommonDenominator(phi, e).equals(BigInteger.ONE));
+                    || !greatestCommonDenominator(phi, e).equals(BigIntegerImpl.ONE));
         return e;
     }
 
-    static BigInteger greatestCommonDenominator(BigInteger a, BigInteger b) {
-        if (b.equals(BigInteger.ZERO)) {
+    static BigIntegerImpl greatestCommonDenominator(BigIntegerImpl a, BigIntegerImpl b) {
+        if (b.equals(BigIntegerImpl.ZERO)) {
             return a;
         } else {
             return greatestCommonDenominator(b, a.mod(b));
@@ -79,14 +81,14 @@ public class OwnKeyPairGenerator {
      * @return [d, p, q] where d = gcd(a,b) and ap + bq = d
      */
 
-    static BigInteger[] extEuclid(BigInteger a, BigInteger b) {
-        if (b.equals(BigInteger.ZERO)) {
-            return new BigInteger[] {a, BigInteger.ONE, BigInteger.ZERO};
+    static BigIntegerImpl[] extEuclid(BigIntegerImpl a, BigIntegerImpl b) {
+        if (b.equals(BigIntegerImpl.ZERO)) {
+            return new BigIntegerImpl[] {a, BigIntegerImpl.ONE, BigIntegerImpl.ZERO};
         }
-        BigInteger[] values = extEuclid(b, a.mod(b));
-        BigInteger d = values[0];
-        BigInteger p = values[2];
-        BigInteger q = values[1].subtract(a.divide(b).multiply(values[2]));
-        return new BigInteger[] {d, p, q};
+        BigIntegerImpl[] values = extEuclid(b, a.mod(b));
+        BigIntegerImpl d = values[0];
+        BigIntegerImpl p = values[2];
+        BigIntegerImpl q = values[1].subtract(a.divide(b).multiply(values[2]));
+        return new BigIntegerImpl[] {d, p, q};
     }
 }

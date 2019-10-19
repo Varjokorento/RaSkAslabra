@@ -1,6 +1,7 @@
 package encrypter;
 
 import keys.keyimpl.OwnPublicKey;
+import utils.BigIntegerImpl;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -20,8 +21,8 @@ public class Encrypter {
      * @param publicKey
      * @return encrypted BigInteger-array
      */
-    public BigInteger[] encrypt(BigInteger[] array, OwnPublicKey publicKey) {
-        BigInteger[] encrypted = new BigInteger[array.length];
+    public BigIntegerImpl[] encrypt(BigIntegerImpl[] array, OwnPublicKey publicKey) {
+        BigIntegerImpl[] encrypted = new BigIntegerImpl[array.length];
         for (int i = 0; i < array.length; i++) {
             encrypted[i] = array[i].modPow(publicKey.getE(), publicKey.getN());
         }
