@@ -92,9 +92,9 @@ public class OwnKeyPairGenerator {
     static OwnBigInteger extendedEuclid(OwnBigInteger m, OwnBigInteger n) {
         // for the formula to work 0 < m < n
         if (m.compareTo(n) > 0) {
-            OwnBigInteger a = n;
+            OwnBigInteger store = n;
             n = m;
-            m = a;
+            m = store;
         }
         if (m.compareTo(OwnBigInteger.ONE) == 0) {
             return OwnBigInteger.ONE;
