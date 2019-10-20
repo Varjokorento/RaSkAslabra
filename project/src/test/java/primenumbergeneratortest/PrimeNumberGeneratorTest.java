@@ -1,7 +1,7 @@
 package primenumbergeneratortest;
 
 import org.junit.Test;
-import utils.BigIntegerImpl;
+import utils.OwnBigInteger;
 import utils.PrimeNumberGenerator;
 import utils.PrimeNumberGeneratorWithBigInt;
 
@@ -28,33 +28,28 @@ public class PrimeNumberGeneratorTest {
         int errors = 0;
         for (int i = 0; i < 1000; i++) {
             String value = String.valueOf(i);
-            BigIntegerImpl possiblePrime = new BigIntegerImpl(value);
+            OwnBigInteger possiblePrime = new OwnBigInteger(value);
             BigInteger bi = new BigInteger(value);
             boolean answer = PrimeNumberGeneratorWithBigInt.millerRabinPrimality(possiblePrime, 1);
             if (answer && !bi.isProbablePrime(100)) {
-              //  System.out.println(value);
                 errors++;
-               // System.out.println("------");
             }
         }
         System.out.println(errors);
     }
 
     @Test
-    public void testSimple() {
-        BigIntegerImpl fourtyNine = new BigIntegerImpl("28");
-        boolean answer = PrimeNumberGeneratorWithBigInt.millerRabinPrimality(fourtyNine, 4);
+    public void notPrimeShouldReturnFalse() {
+        OwnBigInteger fourtyNine = new OwnBigInteger("28");
+        boolean answer = PrimeNumberGeneratorWithBigInt.millerRabinPrimality(fourtyNine, 1);
         assertFalse(answer);
     }
 
     @Test
     public void ownImplementationNumberArePrime() {
-        for (int i = 0; i < 10; i++) {
-         //   System.out.println(i);
-            BigIntegerImpl number = PrimeNumberGeneratorWithBigInt.generateLargePrime(100);
-            BigInteger numberAsBigInt = new BigInteger(number.valueOf());
-            assertTrue(numberAsBigInt.isProbablePrime(100));
-        }
+        OwnBigInteger number = PrimeNumberGeneratorWithBigInt.generateLargePrime();
+        BigInteger numberAsBigInt = new BigInteger(number.valueOf());
+        assertTrue(numberAsBigInt.isProbablePrime(100));
     }
 
 }

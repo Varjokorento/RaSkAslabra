@@ -4,91 +4,114 @@ package keys;
 import keys.keyimpl.OwnKeyPair;
 import keys.keyimpl.OwnPrivateKey;
 import keys.keyimpl.OwnPublicKey;
-import utils.BigIntegerImpl;
-import utils.PrimeNumberGenerator;
+import utils.OwnBigInteger;
 import utils.PrimeNumberGeneratorWithBigInt;
 
-import java.math.BigInteger;
-import java.security.SecureRandom;
 import java.util.Random;
 
 public class OwnKeyPairGenerator {
 
     /**
      * Generates two public keys e,n and d.
+     *
      * @return
      */
 
-    public OwnKeyPair generateKeyPair(int bitLength) {
-        BigIntegerImpl p = PrimeNumberGeneratorWithBigInt.generateLargePrime(bitLength);
-        BigIntegerImpl q = PrimeNumberGeneratorWithBigInt.generateLargePrime(bitLength);
-        BigIntegerImpl n = findN(p, q);
-        BigIntegerImpl phi = getPhi(p, q);
-        BigIntegerImpl e = genE(phi);
-        BigIntegerImpl d = extEuclid(e, phi)[1];
+    public OwnKeyPair generateKeyPair() {
+        OwnBigInteger p = PrimeNumberGeneratorWithBigInt.generateLargePrime();
+        OwnBigInteger q = PrimeNumberGeneratorWithBigInt.generateLargePrime();
+        OwnBigInteger n = findN(p, q);
+        OwnBigInteger phi = getPhi(p, q);
+        OwnBigInteger e = genE(phi);
+        OwnBigInteger[] array = extEuclid(e, phi);
+        OwnBigInteger d = extendedEuclid(e, phi);
         return new OwnKeyPair(new OwnPublicKey(e, n), new OwnPrivateKey(d));
     }
 
     /**
      * Find mod n from large prime numbers
+     *
      * @param p a large prime number
      * @param q a large prime number
      * @return mod n
      */
 
-    private BigIntegerImpl findN(BigIntegerImpl p, BigIntegerImpl q) {
+    private OwnBigInteger findN(OwnBigInteger p, OwnBigInteger q) {
         return p.multiply(q);
     }
 
 
-    /** Compute phi(n) (Euler's totient function)
+    /**
+     * Compute phi(n) (Euler's totient function)
      * (Modern version uses Carmichael totient function.)
-     *  phi(n) = (p-1)(q-1)
+     * phi(n) = (p-1)(q-1)
+     *
      * @return phi
      */
-    private BigIntegerImpl getPhi(BigIntegerImpl p, BigIntegerImpl q) {
-        return (p.subtract(BigIntegerImpl.ONE)).multiply(q.subtract(BigIntegerImpl.ONE));
+    private OwnBigInteger getPhi(OwnBigInteger p, OwnBigInteger q) {
+        return (p.subtract(OwnBigInteger.ONE)).multiply(q.subtract(OwnBigInteger.ONE));
     }
 
     /**
      * Generate e by finding a Phi such that the greatest common denominator is one
+     *
      * @param phi
-     * @return
+     * @return e
      */
-
-    static BigIntegerImpl genE(BigIntegerImpl phi) {
-        Random rand = new SecureRandom();
-        BigIntegerImpl e;
+    static OwnBigInteger genE(OwnBigInteger phi) {
+        OwnBigInteger e;
         do {
-            e = new BigIntegerImpl(100, rand);
+            e = new OwnBigInteger(new Random());
         }
-        while (e.compareTo(BigIntegerImpl.ONE) <= 0
-                    || e.compareTo(phi) >= 0
-                    || !greatestCommonDenominator(phi, e).equals(BigIntegerImpl.ONE));
+        while (e.compareTo(OwnBigInteger.ONE) <= 0
+                || e.compareTo(phi) >= 0
+                || !gcd(phi, e).equals(OwnBigInteger.ONE));
         return e;
     }
 
-    static BigIntegerImpl greatestCommonDenominator(BigIntegerImpl a, BigIntegerImpl b) {
-        if (b.equals(BigIntegerImpl.ZERO)) {
+    /**
+     * Recursively Returns greatest common denominator between two numbers
+     * @param a
+     * @param b
+     * @return gcd(a,b)
+     */
+
+    static OwnBigInteger gcd(OwnBigInteger a, OwnBigInteger b) {
+        if (b.equals(OwnBigInteger.ZERO)) {
             return a;
         } else {
-            return greatestCommonDenominator(b, a.mod(b));
+            return gcd(b, a.mod(b));
         }
     }
 
-    /** Extended Euclidean algorithm to solve Bezout's identity (ax + by = gcd(a,b))
+    /**
+     * Extended Euclidean algorithm to solve Bezout's identity (ax + by = gcd(a,b))
      * and finds the multiplicative inverse which is the solution to ax ≡ 1 (mod m)
+     *
      * @return [d, p, q] where d = gcd(a,b) and ap + bq = d
      */
 
-    static BigIntegerImpl[] extEuclid(BigIntegerImpl a, BigIntegerImpl b) {
-        if (b.equals(BigIntegerImpl.ZERO)) {
-            return new BigIntegerImpl[] {a, BigIntegerImpl.ONE, BigIntegerImpl.ZERO};
+    static OwnBigInteger[] extEuclid(OwnBigInteger p, OwnBigInteger q) {
+        if (q.compareTo(OwnBigInteger.ZERO) == 0)
+            return new OwnBigInteger[]{p, OwnBigInteger.ONE, OwnBigInteger.ZERO};
+        OwnBigInteger[] vals = extEuclid(q, p.mod(q));
+        OwnBigInteger d = vals[0];
+        OwnBigInteger a = vals[2];
+        OwnBigInteger subtractor = (p.divide(q)).multiply(vals[2]);
+        OwnBigInteger b = vals[1].subtract(subtractor);
+        return new OwnBigInteger[]{d, a, b};
+    }
+
+    static OwnBigInteger extendedEuclid(OwnBigInteger e, OwnBigInteger phi) {
+        if (e.compareTo(phi) > 0) {
+            OwnBigInteger a = phi;
+            phi = e;
+            e = a;
         }
-        BigIntegerImpl[] values = extEuclid(b, a.mod(b));
-        BigIntegerImpl d = values[0];
-        BigIntegerImpl p = values[2];
-        BigIntegerImpl q = values[1].subtract(a.divide(b).multiply(values[2]));
-        return new BigIntegerImpl[] {d, p, q};
+        if (e.compareTo(OwnBigInteger.ONE) == 0) {
+            return OwnBigInteger.ONE;
+        }
+        OwnBigInteger d = OwnBigInteger.ONE.add(phi.multiply(e.subtract(extendedEuclid(phi.mod(e), e)))).divide(e);
+        return d;
     }
 }

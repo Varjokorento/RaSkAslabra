@@ -8,6 +8,7 @@ public class PrimeNumberGenerator {
 
     /**
      * Generates a large prime number
+     *
      * @return BigInteger that is a prime
      */
     public static BigInteger generateLargePrime(int bitLength) {
@@ -16,6 +17,7 @@ public class PrimeNumberGenerator {
 
     /**
      * Generates a prime number with a specified length with Miller-Rabin primality test
+     *
      * @param bitLength
      * @return a BigInteger that should be a prime
      */
@@ -33,6 +35,7 @@ public class PrimeNumberGenerator {
 
     /**
      * Miller-Rabin test for primality
+     *
      * @param possiblePrime
      * @param iterations
      * @return boolean isPrime

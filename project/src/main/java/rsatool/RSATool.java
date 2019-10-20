@@ -1,35 +1,23 @@
 package rsatool;
 
-import utils.BigIntegerImpl;
+import utils.OwnBigInteger;
 import utils.asciiutil.AsciiUtil;
-import decrypter.Decrypter;
-import encrypter.Encrypter;
+import decrypter.OwnDecrypter;
+import encrypter.OwnEncrypter;
 import keys.KeyGenerator;
-import keys.KeyUtil;
+import keys.JavaLibKeyUtil;
 import keys.keyimpl.OwnPrivateKey;
 import keys.keyimpl.OwnPublicKey;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import java.io.IOException;
-import java.math.BigInteger;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.PublicKey;
 
 public class RSATool {
     private KeyGenerator keyGenerator;
     private KeyGenerator libraryKeyGenerator;
     private OwnPublicKey publicKey;
     private OwnPrivateKey privateKey;
-    private KeyUtil keyUtil;
+    private JavaLibKeyUtil keyUtil;
     private AsciiUtil asciiUtil;
-    private Encrypter encrypter;
-    private Decrypter decrypter;
-    private PublicKey libraryPublicKey;
-    private PrivateKey libraryPrivateKey;
+    private OwnEncrypter ownEncrypter;
+    private OwnDecrypter decrypter;
 
     /**
      * Constructor for RSATool.
@@ -37,10 +25,10 @@ public class RSATool {
      */
     public RSATool() {
         this.keyGenerator = new KeyGenerator();
-        this.keyUtil = new KeyUtil();
+        this.keyUtil = new JavaLibKeyUtil();
         this.asciiUtil = new AsciiUtil();
-        this.decrypter = new Decrypter();
-        this.encrypter = new Encrypter();
+        this.decrypter = new OwnDecrypter();
+        this.ownEncrypter = new OwnEncrypter();
 
     }
 
@@ -52,81 +40,47 @@ public class RSATool {
         return privateKey;
     }
 
-    /** OWN IMPLEMENTATION
+    /**
+     * OWN IMPLEMENTATION
      * Generates keys for the tool
-     *
      */
-    public void generateKeys(int bitLength) {
-        keyGenerator.generateKeyPair(bitLength);
+    public void generateKeys() {
+        keyGenerator.generateKeyPair();
         this.publicKey = keyGenerator.getPublicKey();
         this.privateKey = keyGenerator.getPrivateKey();
     }
 
-    /**
-     * LIBRARY IMPLEMENTATION
-     * Generates privateKeys using libraries
-     */
-
-    public void generateKeysWithLibraries() throws NoSuchAlgorithmException {
-        libraryKeyGenerator = new KeyGenerator(true);
-        libraryPublicKey = libraryKeyGenerator.getLibPublicKey();
-        libraryPrivateKey = libraryKeyGenerator.getLibPrivateKey();
-
-    }
 
     /**
      * OWN IMPLEMENTATION
      * Calls encrypter to encrypt a plaintext String.
+     *
      * @return encrypted byteArray of String.
      */
-    public BigIntegerImpl[] encrypt(String plainText) {
-        BigIntegerImpl[] cipherAsIntArray = asciiUtil.stringToCipher(plainText);
-        return encrypter.encrypt(cipherAsIntArray, this.getPublicKey());
+    public OwnBigInteger[] encrypt(String plainText) {
+        OwnBigInteger[] cipherAsIntArray = asciiUtil.stringToCipher(plainText);
+        return ownEncrypter.encrypt(cipherAsIntArray, this.getPublicKey());
     }
-
-    /**
-     * LIBRARY IMPLEMENTATION
-     * Library encrypt
-     */
-
-    public byte[] encryptWithLibraries(String message) throws IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException {
-        return encrypter.encrypt(message, libraryPrivateKey);
-    }
-
     /**
      * OWN IMPLEMENTATION
      * Calls decrypter to decipher a cryptedByteArray
+     *
      * @return decrypted byteArray of String.
      */
-    public BigIntegerImpl[] decrypt(BigIntegerImpl[] encrypted) {
+    public OwnBigInteger[] decrypt(OwnBigInteger[] encrypted) {
         return decrypter.decrypt(encrypted, this.getPrivateKey(), this.getPublicKey());
     }
-    /**
-     * LIBRARY IMPLEMENTATION
-     * Decrypt with libraries
-     */
 
-    public String decryptWithLibraries(byte[] encrypted) throws IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException {
-        byte[] decrypted = decrypter.decrypt(encrypted, libraryPublicKey);
-        return asciiUtil.getStringFromByteArray(decrypted);
-    }
     /**
      * OWN IMPLEMENTATION
      * Converts decrypted BigInteger-array to String
+     *
      * @return deciphered message
      */
-    public String cipherToString(BigIntegerImpl[] decrypted) {
+    public String cipherToString(OwnBigInteger[] decrypted) {
         return asciiUtil.cipherToString(decrypted);
     }
 
-    /**LIBRARY IMPLEMENTATION
-     * Calls keyUtil that writes the generated keys to file
-     *
-     */
-    public void writeKeysToFile() throws IOException {
-        keyUtil.savePublicKeyToFile(this.publicKey);
-        keyUtil.savePrivateKeyToFile(this.privateKey);
-    }
 
 
 }

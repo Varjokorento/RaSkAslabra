@@ -3,15 +3,12 @@ package rsatooltest;
 import org.junit.Before;
 import org.junit.Test;
 import rsatool.RSATool;
-import utils.BigIntegerImpl;
-
-import java.math.BigInteger;
+import utils.OwnBigInteger;
 
 import static org.junit.Assert.assertEquals;
 
 
 public class RSAToolTest {
-
 
 
     private static final String testString = "testString";
@@ -22,18 +19,15 @@ public class RSAToolTest {
     @Before
     public void setUp() {
         this.rsaTool = new RSATool();
-        rsaTool.generateKeys(100);
+        rsaTool.generateKeys();
     }
 
     @Test
     public void rsaToolEncryptsAndDecryptsAGivenString() {
-        BigIntegerImpl[] array = rsaTool.encrypt(testString);
-        BigIntegerImpl[] decrypted = rsaTool.decrypt(array);
+        OwnBigInteger[] array = rsaTool.encrypt(testString);
+        OwnBigInteger[] decrypted = rsaTool.decrypt(array);
         assertEquals(testString, rsaTool.cipherToString(decrypted));
     }
-
-
-
 
 
 }

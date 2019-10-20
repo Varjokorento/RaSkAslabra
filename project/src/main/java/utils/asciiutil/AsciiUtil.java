@@ -1,8 +1,7 @@
 package utils.asciiutil;
 
-import utils.BigIntegerImpl;
+import utils.OwnBigInteger;
 
-import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 
 public class AsciiUtil {
@@ -10,6 +9,7 @@ public class AsciiUtil {
 
     /**
      * Constructs a new String from byteArray.
+     *
      * @return Stringified byteArray
      */
 
@@ -19,16 +19,17 @@ public class AsciiUtil {
 
     /**
      * Converts plainText message to bigIntegerArray.
+     *
      * @param message
      * @return BigInteger[] decipheredArray
      */
 
-    public BigIntegerImpl[] stringToCipher(String message) {
-        BigIntegerImpl[] cipherString = new BigIntegerImpl[message.length()];
+    public OwnBigInteger[] stringToCipher(String message) {
+        OwnBigInteger[] cipherString = new OwnBigInteger[message.length()];
         int i = 0;
         while (i < message.length()) {
             int ch = (int) message.charAt(i);
-            BigIntegerImpl character = new BigIntegerImpl(String.valueOf(ch));
+            OwnBigInteger character = new OwnBigInteger(String.valueOf(ch));
             cipherString[i] = character;
             i++;
         }
@@ -37,11 +38,12 @@ public class AsciiUtil {
 
     /**
      * Converts cipher BigInteger[] to a plainText String
+     *
      * @param message
      * @return message
      */
 
-    public String cipherToString(BigIntegerImpl[] message) {
+    public String cipherToString(OwnBigInteger[] message) {
         String output = "";
         for (int i = 0; i < message.length; i++) {
             int temp = Integer.valueOf(message[i].valueOf());

@@ -1,17 +1,15 @@
 package keys.keyimpl;
 
-import utils.BigIntegerImpl;
-
-import java.math.BigInteger;
+import utils.OwnBigInteger;
 
 public class OwnPrivateKey {
-    private BigIntegerImpl key;
+    private OwnBigInteger key;
 
-    public OwnPrivateKey(BigIntegerImpl key) {
+    public OwnPrivateKey(OwnBigInteger key) {
         this.key = key;
     }
 
-    public BigIntegerImpl getPrivateKey() {
+    public OwnBigInteger getPrivateKey() {
         return key;
     }
 }

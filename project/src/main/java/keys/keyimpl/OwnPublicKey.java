@@ -1,31 +1,29 @@
 package keys.keyimpl;
 
-import utils.BigIntegerImpl;
-
-import java.math.BigInteger;
+import utils.OwnBigInteger;
 
 public class OwnPublicKey {
-    private BigIntegerImpl e;
-    private BigIntegerImpl n;
+    private OwnBigInteger e;
+    private OwnBigInteger n;
 
-    public OwnPublicKey(BigIntegerImpl e, BigIntegerImpl n) {
+    public OwnPublicKey(OwnBigInteger e, OwnBigInteger n) {
         this.e = e;
         this.n = n;
     }
 
-    public BigIntegerImpl getE() {
+    public OwnBigInteger getE() {
         return e;
     }
 
-    public void setE(BigIntegerImpl e) {
+    public void setE(OwnBigInteger e) {
         this.e = e;
     }
 
-    public BigIntegerImpl getN() {
+    public OwnBigInteger getN() {
         return n;
     }
 
-    public void setN(BigIntegerImpl n) {
+    public void setN(OwnBigInteger n) {
         this.n = n;
     }
 }

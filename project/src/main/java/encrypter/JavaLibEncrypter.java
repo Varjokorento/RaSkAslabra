@@ -1,37 +1,19 @@
 package encrypter;
 
-import keys.keyimpl.OwnPublicKey;
-import utils.BigIntegerImpl;
-
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-import java.math.BigInteger;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 
-public class Encrypter {
+public class JavaLibEncrypter {
+
 
     /**
-     * OWN IMPLEMENTATION
-     * Encrypts a given BigInteger-array with
-     * @param array
-     * @param publicKey
-     * @return encrypted BigInteger-array
-     */
-    public BigIntegerImpl[] encrypt(BigIntegerImpl[] array, OwnPublicKey publicKey) {
-        BigIntegerImpl[] encrypted = new BigIntegerImpl[array.length];
-        for (int i = 0; i < array.length; i++) {
-            encrypted[i] = array[i].modPow(publicKey.getE(), publicKey.getN());
-        }
-        return encrypted;
-    }
-
-    /**
-     * LIBRARY IMPLEMENTATION
      * Encrypts a given byteArray with given privateKey
+     *
      * @return encrypted byteArray
      */
     public byte[] encrypt(String plainText, PrivateKey privateKey) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
@@ -40,7 +22,4 @@ public class Encrypter {
         byte[] ciphered = cipher.doFinal(plainText.getBytes());
         return ciphered;
     }
-
-
-
 }

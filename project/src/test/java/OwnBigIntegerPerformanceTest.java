@@ -1,5 +1,5 @@
 import org.junit.Test;
-import utils.BigIntegerImpl;
+import utils.OwnBigInteger;
 
 import java.math.BigInteger;
 
@@ -10,7 +10,7 @@ public class OwnBigIntegerPerformanceTest {
     @Test
     public void testAdding() {
         String numberString = "200000000000000000";
-        BigIntegerImpl number = new BigIntegerImpl(numberString);
+        OwnBigInteger number = new OwnBigInteger(numberString);
         BigInteger bigInteger = new BigInteger(numberString);
         long startTime = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
@@ -18,7 +18,7 @@ public class OwnBigIntegerPerformanceTest {
         }
         long endTime = System.nanoTime();
         long duration = (endTime - startTime);
-        System.out.println("Addition took " + duration);
+        System.out.println("Addition took " + duration + " with own implementation");
 
         startTime = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
@@ -26,17 +26,17 @@ public class OwnBigIntegerPerformanceTest {
         }
         endTime = System.nanoTime();
         duration = (endTime - startTime);
-        System.out.println("Addition took " + duration);
+        System.out.println("Addition took " + duration + " with libraries");
     }
 
 
     @Test
     public void testSubtracting() {
         String numberString = "200000000000000000";
-        String numberSubtract  = "1";
-        BigIntegerImpl number = new BigIntegerImpl(numberString);
+        String numberSubtract = "1";
+        OwnBigInteger number = new OwnBigInteger(numberString);
         BigInteger bigInteger = new BigInteger(numberString);
-        BigIntegerImpl subtractImpl = new BigIntegerImpl(numberSubtract);
+        OwnBigInteger subtractImpl = new OwnBigInteger(numberSubtract);
         BigInteger bigIntegerSubtract = new BigInteger(numberSubtract);
         long startTime = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
@@ -44,7 +44,7 @@ public class OwnBigIntegerPerformanceTest {
         }
         long endTime = System.nanoTime();
         long duration = (endTime - startTime);
-        System.out.println("Subtraction took " + duration);
+        System.out.println("Subtraction took " + duration + " with own implementation");
 
         startTime = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
@@ -52,16 +52,16 @@ public class OwnBigIntegerPerformanceTest {
         }
         endTime = System.nanoTime();
         duration = (endTime - startTime);
-        System.out.println("Subtraction took " + duration);
+        System.out.println("Subtraction took " + duration + " with libraries");
     }
 
     @Test
     public void testMultiplication() {
         String numberString = "200000000000000000";
-        String numberMultiply  = "1000000";
-        BigIntegerImpl number = new BigIntegerImpl(numberString);
+        String numberMultiply = "1000000";
+        OwnBigInteger number = new OwnBigInteger(numberString);
         BigInteger bigInteger = new BigInteger(numberString);
-        BigIntegerImpl multiplyImpl = new BigIntegerImpl(numberMultiply);
+        OwnBigInteger multiplyImpl = new OwnBigInteger(numberMultiply);
         BigInteger multiyplyBI = new BigInteger(numberMultiply);
         long startTime = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
@@ -69,7 +69,7 @@ public class OwnBigIntegerPerformanceTest {
         }
         long endTime = System.nanoTime();
         long duration = (endTime - startTime);
-        System.out.println("Multiplication took " + duration);
+        System.out.println("Multiplication took " + duration + " with own implementation");
 
         startTime = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
@@ -77,16 +77,16 @@ public class OwnBigIntegerPerformanceTest {
         }
         endTime = System.nanoTime();
         duration = (endTime - startTime);
-        System.out.println("Multiplication took " + duration);
+        System.out.println("Multiplication took " + duration + " with libraries");
     }
 
     @Test
     public void testDivision() {
         String numberString = "200000";
-        String numberDivide  = "10";
-        BigIntegerImpl number = new BigIntegerImpl(numberString);
+        String numberDivide = "10";
+        OwnBigInteger number = new OwnBigInteger(numberString);
         BigInteger bigInteger = new BigInteger(numberString);
-        BigIntegerImpl divideImpl = new BigIntegerImpl(numberDivide);
+        OwnBigInteger divideImpl = new OwnBigInteger(numberDivide);
         BigInteger divideBI = new BigInteger(numberDivide);
         long startTime = System.nanoTime();
         for (int i = 0; i < 10; i++) {
@@ -94,23 +94,23 @@ public class OwnBigIntegerPerformanceTest {
         }
         long endTime = System.nanoTime();
         long duration = (endTime - startTime);
-        System.out.println("Division took " + duration);
+        System.out.println("Division took " + duration + " with own implementation");
         startTime = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
             bigInteger = bigInteger.divide(divideBI);
         }
         endTime = System.nanoTime();
         duration = (endTime - startTime);
-        System.out.println("Division took " + duration);
+        System.out.println("Division took " + duration + " with libraries");
     }
 
     @Test
     public void testMod() {
         String numberString = "2000000000";
-        String numberDivide  = "100";
-        BigIntegerImpl number = new BigIntegerImpl(numberString);
+        String numberDivide = "100";
+        OwnBigInteger number = new OwnBigInteger(numberString);
         BigInteger bigInteger = new BigInteger(numberString);
-        BigIntegerImpl divideImpl = new BigIntegerImpl(numberDivide);
+        OwnBigInteger divideImpl = new OwnBigInteger(numberDivide);
         BigInteger divideBI = new BigInteger(numberDivide);
         long startTime = System.nanoTime();
         for (int i = 0; i < 1; i++) {
@@ -118,23 +118,23 @@ public class OwnBigIntegerPerformanceTest {
         }
         long endTime = System.nanoTime();
         long duration = (endTime - startTime);
-        System.out.println("Division took " + duration);
+        System.out.println("Division took " + duration + " with own implementation");
         startTime = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
             bigInteger = bigInteger.mod(divideBI);
         }
         endTime = System.nanoTime();
         duration = (endTime - startTime);
-        System.out.println("Division took " + duration);
+        System.out.println("Division took " + duration + " with libraries");
     }
 
     @Test
     public void testPow() {
-        String numberString = "2000";
-        String numberPow  = "300";
-        BigIntegerImpl number = new BigIntegerImpl(numberString);
+        String numberString = "200";
+        String numberPow = "3397";
+        OwnBigInteger number = new OwnBigInteger(numberString);
         BigInteger bigInteger = new BigInteger(numberString);
-        BigIntegerImpl powerImpl = new BigIntegerImpl(numberPow);
+        OwnBigInteger powerImpl = new OwnBigInteger(numberPow);
         BigInteger powerBI = new BigInteger(numberPow);
         long startTime = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
@@ -142,7 +142,7 @@ public class OwnBigIntegerPerformanceTest {
         }
         long endTime = System.nanoTime();
         long duration = (endTime - startTime);
-        System.out.println("Power took " + duration);
+        System.out.println("Power took " + duration + "seconds with own implementation");
 
         startTime = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
@@ -150,9 +150,8 @@ public class OwnBigIntegerPerformanceTest {
         }
         endTime = System.nanoTime();
         duration = (endTime - startTime);
-        System.out.println("Power took " + duration);
+        System.out.println("Power took " + duration + "seconds with libraries");
     }
-
 
 
 }
