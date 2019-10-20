@@ -23,7 +23,6 @@ public class OwnKeyPairGenerator {
         OwnBigInteger n = findN(p, q);
         OwnBigInteger phi = getPhi(p, q);
         OwnBigInteger e = genE(phi);
-        OwnBigInteger[] array = extEuclid(e, phi);
         OwnBigInteger d = extendedEuclid(e, phi);
         return new OwnKeyPair(new OwnPublicKey(e, n), new OwnPrivateKey(d));
     }
@@ -85,33 +84,22 @@ public class OwnKeyPairGenerator {
     }
 
     /**
-     * Extended Euclidean algorithm to solve Bezout's identity (ax + by = gcd(a,b))
+     * Extended Euclidean algorithm to solve Bezout's identity INV(m,n)
      * and finds the multiplicative inverse which is the solution to ax ≡ 1 (mod m)
-     *
-     * @return [d, p, q] where d = gcd(a,b) and ap + bq = d
+     * Read (https://fi.wikipedia.org/wiki/Modulaariaritmetiikan_käänteisluku) (in Finnish)
+     * @return INV(m,n)
      */
-
-    static OwnBigInteger[] extEuclid(OwnBigInteger p, OwnBigInteger q) {
-        if (q.compareTo(OwnBigInteger.ZERO) == 0)
-            return new OwnBigInteger[]{p, OwnBigInteger.ONE, OwnBigInteger.ZERO};
-        OwnBigInteger[] vals = extEuclid(q, p.mod(q));
-        OwnBigInteger d = vals[0];
-        OwnBigInteger a = vals[2];
-        OwnBigInteger subtractor = (p.divide(q)).multiply(vals[2]);
-        OwnBigInteger b = vals[1].subtract(subtractor);
-        return new OwnBigInteger[]{d, a, b};
-    }
-
-    static OwnBigInteger extendedEuclid(OwnBigInteger e, OwnBigInteger phi) {
-        if (e.compareTo(phi) > 0) {
-            OwnBigInteger a = phi;
-            phi = e;
-            e = a;
+    static OwnBigInteger extendedEuclid(OwnBigInteger m, OwnBigInteger n) {
+        // for the formula to work 0 < m < n
+        if (m.compareTo(n) > 0) {
+            OwnBigInteger a = n;
+            n = m;
+            m = a;
         }
-        if (e.compareTo(OwnBigInteger.ONE) == 0) {
+        if (m.compareTo(OwnBigInteger.ONE) == 0) {
             return OwnBigInteger.ONE;
         }
-        OwnBigInteger d = OwnBigInteger.ONE.add(phi.multiply(e.subtract(extendedEuclid(phi.mod(e), e)))).divide(e);
+        OwnBigInteger d = OwnBigInteger.ONE.add(n.multiply(m.subtract(extendedEuclid(n.mod(m), m)))).divide(m);
         return d;
     }
 }

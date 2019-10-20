@@ -38,6 +38,23 @@ public class OwnBigIntegerTest {
     }
 
     @Test
+    public void testSubtractionWithCarry() {
+        OwnBigInteger int1 = new OwnBigInteger("220");
+        OwnBigInteger int2 = new OwnBigInteger("90");
+        OwnBigInteger int3 = int1.subtract(int2);
+        assertEquals("130", int3.valueOf());
+    }
+
+
+    @Test
+    public void testSubtractionWithNegativeNumbers() {
+        OwnBigInteger int1 = new OwnBigInteger("10");
+        OwnBigInteger int2 = new OwnBigInteger("20");
+        OwnBigInteger int3 = int1.subtract(int2);
+        assertEquals("-10", int3.valueOf());
+    }
+
+    @Test
     public void testNegativeSubstraction() {
         OwnBigInteger int1 = new OwnBigInteger("30");
         OwnBigInteger int2 = new OwnBigInteger("20");
@@ -54,11 +71,19 @@ public class OwnBigIntegerTest {
     }
 
     @Test
-    public void testMultiplication() {
-        OwnBigInteger int1 = new OwnBigInteger("2");
-        OwnBigInteger int2 = new OwnBigInteger("2000000000000000000000000");
+    public void testMultiplicationWithSmallNumbers() {
+        OwnBigInteger int1 = new OwnBigInteger("240");
+        OwnBigInteger int2 = new OwnBigInteger("102");
         OwnBigInteger int3 = int2.multiply(int1);
-        assertEquals("4000000000000000000000000", int3.valueOf());
+        assertEquals("24480", int3.valueOf());
+    }
+
+    @Test
+    public void testMultiplicationWithLargeNumbers() {
+        OwnBigInteger int1 = new OwnBigInteger("2");
+        OwnBigInteger int2 = new OwnBigInteger("2000000");
+        OwnBigInteger int3 = int2.multiply(int1);
+        assertEquals("4000000", int3.valueOf());
     }
 
     @Test
@@ -80,9 +105,12 @@ public class OwnBigIntegerTest {
 
     @Test
     public void moduloTest() {
-        OwnBigInteger impl = new OwnBigInteger("1311313232323232323232323232323");
-        OwnBigInteger divisor = new OwnBigInteger("23232323232323232323322323");
-        assertEquals("11212121212121207041355234", impl.mod(divisor).valueOf());
+        OwnBigInteger impl = new OwnBigInteger("131131323");
+        OwnBigInteger divisor = new OwnBigInteger("2323232");
+        int mod = 131131323;
+        int divisori = 2323232;
+        int modu = mod % divisori;
+        assertEquals("1030331", impl.mod(divisor).valueOf());
     }
 
     @Test

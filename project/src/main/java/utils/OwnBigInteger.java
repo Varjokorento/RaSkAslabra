@@ -1,5 +1,6 @@
 package utils;
 
+import java.math.BigInteger;
 import java.util.Random;
 
 /**
@@ -111,7 +112,8 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
 
     /**
      * Subtracts a BigInteger from BigInteger
-     *
+     * Does not support an operation where the subtracting number
+     * has more digits that the number to subtract from.
      * @param otherNumber
      * @return subtracted bigInteger
      */
@@ -148,6 +150,8 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
 
     /**
      * Multiplies a BigInteger with another BigInteger
+     * It adds each number n times from smallerNumber index and then adds the resulting numbers
+     * together. Works like long multiplication.
      * @param otherNumber
      * @return product of BigInteger
      */
@@ -158,23 +162,23 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
         OwnBigInteger bigger = new OwnBigInteger(biggerArray);
         int[] result = new int[smallerArray.length + biggerArray.length + 1];
         for (int i = 0; i < smallerArray.length; i++) {
-            OwnBigInteger total = OwnBigInteger.ZERO;
+            OwnBigInteger currentTotal = OwnBigInteger.ZERO;
             for (int j = 0; j < smallerArray[smallerArray.length - 1 - i]; j++) {
-                total = total.add(bigger);
+                currentTotal = currentTotal.add(bigger);
             }
-            for (int j = 0; j < total.digits.length; j++) {
+            for (int j = 0; j < currentTotal.digits.length; j++) {
                 int resultIndex = result.length - i - j - 1;
-                int totalIndex = total.digits.length - j - 1;
-                result[resultIndex] += total.digits[totalIndex];
+                int totalIndex = currentTotal.digits.length - j - 1;
+                result[resultIndex] += currentTotal.digits[totalIndex];
                 if (result[resultIndex] > 9) {
+                    int carry = 1;
                     result[resultIndex] -= 10;
-                    result[resultIndex - 1] += 1;
+                    result[resultIndex - 1] += carry;
                 }
             }
         }
         return new OwnBigInteger(filterZeroesFromBeginning(result));
     }
-
 
     /**
      * Divides a BigInteger with BigInteger
@@ -341,7 +345,8 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
     }
 
     /**
-     * With the arithmetic operations the result has zeroes in the beginning. As this causes problems after the number has been
+     * The arithmetic operations sometimes copy arrays so that there are leading zeroes.
+     * As this causes problems after the number has been
      * generated this filters them out.
      * @param array
      * @return a number without the leading zeroes
