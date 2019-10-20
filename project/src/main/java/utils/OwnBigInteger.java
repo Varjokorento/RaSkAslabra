@@ -1,11 +1,13 @@
 package utils;
 
-import java.math.BigInteger;
 import java.util.Random;
 
 /**
  * This is my implementation of BigInteger. It stores the number as a digit array. The Arithmetic operations use
  * the paper-and-pen techniques.
+ *
+ * This implementation copies arrays using OwnArrays.arraycopy because regular copying by assigning
+ * arrays to each other leads to a shallow copy of the array that causes a lot of issues.
  *
  * Note: This implemenentation only implements the operations required for this program. It does not, for example,
  * allow for negative multiplications or square roots.
@@ -187,22 +189,12 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
      * @return result of division
      */
     public OwnBigInteger divide(OwnBigInteger otherNumber) {
-        int compareResult = this.compareTo(otherNumber);
-        if (compareResult < 0) {
-            return OwnBigInteger.ZERO;
-        } else if (compareResult == 0) {
-            return OwnBigInteger.ONE;
-        }
-        int[] thisCopy = new int[this.digits.length];
-        OwnArrays.arraycopy(this.digits, 0, thisCopy, 0, this.digits.length);
-        OwnBigInteger dividend = new OwnBigInteger(thisCopy);
+        int[] copy = new int[this.digits.length];
+        OwnArrays.arraycopy(this.digits, 0, copy, 0, this.digits.length);
+        OwnBigInteger dividend = new OwnBigInteger(copy);
         int beginningIndex = 0;
-        int endingIndex = 1;
         int[] result = new int[this.digits.length];
-        while (true) {
-            if (endingIndex > this.digits.length) {
-                break;
-            }
+        for (int endingIndex = 1; endingIndex <= this.digits.length; endingIndex++) {
             int[] longDividerArray = new int[endingIndex - beginningIndex];
             OwnArrays.arraycopy(dividend.digits, beginningIndex, longDividerArray, 0, endingIndex - beginningIndex);
             OwnBigInteger currentDividend = new OwnBigInteger(longDividerArray);
@@ -215,13 +207,12 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
                 if (currentDividend.compareTo(OwnBigInteger.ZERO) == 0) {
                     beginningIndex = endingIndex;
                 } else {
-                    int digitsLeftFromSubtract = currentDividend.digits.length;
-                    beginningIndex = endingIndex - digitsLeftFromSubtract;
-                    OwnArrays.arraycopy(currentDividend.digits, 0, dividend.digits, beginningIndex, digitsLeftFromSubtract);
+                    int leftDigits = currentDividend.digits.length;
+                    beginningIndex = endingIndex - leftDigits;
+                    OwnArrays.arraycopy(currentDividend.digits, 0, dividend.digits, beginningIndex, leftDigits);
                 }
             }
             result[endingIndex - 1] = times;
-            endingIndex++;
         }
         return new OwnBigInteger(filterZeroesFromBeginning(result));
     }
@@ -338,7 +329,7 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
     }
 
     /**
-     * The arithmetic operations sometimes copy arrays so that there are leading zeroes.
+     * The arithmetic operations copy arrays so that there are leading zeroes.
      * As this causes problems after the number has been
      * generated this filters them out.
      * @param array

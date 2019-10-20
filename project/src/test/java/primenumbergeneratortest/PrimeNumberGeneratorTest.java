@@ -29,8 +29,8 @@ public class PrimeNumberGeneratorTest {
 
     @Test
     public void notPrimeShouldReturnFalse() {
-        OwnBigInteger fourtyNine = new OwnBigInteger("28");
-        boolean answer = PrimeNumberGenerator.millerRabinPrimality(fourtyNine, 1);
+        OwnBigInteger fourtyNine = new OwnBigInteger("26");
+        boolean answer = PrimeNumberGenerator.millerRabinPrimality(fourtyNine, 3);
         assertFalse(answer);
     }
 

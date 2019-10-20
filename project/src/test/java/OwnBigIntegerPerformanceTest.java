@@ -6,6 +6,7 @@ import java.math.BigInteger;
 public class OwnBigIntegerPerformanceTest {
 
     private static final int iterations = 100;
+    private static final int powIterations = 10;
 
     @Test
     public void testAdding() {
@@ -93,14 +94,14 @@ public class OwnBigIntegerPerformanceTest {
             number = number.divide(divideImpl);
         }
         long endTime = System.nanoTime();
-        long duration = (endTime - startTime) / (10) ;
+        long duration = (endTime - startTime) / (100) ;
         System.out.println("Division took " + duration + " with own implementation");
         startTime = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
             bigInteger = bigInteger.divide(divideBI);
         }
         endTime = System.nanoTime();
-        duration = (endTime - startTime) / (10) ;
+        duration = (endTime - startTime) / (100) ;
         System.out.println("Division took " + duration + " with libraries");
     }
 
@@ -137,7 +138,7 @@ public class OwnBigIntegerPerformanceTest {
         OwnBigInteger powerImpl = new OwnBigInteger(numberPow);
         BigInteger powerBI = new BigInteger(numberPow);
         long startTime = System.nanoTime();
-        for (int i = 0; i < iterations; i++) {
+        for (int i = 0; i < powIterations; i++) {
             number.pow(powerImpl);
         }
         long endTime = System.nanoTime();
@@ -145,7 +146,7 @@ public class OwnBigIntegerPerformanceTest {
         System.out.println("Power took " + duration + "seconds with own implementation");
 
         startTime = System.nanoTime();
-        for (int i = 0; i < iterations; i++) {
+        for (int i = 0; i < powIterations; i++) {
             bigInteger.pow(10);
         }
         endTime = System.nanoTime();

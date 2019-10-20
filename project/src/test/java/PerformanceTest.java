@@ -1,4 +1,5 @@
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import rsatool.JavaLibRSATool;
 import rsatool.RSATool;
 import utils.OwnBigInteger;
@@ -17,6 +18,12 @@ public class PerformanceTest {
     public PerformanceTest() throws NoSuchAlgorithmException {
     }
 
+
+    @BeforeEach
+    public void setUp() throws NoSuchAlgorithmException {
+        rsaTool = new RSATool();
+        javaLibRSATool = new JavaLibRSATool();
+    }
 
     @Test
     public void comparingKeyGenerationPerformance() throws NoSuchAlgorithmException {

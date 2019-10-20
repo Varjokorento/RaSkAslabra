@@ -99,8 +99,8 @@ public class OwnBigIntegerTest {
         OwnBigInteger bigInteger = new OwnBigInteger("2");
         OwnBigInteger impl2 = bigInteger.shiftLeft(1);
         BigInteger integer = new BigInteger("2");
-        System.out.println(impl2);
-        System.out.println(integer.shiftLeft(1));
+        integer = integer.shiftLeft(1);
+        assertEquals(integer.toString(), impl2.valueOf());
     }
 
     @Test
