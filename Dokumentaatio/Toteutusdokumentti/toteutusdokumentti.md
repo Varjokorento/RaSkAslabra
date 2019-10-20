@@ -19,13 +19,41 @@ Laskun tuloksena saadaan julkinen avain, joka on jakojäännös n ja exponentti 
 ## 2. Tekstin salaaminen 
 
 1. Käyttäjä syöttää merkkijonon. 
-2. RSATool-luokka purkaa merkkijonot puretaan sen merkkien ASCII-arvoon, josta tehdään BigInteger-array. Esimerkiksi abc = {97, 98, 99}
-3. Tämän jälkeen Encrypter-luokka kryptaa BigInteger-arrayn niin, että jokainen numero nostetaan a^e mod n. e ja n ovat julkisen avaimen osia. Lopputuloksena saadaan kryptattu versio BigInteger-arraystä.
+2. RSATool-luokka purkaa merkkijonot puretaan sen merkkien ASCII-arvoon, josta tehdään OwnBigInteger-array. Esimerkiksi abc = {97, 98, 99}
+3. Tämän jälkeen Encrypter-luokka kryptaa OwnBigInteger-arrayn niin, että jokainen numero nostetaan a^e mod n. e ja n ovat julkisen avaimen osia. Lopputuloksena saadaan kryptattu versio BigInteger-arraystä.
 
 ## 3. Salauksen purkaminen
-1. Kryptattu BigInteger-array annetaan Decrypter-luokalle, joka saa syötteenään myös julkisen avaimen ja yksityisen avaimen. 
+1. Kryptattu OwnBigInteger-array annetaan Decrypter-luokalle, joka saa syötteenään myös julkisen avaimen ja yksityisen avaimen. 
 2. Jokaiselle alkiolle tehdään seuraava operaatio: a^d mod n. Tässä d on yksityinen avain ja n saadaan julkisesta avaimesta. 
+
+
+## OwnBigInteger-luokka
+
+Tämä luokka implementoi Javan BigInteger-luokan. Luokka säilöö suuria lukua Array-listoissa yksi numero kerrallaan. Luokan toiminnallisuus perustuu allekkain laskemiseen.
+
+1. Lisäys
+
+Jokainen lukuun lisätään allekkain toisen luvun vastaava. Jos mennään yli kymmenen, niin lisätään muistiin luku. 
+
+2. Vähennys
+
+Jokainen lukuun lisätään allekkain toisen luvun vastaava. Jos mennään yli kymmenen, niin lisätään muistiin luku. 
+
+3. Jakolasku
+
+Jakolasku tehdään jakokulmalla.
+
+4. Kertolasku
+
+Kertolasku tehdään niin, että otetaan pienemmästä numerosta viimeinen luku ja kerrotaan sillä kokonaan suurempi luku. Tämän jälkeen tämä luku lisätään tuloslistaan. Käydään näin läpi koko luku ja aina välitulokset lisätään allekkain toisiinsa niin, että välitulokset saavat aina matalamman indeksin kuin edellinen (eli saadaan '0' luvun perään).
+
+5. Modulo ja potenssi.
+
+Nämä ovat edellämainittujen operaatioiden kombinaatioita. Tämän vuoksi ne eivät ole erityisen tehokkaita.
 
 Lähteet:
 https://www.geeksforgeeks.org/primality-test-set-3-miller-rabin/
 https://en.wikipedia.org/wiki/RSA_(cryptosystem)
+https://rosettacode.org/wiki/Long_multiplication
+https://en.wikipedia.org/wiki/Long_division
+
