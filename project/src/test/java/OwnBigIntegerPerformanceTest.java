@@ -17,7 +17,7 @@ public class OwnBigIntegerPerformanceTest {
             number = number.add(number);
         }
         long endTime = System.nanoTime();
-        long duration = (endTime - startTime);
+        long duration = (endTime - startTime) / (10) ;
         System.out.println("Addition took " + duration + " with own implementation");
 
         startTime = System.nanoTime();
@@ -25,7 +25,7 @@ public class OwnBigIntegerPerformanceTest {
             bigInteger = bigInteger.add(bigInteger);
         }
         endTime = System.nanoTime();
-        duration = (endTime - startTime);
+        duration = (endTime - startTime) / (10) ;
         System.out.println("Addition took " + duration + " with libraries");
     }
 
@@ -43,7 +43,7 @@ public class OwnBigIntegerPerformanceTest {
             number = number.subtract(subtractImpl);
         }
         long endTime = System.nanoTime();
-        long duration = (endTime - startTime);
+        long duration = (endTime - startTime) / (10) ;
         System.out.println("Subtraction took " + duration + " with own implementation");
 
         startTime = System.nanoTime();
@@ -51,7 +51,7 @@ public class OwnBigIntegerPerformanceTest {
             bigInteger = bigInteger.subtract(bigIntegerSubtract);
         }
         endTime = System.nanoTime();
-        duration = (endTime - startTime);
+        duration = (endTime - startTime) / (10) ;
         System.out.println("Subtraction took " + duration + " with libraries");
     }
 
@@ -68,7 +68,7 @@ public class OwnBigIntegerPerformanceTest {
             number = number.multiply(multiplyImpl);
         }
         long endTime = System.nanoTime();
-        long duration = (endTime - startTime);
+        long duration = (endTime - startTime) / (10) ;
         System.out.println("Multiplication took " + duration + " with own implementation");
 
         startTime = System.nanoTime();
@@ -76,7 +76,7 @@ public class OwnBigIntegerPerformanceTest {
             bigInteger = bigInteger.subtract(multiyplyBI);
         }
         endTime = System.nanoTime();
-        duration = (endTime - startTime);
+        duration = (endTime - startTime) / (10) ;
         System.out.println("Multiplication took " + duration + " with libraries");
     }
 
@@ -93,14 +93,14 @@ public class OwnBigIntegerPerformanceTest {
             number = number.divide(divideImpl);
         }
         long endTime = System.nanoTime();
-        long duration = (endTime - startTime);
+        long duration = (endTime - startTime) / (10) ;
         System.out.println("Division took " + duration + " with own implementation");
         startTime = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
             bigInteger = bigInteger.divide(divideBI);
         }
         endTime = System.nanoTime();
-        duration = (endTime - startTime);
+        duration = (endTime - startTime) / (10) ;
         System.out.println("Division took " + duration + " with libraries");
     }
 
@@ -117,15 +117,15 @@ public class OwnBigIntegerPerformanceTest {
             number.mod(divideImpl);
         }
         long endTime = System.nanoTime();
-        long duration = (endTime - startTime);
-        System.out.println("Division took " + duration + " with own implementation");
+        long duration = (endTime - startTime) / (10) ;
+        System.out.println("Mod took " + duration + " with own implementation");
         startTime = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
             bigInteger = bigInteger.mod(divideBI);
         }
         endTime = System.nanoTime();
-        duration = (endTime - startTime);
-        System.out.println("Division took " + duration + " with libraries");
+        duration = (endTime - startTime) / (10) ;
+        System.out.println("Mod took " + duration + " with libraries");
     }
 
     @Test
@@ -141,7 +141,7 @@ public class OwnBigIntegerPerformanceTest {
             number.pow(powerImpl);
         }
         long endTime = System.nanoTime();
-        long duration = (endTime - startTime);
+        long duration = (endTime - startTime) / (10) ;
         System.out.println("Power took " + duration + "seconds with own implementation");
 
         startTime = System.nanoTime();
@@ -149,7 +149,7 @@ public class OwnBigIntegerPerformanceTest {
             bigInteger.pow(10);
         }
         endTime = System.nanoTime();
-        duration = (endTime - startTime);
+        duration = (endTime - startTime) / (10) ;
         System.out.println("Power took " + duration + "seconds with libraries");
     }
 
