@@ -5,7 +5,7 @@ import keys.keyimpl.OwnKeyPair;
 import keys.keyimpl.OwnPrivateKey;
 import keys.keyimpl.OwnPublicKey;
 import utils.OwnBigInteger;
-import utils.PrimeNumberGeneratorWithBigInt;
+import utils.PrimeNumberGenerator;
 
 import java.util.Random;
 
@@ -18,8 +18,8 @@ public class OwnKeyPairGenerator {
      */
 
     public OwnKeyPair generateKeyPair() {
-        OwnBigInteger p = PrimeNumberGeneratorWithBigInt.generateLargePrime();
-        OwnBigInteger q = PrimeNumberGeneratorWithBigInt.generateLargePrime();
+        OwnBigInteger p = PrimeNumberGenerator.generateLargePrime();
+        OwnBigInteger q = PrimeNumberGenerator.generateLargePrime();
         OwnBigInteger n = findN(p, q);
         OwnBigInteger phi = getPhi(p, q);
         OwnBigInteger e = genE(phi);

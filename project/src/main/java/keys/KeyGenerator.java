@@ -19,8 +19,6 @@ public class KeyGenerator {
     public KeyGenerator() {
         this.keyPairGenerator = new OwnKeyPairGenerator();
     }
-
-
     /**
      * Generates keyPar with keyPairGenerator.
      */

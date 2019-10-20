@@ -1,7 +1,6 @@
 package utils;
 
 
-import java.math.BigInteger;
 import java.util.Random;
 
 public class PrimeNumberGenerator {
@@ -11,21 +10,20 @@ public class PrimeNumberGenerator {
      *
      * @return BigInteger that is a prime
      */
-    public static BigInteger generateLargePrime(int bitLength) {
-        return generatePrime(bitLength);
+    public static OwnBigInteger generateLargePrime() {
+        return generatePrime();
     }
 
     /**
      * Generates a prime number with a specified length with Miller-Rabin primality test
      *
-     * @param bitLength
      * @return a BigInteger that should be a prime
      */
-    private static BigInteger generatePrime(int bitLength) {
-        BigInteger prime = new BigInteger(bitLength, new Random());
+    private static OwnBigInteger generatePrime() {
+        OwnBigInteger prime = new OwnBigInteger(new Random());
         while (true) {
             if (!millerRabinPrimality(prime, 4)) {
-                prime = prime.add(BigInteger.valueOf(1));
+                prime = prime.add(OwnBigInteger.ONE);
                 continue;
             } else {
                 return prime;
@@ -40,16 +38,19 @@ public class PrimeNumberGenerator {
      * @param iterations
      * @return boolean isPrime
      */
-    public static boolean millerRabinPrimality(BigInteger possiblePrime, int iterations) {
-        BigInteger two = new BigInteger("2");
-        BigInteger three = new BigInteger("3");
-        BigInteger four = new BigInteger("4");
-        if (possiblePrime.compareTo(BigInteger.ONE) <= 0 || possiblePrime.compareTo(four) == 0 || possiblePrime.compareTo(three) <= 0) {
+    public static boolean millerRabinPrimality(OwnBigInteger possiblePrime, int iterations) {
+        OwnBigInteger two = new OwnBigInteger("2");
+        OwnBigInteger three = new OwnBigInteger("3");
+        OwnBigInteger four = new OwnBigInteger("4");
+        if (possiblePrime.compareTo(OwnBigInteger.ONE) <= 0 || possiblePrime.compareTo(four) == 0) {
             return false;
         }
-        BigInteger d = possiblePrime.subtract(BigInteger.ONE);
-        while (d.mod(two).equals(BigInteger.ZERO)) {
-            d = d.shiftRight(1);
+        if (possiblePrime.compareTo(three) <= 0) {
+            return true;
+        }
+        OwnBigInteger d = possiblePrime.subtract(OwnBigInteger.ONE);
+        while (d.mod(two).equals(new OwnBigInteger("0"))) {
+            d = d.divide(new OwnBigInteger("2"));
         }
         for (int i = 0; i < iterations; i++) {
             if (millerRabinTest(d, possiblePrime)) {
@@ -59,19 +60,39 @@ public class PrimeNumberGenerator {
         return false;
     }
 
-    private static boolean millerRabinTest(BigInteger d, BigInteger n) {
-        BigInteger a = new BigInteger(n.bitLength(), new Random());
-        BigInteger x = a.modPow(d, n);
-        if (x.compareTo(BigInteger.ONE) == 0 || x.compareTo(n.subtract(BigInteger.ONE)) == 0) {
+    /**
+     * Generates A to use in the Miller Rabin test
+     * @param n
+     * @return a
+     */
+
+    private static OwnBigInteger generateA(OwnBigInteger n) {
+        OwnBigInteger random = new OwnBigInteger(new Random());
+        OwnBigInteger nSubtracted = n.subtract(new OwnBigInteger("4"));
+        OwnBigInteger moddedRandom = random.mod(nSubtracted);
+        OwnBigInteger a = new OwnBigInteger("2").add(moddedRandom);
+        return a;
+    }
+
+    /**
+     * Tests number n for primality
+     * @param d
+     * @param n
+     * @return boolean isPrime
+     */
+    private static boolean millerRabinTest(OwnBigInteger d, OwnBigInteger n) {
+        OwnBigInteger a = generateA(n);
+        OwnBigInteger x = a.modPow(n, d);
+        if (x.compareTo(OwnBigInteger.ONE) == 0 || x.compareTo(n.subtract(OwnBigInteger.ONE)) == 0) {
             return true;
         }
-        while (d.compareTo(n.subtract(BigInteger.ONE)) != 0) {
-            x = x.multiply(x).mod(n);
-            d = d.shiftLeft(1);
-            if (x.compareTo(BigInteger.ONE) == 0) {
+        while (d.compareTo(n.subtract(OwnBigInteger.ONE)) != 0) {
+            x = (x.multiply(x)).mod(n);
+            d = d.multiply(new OwnBigInteger("2"));
+            if (x.compareTo(new OwnBigInteger("1")) == 0) {
                 return false;
             }
-            if (x.compareTo(n.subtract(BigInteger.ONE)) == 0) {
+            if (x.compareTo(n.subtract(OwnBigInteger.ONE)) == 0) {
                 return true;
             }
         }

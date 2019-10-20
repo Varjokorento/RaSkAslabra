@@ -252,16 +252,14 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
 
     /**
      * Raises a number to a power
-     *
      * @param power
      * @return n^p
      */
     public OwnBigInteger pow(OwnBigInteger power) {
-        OwnBigInteger zero = new OwnBigInteger("0");
         OwnBigInteger result = new OwnBigInteger("1");
-        if (power.equals(zero)) {
+        if (power.equals(OwnBigInteger.ZERO)) {
             return new OwnBigInteger("1");
-        } else if (power.compareTo(zero) > 0) {
+        } else if (power.compareTo(OwnBigInteger.ZERO) > 0) {
             OwnBigInteger newPower = power.subtract(new OwnBigInteger("1"));
             return this.multiply(pow(newPower));
         }
@@ -287,18 +285,13 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
 
     @Override
     public boolean equals(Object o) {
-
         if (this == o)
             return true;
-
         if (o == null)
             return false;
-
         if (getClass() != o.getClass())
             return false;
-
         OwnBigInteger other = (OwnBigInteger) o;
-
         if (this.digits.length != other.digits.length) {
             return false;
         }
@@ -353,22 +346,21 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
      */
 
     private int[] filterZeroesFromBeginning(int[] array) {
-        int[] finalArray = array;
+        int[] arrayWithoutZeroes = array;
         for (int i = 0; i < array.length; i++) {
             if (array[i] != 0) {
                 if (i == 0) {
                     break;
                 }
-                finalArray = new int[array.length - i];
-                OwnArrays.arraycopy(array, i, finalArray, 0, finalArray.length);
+                arrayWithoutZeroes = new int[array.length - i];
+                OwnArrays.arraycopy(array, i, arrayWithoutZeroes, 0, arrayWithoutZeroes.length);
                 break;
             }
             if (i == array.length - 1) {
-                finalArray = new int[1];
-                finalArray[0] = array[array.length - 1];
+                arrayWithoutZeroes = new int[1];
             }
         }
-        return finalArray;
+        return arrayWithoutZeroes;
     }
 
 
@@ -401,7 +393,6 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
             int j;
             for (j = 0; j < magLen - 1; newMag[i++] = mag[j++] << nBits | mag[j] >>> nBits2) {
             }
-
             newMag[i] = mag[j] << nBits;
         }
         StringBuilder number = new StringBuilder();

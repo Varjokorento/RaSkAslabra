@@ -107,9 +107,6 @@ public class OwnBigIntegerTest {
     public void moduloTest() {
         OwnBigInteger impl = new OwnBigInteger("131131323");
         OwnBigInteger divisor = new OwnBigInteger("2323232");
-        int mod = 131131323;
-        int divisori = 2323232;
-        int modu = mod % divisori;
         assertEquals("1030331", impl.mod(divisor).valueOf());
     }
 
