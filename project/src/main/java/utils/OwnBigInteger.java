@@ -190,7 +190,7 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
     }
 
     /**
-     * Divides a BigInteger with BigInteger
+     * Divides a this with BigInteger
      * Long division algorithm implemented
      * @param dividor
      * @return result of division
@@ -205,13 +205,14 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
             int[] longDividerArray = new int[endingIndex - beginningIndex];
             OwnArrays.arraycopy(dividend.digits, beginningIndex, longDividerArray, 0, endingIndex - beginningIndex);
             OwnBigInteger currDiv = new OwnBigInteger(longDividerArray);
-            int times = 0;
+            int multiple = 0;
             if (currDiv.compareTo(dividor) >= 0) {
                 while (currDiv.compareTo(dividor) >= 0) {
                     currDiv = currDiv.subtract(dividor);
-                    times++;
+                    multiple++;
                 }
                 if (currDiv.compareTo(OwnBigInteger.ZERO) == 0) {
+                    // currDiv fits divides number evenly. End operation and rest of the array has zeroes.
                     beginningIndex = endingIndex;
                 } else {
                     int leftDigits = currDiv.digits.length;
@@ -219,7 +220,7 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
                     OwnArrays.arraycopy(currDiv.digits, 0, dividend.digits, beginningIndex, leftDigits);
                 }
             }
-            result[endingIndex - 1] = times;
+            result[endingIndex - 1] = multiple;
         }
         return new OwnBigInteger(filterZeroesFromBeginning(result));
     }
