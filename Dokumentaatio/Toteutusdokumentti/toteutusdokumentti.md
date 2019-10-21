@@ -2,7 +2,9 @@
 
 Aikavaativuudet ovat itse laskettuja ellei lähdettä ole mainittu. 
 
-## 1. Julkisen ja yksityisen avaimen generointi
+## RSA-tool -luokan toteutus
+
+### 1. Julkisen ja yksityisen avaimen generointi
 
 Ohjelma toteuttaa avainten generoinnin seuraavasti:
 
@@ -16,7 +18,7 @@ Ohjelma toteuttaa avainten generoinnin seuraavasti:
     4. Laskee d niin, että d ≡ e−1 (mod λ(n))
         1. Tämä lasketaan Euclideanin algoritmin laajennetulla versiolla (Extended Euclidean Algorithm).
 
-#### Aikavaativuudet:
+##### Aikavaativuudet:
     1. O(n)
     2. O(n)
     3. O(c * log(n)) (gcd:n aikavaativuus log(n) * kuinka monta kertaa täytyy yrittää.)
@@ -25,13 +27,13 @@ Ohjelma toteuttaa avainten generoinnin seuraavasti:
 
 Laskun tuloksena saadaan julkinen avain, joka on jakojäännös n ja exponentti e. Yksityinen avain on exponentti d.
 
-## 2. Tekstin salaaminen 
+### 2. Tekstin salaaminen 
 
 1. Käyttäjä syöttää merkkijonon. 
 2. RSATool-luokka purkaa merkkijonot puretaan sen merkkien ASCII-arvoon, josta tehdään OwnBigInteger-array. Esimerkiksi abc = {97, 98, 99}
 3. Tämän jälkeen Encrypter-luokka kryptaa OwnBigInteger-arrayn niin, että jokainen numero nostetaan a^e mod n. e ja n ovat julkisen avaimen osia. Lopputuloksena saadaan kryptattu versio BigInteger-arraystä.
 
-## 3. Salauksen purkaminen
+### 3. Salauksen purkaminen
 1. Kryptattu OwnBigInteger-array annetaan Decrypter-luokalle, joka saa syötteenään myös julkisen avaimen ja yksityisen avaimen. 
 2. Jokaiselle alkiolle tehdään seuraava operaatio: a^d mod n. Tässä d on yksityinen avain ja n saadaan julkisesta avaimesta. 
 
