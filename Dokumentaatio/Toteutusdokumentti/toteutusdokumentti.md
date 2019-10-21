@@ -51,6 +51,8 @@ Kertolasku tehdään niin, että otetaan pienemmästä numerosta viimeinen luku 
 
 Nämä ovat edellämainittujen operaatioiden kombinaatioita. Tämän vuoksi ne eivät ole erityisen tehokkaita.
 
+### Lähteet
+
 - Paloja, J. "RSA-salausalgoritmi ja alkuluvut", https://trepo.tuni.fi/handle/10024/78940
 - Rivest, Shamir, Adleman, "Cryptographic communications system and method" https://patents.google.com/patent/US4405829
 - Ireland D, "RSA Algorithm", https://www.di-mgt.com.au/rsa_alg.html
