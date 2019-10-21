@@ -50,3 +50,8 @@ RSA-algoritmin tilavaativuus on O(1), sillä lisätty syöte ei vaikuta siihen, 
 - Rivest, Shamir, Adleman, "Cryptographic communications system and method" https://patents.google.com/patent/US4405829
 - Ireland D, "RSA Algorithm", https://www.di-mgt.com.au/rsa_alg.html
 - https://www.geeksforgeeks.org/primality-test-set-3-miller-rabin/
+- https://en.wikipedia.org/wiki/RSA_(cryptosystem)
+- https://rosettacode.org/wiki/Long_multiplication
+- https://en.wikipedia.org/wiki/Long_division
+- https://fi.wikipedia.org/wiki/Modulaariaritmetiikan_k%C3%A4%C3%A4nteisluku
+- https://en.wikipedia.org/wiki/Modular_exponentiation
