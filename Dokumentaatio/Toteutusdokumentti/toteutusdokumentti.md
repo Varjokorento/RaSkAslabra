@@ -51,9 +51,14 @@ Kertolasku tehdään niin, että otetaan pienemmästä numerosta viimeinen luku 
 
 Nämä ovat edellämainittujen operaatioiden kombinaatioita. Tämän vuoksi ne eivät ole erityisen tehokkaita.
 
-Lähteet:
-https://www.geeksforgeeks.org/primality-test-set-3-miller-rabin/
-https://en.wikipedia.org/wiki/RSA_(cryptosystem)
-https://rosettacode.org/wiki/Long_multiplication
-https://en.wikipedia.org/wiki/Long_division
+- Paloja, J. "RSA-salausalgoritmi ja alkuluvut", https://trepo.tuni.fi/handle/10024/78940
+- Rivest, Shamir, Adleman, "Cryptographic communications system and method" https://patents.google.com/patent/US4405829
+- Ireland D, "RSA Algorithm", https://www.di-mgt.com.au/rsa_alg.html
+- https://www.geeksforgeeks.org/primality-test-set-3-miller-rabin/
+- https://en.wikipedia.org/wiki/RSA_(cryptosystem)
+- https://rosettacode.org/wiki/Long_multiplication
+- https://en.wikipedia.org/wiki/Long_division
+- https://fi.wikipedia.org/wiki/Modulaariaritmetiikan_k%C3%A4%C3%A4nteisluku
+- https://en.wikipedia.org/wiki/Modular_exponentiation
+- https://cp-algorithms.com/algebra/binary-exp.html
 
