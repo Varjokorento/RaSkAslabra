@@ -56,7 +56,7 @@ Jokainen lukuun lisätään allekkain toisen luvun vastaava. Jos mennään yli k
 
 Jakolasku tehdään jakokulmalla.
 
-    Kertolaskun aikavaativuus on O(n * m), jossa n ja m ovat kerrottavat luvut. 
+    Kertolaskun aikavaativuus on O(n), jossa n ja m ovat jaettavat luvut. 
 
 4. Kertolasku
 
