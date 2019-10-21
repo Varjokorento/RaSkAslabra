@@ -166,7 +166,7 @@ public class OwnBigIntegerPerformanceTest {
         OwnBigInteger powerImpl = new OwnBigInteger(numberPow);
         long startTime = System.nanoTime();
         for (int i = 0; i < powIterations; i++) {
-            number.mulPow(pow, mod);
+            number.modPow(pow, mod);
         }
         long endTime = System.nanoTime();
         long duration = (endTime - startTime);

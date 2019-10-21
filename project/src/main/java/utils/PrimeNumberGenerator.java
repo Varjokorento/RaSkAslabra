@@ -82,7 +82,7 @@ public class PrimeNumberGenerator {
      */
     private static boolean millerRabinTest(OwnBigInteger d, OwnBigInteger n) {
         OwnBigInteger a = generateA(n);
-        OwnBigInteger x = a.mulPow(d, n);
+        OwnBigInteger x = a.modPow(d, n);
         if (x.compareTo(OwnBigInteger.ONE) == 0 || x.compareTo(n.subtract(OwnBigInteger.ONE)) == 0) {
             return true;
         }

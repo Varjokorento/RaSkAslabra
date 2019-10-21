@@ -4,7 +4,6 @@ import org.junit.Test;
 import utils.OwnBigInteger;
 
 import java.math.BigInteger;
-import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -124,23 +123,13 @@ public class OwnBigIntegerTest {
         assertEquals(result.toString(), newNumber.valueOf());
     }
 
-    @Test
-    public void modPowerTest() {
-        OwnBigInteger ninetySeven = new OwnBigInteger("97");
-        OwnBigInteger n = new OwnBigInteger("5110");
-        OwnBigInteger modPowResult = ninetySeven.modPow(n, new OwnBigInteger("31"));
-        BigInteger number = new BigInteger("97");
-        number = number.modPow(new BigInteger("31"), new BigInteger("5110"));
-        assertEquals(number.toString(), modPowResult.valueOf());
-    }
-
 
     @Test
     public void testMulPow() {
         OwnBigInteger int2 = new OwnBigInteger("2000000000");
         OwnBigInteger exponent = new OwnBigInteger("3000000000");
         OwnBigInteger modulus = new OwnBigInteger("3000000000");
-        OwnBigInteger result = int2.mulPow(exponent, modulus);
+        OwnBigInteger result = int2.modPow(exponent, modulus);
         BigInteger compare = new BigInteger("2000000000");
         compare = compare.modPow(new BigInteger("3000000000"), new BigInteger("3000000000"));
         assertEquals(compare.toString(), result.toString());

@@ -17,8 +17,8 @@ public class KeyPairGeneratorImplTest {
         OwnKeyPairGenerator keyPairGenerator = new OwnKeyPairGenerator();
         OwnKeyPair kp = keyPairGenerator.generateKeyPair();
         OwnBigInteger test = new OwnBigInteger("97");
-        OwnBigInteger eModN = test.mulPow( kp.getPublicKey().getE(), kp.getPublicKey().getN());
-        OwnBigInteger dModN = eModN.mulPow(kp.getPrivateKey().getPrivateKey(), kp.getPublicKey().getN());
+        OwnBigInteger eModN = test.modPow( kp.getPublicKey().getE(), kp.getPublicKey().getN());
+        OwnBigInteger dModN = eModN.modPow(kp.getPrivateKey().getPrivateKey(), kp.getPublicKey().getN());
         assertEquals(test, dModN);
     }
 
