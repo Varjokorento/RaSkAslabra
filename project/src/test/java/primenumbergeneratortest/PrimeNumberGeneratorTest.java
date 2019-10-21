@@ -5,6 +5,7 @@ import utils.OwnBigInteger;
 import utils.PrimeNumberGenerator;
 
 import java.math.BigInteger;
+import java.util.Random;
 
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
@@ -14,17 +15,23 @@ public class PrimeNumberGeneratorTest {
 
     @Test
     public void testMillerRabinPrimality() {
+        Random random = new Random();
         int errors = 0;
-        for (int i = 0; i < 1000; i++) {
-            String value = String.valueOf(i);
-            OwnBigInteger possiblePrime = new OwnBigInteger(value);
-            BigInteger bi = new BigInteger(value);
-            boolean answer = PrimeNumberGenerator.millerRabinPrimality(possiblePrime, 1);
+        int totalPrimes = 0;
+        for (int i = 0; i < 10000; i++) {
+            OwnBigInteger possiblePrime = OwnBigInteger.getLargeRandom(random);
+            BigInteger bi = new BigInteger(possiblePrime.valueOf());
+            boolean answer = PrimeNumberGenerator.millerRabinPrimality(possiblePrime, 3);
+
+            if (answer) {
+                totalPrimes++;
+            }
+
             if (answer && !bi.isProbablePrime(100)) {
                 errors++;
             }
         }
-        System.out.println(errors);
+        System.out.println("Error rate: " + errors + "/" + totalPrimes);
     }
 
     @Test

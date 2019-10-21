@@ -5,16 +5,13 @@ import utils.asciiutil.AsciiUtil;
 import decrypter.OwnDecrypter;
 import encrypter.OwnEncrypter;
 import keys.KeyGenerator;
-import keys.JavaLibKeyUtil;
 import keys.keyimpl.OwnPrivateKey;
 import keys.keyimpl.OwnPublicKey;
 
 public class RSATool {
     private KeyGenerator keyGenerator;
-    private KeyGenerator libraryKeyGenerator;
     private OwnPublicKey publicKey;
     private OwnPrivateKey privateKey;
-    private JavaLibKeyUtil keyUtil;
     private AsciiUtil asciiUtil;
     private OwnEncrypter ownEncrypter;
     private OwnDecrypter decrypter;
@@ -25,7 +22,6 @@ public class RSATool {
      */
     public RSATool() {
         this.keyGenerator = new KeyGenerator();
-        this.keyUtil = new JavaLibKeyUtil();
         this.asciiUtil = new AsciiUtil();
         this.decrypter = new OwnDecrypter();
         this.ownEncrypter = new OwnEncrypter();
@@ -46,7 +42,9 @@ public class RSATool {
      */
     public void generateKeys() {
         keyGenerator.generateKeyPair();
+        System.out.println("PublicKey: e: " + keyGenerator.getPublicKey().getE() + " n: " + keyGenerator.getPublicKey().getN());
         this.publicKey = keyGenerator.getPublicKey();
+        System.out.println("Privatekey: e: " + keyGenerator.getPrivateKey().getPrivateKey().toString());
         this.privateKey = keyGenerator.getPrivateKey();
     }
 

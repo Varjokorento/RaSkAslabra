@@ -20,7 +20,7 @@ public class PrimeNumberGenerator {
      * @return a BigInteger that should be a prime
      */
     private static OwnBigInteger generatePrime() {
-        OwnBigInteger prime = new OwnBigInteger(new Random());
+        OwnBigInteger prime = OwnBigInteger.getLargeRandom(new Random());
         while (true) {
             if (!millerRabinPrimality(prime, 4)) {
                 prime = prime.add(OwnBigInteger.ONE);
@@ -82,7 +82,7 @@ public class PrimeNumberGenerator {
      */
     private static boolean millerRabinTest(OwnBigInteger d, OwnBigInteger n) {
         OwnBigInteger a = generateA(n);
-        OwnBigInteger x = a.modPow(n, d);
+        OwnBigInteger x = a.mulPow(d, n);
         if (x.compareTo(OwnBigInteger.ONE) == 0 || x.compareTo(n.subtract(OwnBigInteger.ONE)) == 0) {
             return true;
         }

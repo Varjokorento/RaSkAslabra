@@ -4,8 +4,10 @@ import org.junit.Test;
 import utils.OwnBigInteger;
 
 import java.math.BigInteger;
+import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class OwnBigIntegerTest {
 
@@ -88,11 +90,12 @@ public class OwnBigIntegerTest {
 
     @Test
     public void testDivision() {
-        OwnBigInteger int1 = new OwnBigInteger("2");
-        OwnBigInteger int2 = new OwnBigInteger("20");
+        OwnBigInteger int1 = new OwnBigInteger("18000");
+        OwnBigInteger int2 = new OwnBigInteger("200501");
         OwnBigInteger int3 = int2.divide(int1);
-        assertEquals("10", int3.valueOf());
+        assertEquals("11", int3.valueOf());
     }
+
 
     @Test
     public void shiftLeft() {
@@ -129,6 +132,18 @@ public class OwnBigIntegerTest {
         BigInteger number = new BigInteger("97");
         number = number.modPow(new BigInteger("31"), new BigInteger("5110"));
         assertEquals(number.toString(), modPowResult.valueOf());
+    }
+
+
+    @Test
+    public void testMulPow() {
+        OwnBigInteger int2 = new OwnBigInteger("2000000000");
+        OwnBigInteger exponent = new OwnBigInteger("3000000000");
+        OwnBigInteger modulus = new OwnBigInteger("3000000000");
+        OwnBigInteger result = int2.mulPow(exponent, modulus);
+        BigInteger compare = new BigInteger("2000000000");
+        compare = compare.modPow(new BigInteger("3000000000"), new BigInteger("3000000000"));
+        assertEquals(compare.toString(), result.toString());
     }
 
 }

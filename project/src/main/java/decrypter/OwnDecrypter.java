@@ -22,7 +22,7 @@ public class OwnDecrypter {
     public OwnBigInteger[] decrypt(OwnBigInteger[] array, OwnPrivateKey privateKey, OwnPublicKey publicKey) {
         OwnBigInteger[] decrypted = new OwnBigInteger[array.length];
         for (int i = 0; i < array.length; i++) {
-            decrypted[i] = array[i].modPow(publicKey.getN(), privateKey.getPrivateKey());
+            decrypted[i] = array[i].mulPow(privateKey.getPrivateKey(), publicKey.getN());
         }
         return decrypted;
     }

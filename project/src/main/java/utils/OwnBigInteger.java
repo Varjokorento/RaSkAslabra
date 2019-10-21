@@ -1,5 +1,6 @@
 package utils;
 
+import java.math.BigInteger;
 import java.util.Random;
 
 /**
@@ -25,7 +26,13 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
      * @param random
      */
     public OwnBigInteger(Random random) {
-        this(String.valueOf(random.nextInt( 100)));
+        this(String.valueOf(random.nextInt( 1000000000)));
+    }
+
+
+    public static OwnBigInteger getLargeRandom(Random random) {
+        BigInteger integer = new BigInteger(10, random);
+        return new OwnBigInteger(integer.toString());
     }
 
     /**
@@ -185,10 +192,10 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
     /**
      * Divides a BigInteger with BigInteger
      * Long division algorithm implemented
-     * @param otherNumber
+     * @param dividor
      * @return result of division
      */
-    public OwnBigInteger divide(OwnBigInteger otherNumber) {
+    public OwnBigInteger divide(OwnBigInteger dividor) {
         int[] copy = new int[this.digits.length];
         OwnArrays.arraycopy(this.digits, 0, copy, 0, this.digits.length);
         OwnBigInteger dividend = new OwnBigInteger(copy);
@@ -197,19 +204,19 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
         for (int endingIndex = 1; endingIndex <= this.digits.length; endingIndex++) {
             int[] longDividerArray = new int[endingIndex - beginningIndex];
             OwnArrays.arraycopy(dividend.digits, beginningIndex, longDividerArray, 0, endingIndex - beginningIndex);
-            OwnBigInteger currentDividend = new OwnBigInteger(longDividerArray);
+            OwnBigInteger currDiv = new OwnBigInteger(longDividerArray);
             int times = 0;
-            if (currentDividend.compareTo(otherNumber) >= 0) {
-                while (currentDividend.compareTo(otherNumber) >= 0) {
-                    currentDividend = currentDividend.subtract(otherNumber);
+            if (currDiv.compareTo(dividor) >= 0) {
+                while (currDiv.compareTo(dividor) >= 0) {
+                    currDiv = currDiv.subtract(dividor);
                     times++;
                 }
-                if (currentDividend.compareTo(OwnBigInteger.ZERO) == 0) {
+                if (currDiv.compareTo(OwnBigInteger.ZERO) == 0) {
                     beginningIndex = endingIndex;
                 } else {
-                    int leftDigits = currentDividend.digits.length;
+                    int leftDigits = currDiv.digits.length;
                     beginningIndex = endingIndex - leftDigits;
-                    OwnArrays.arraycopy(currentDividend.digits, 0, dividend.digits, beginningIndex, leftDigits);
+                    OwnArrays.arraycopy(currDiv.digits, 0, dividend.digits, beginningIndex, leftDigits);
                 }
             }
             result[endingIndex - 1] = times;
@@ -391,6 +398,41 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
             number.append(String.valueOf(i));
         }
         return number.toString();
+    }
+
+
+
+    public int mulPow(int base, int exponent, int modulus)  {
+        if (modulus == 1) {
+            return 0;
+        }
+        int result = 1;
+        base = base % modulus;
+        while (exponent > 0) {
+            if (exponent % 2 == 1) {
+                 result = (result * base) % modulus;
+            }
+            exponent = exponent >> 1;
+            base = (base*base) % modulus;
+        }
+        return result;
+    }
+
+    public OwnBigInteger mulPow(OwnBigInteger exponent, OwnBigInteger modulus) {
+        OwnBigInteger base = this;
+        if (modulus.compareTo(OwnBigInteger.ONE) == 0) {
+            return OwnBigInteger.ZERO;
+        }
+        OwnBigInteger result = OwnBigInteger.ONE;
+        base = base.mod(modulus);
+        while (exponent.compareTo(OwnBigInteger.ZERO) > 0) {
+            if (exponent.mod(new OwnBigInteger("2")).compareTo(OwnBigInteger.ONE) == 0) {
+                result = (result.multiply(base)).mod(modulus);
+            }
+            exponent = exponent.divide(new OwnBigInteger("2"));
+            base = (base.multiply(base)).mod(modulus);
+        }
+        return result;
     }
 
 }

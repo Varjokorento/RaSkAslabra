@@ -58,13 +58,13 @@ public class OwnKeyPairGenerator {
      * @return e
      */
     static OwnBigInteger genE(OwnBigInteger phi) {
-        OwnBigInteger e;
-        do {
-            e = new OwnBigInteger(new Random());
-        }
+        OwnBigInteger e = new OwnBigInteger(new Random());
+
         while (e.compareTo(OwnBigInteger.ONE) <= 0
                 || e.compareTo(phi) >= 0
-                || !gcd(phi, e).equals(OwnBigInteger.ONE));
+                || !gcd(phi, e).equals(OwnBigInteger.ONE)) {
+            e = new OwnBigInteger(new Random());
+        };
         return e;
     }
 
