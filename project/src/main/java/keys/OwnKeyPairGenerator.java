@@ -64,15 +64,17 @@ public class OwnKeyPairGenerator {
                 || e.compareTo(phi) >= 0
                 || !gcd(phi, e).equals(OwnBigInteger.ONE)) {
             e = new OwnBigInteger(new Random());
-        };
+        }
+        ;
         return e;
     }
 
     /**
      * Recursively Returns greatest common denominator between two numbers
+     *
      * @param a
      * @param b
-     * @return gcd(a,b)
+     * @return gcd(a, b)
      */
 
     static OwnBigInteger gcd(OwnBigInteger a, OwnBigInteger b) {
@@ -87,7 +89,8 @@ public class OwnKeyPairGenerator {
      * Extended Euclidean algorithm to solve Bezout's identity INV(m,n)
      * and finds the multiplicative inverse which is the solution to ax ≡ 1 (mod m)
      * Read (https://fi.wikipedia.org/wiki/Modulaariaritmetiikan_käänteisluku) (in Finnish)
-     * @return INV(m,n)
+     *
+     * @return INV(m, n)
      */
     static OwnBigInteger extendedEuclid(OwnBigInteger m, OwnBigInteger n) {
         // for the formula to work 0 < m < n

@@ -59,6 +59,7 @@ public class RSATool {
         OwnBigInteger[] cipherAsIntArray = asciiUtil.stringToCipher(plainText);
         return ownEncrypter.encrypt(cipherAsIntArray, this.getPublicKey());
     }
+
     /**
      * OWN IMPLEMENTATION
      * Calls decrypter to decipher a cryptedByteArray
@@ -78,7 +79,6 @@ public class RSATool {
     public String cipherToString(OwnBigInteger[] decrypted) {
         return asciiUtil.cipherToString(decrypted);
     }
-
 
 
 }

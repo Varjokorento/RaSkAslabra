@@ -182,7 +182,7 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
         int[] result = new int[smallerArray.length + biggerArray.length + 1];
         for (int i = 0; i < smallerArray.length; i++) {
             OwnBigInteger currentTotal = OwnBigInteger.ZERO;
-            int times  = smallerArray[smallerArray.length - 1 -i];
+            int times = smallerArray[smallerArray.length - 1 - i];
             for (int j = 0; j < times; j++) {
                 currentTotal = currentTotal.add(bigger);
             }

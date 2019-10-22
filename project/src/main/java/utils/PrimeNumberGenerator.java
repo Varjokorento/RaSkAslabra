@@ -62,6 +62,7 @@ public class PrimeNumberGenerator {
 
     /**
      * Generates A to use in the Miller Rabin test
+     *
      * @param n
      * @return a
      */
@@ -76,6 +77,7 @@ public class PrimeNumberGenerator {
 
     /**
      * Tests number n for primality
+     *
      * @param d
      * @param n
      * @return boolean isPrime

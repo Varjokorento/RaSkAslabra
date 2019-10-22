@@ -5,14 +5,15 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("Please enter plain text. Exit quits the program.");
             String message = scanner.nextLine();
             if (message.equals("exit")) {
                 break;
-            };
+            }
+            ;
             RSATool rsaTool = new RSATool();
             try {
                 rsaTool.generateKeys();
@@ -34,7 +35,7 @@ public class Main {
 
     private static void printArray(OwnBigInteger[] array) {
         for (OwnBigInteger a : array) {
-            for(int i: a.getDigits()) {
+            for (int i : a.getDigits()) {
                 System.out.print(i);
             }
         }
