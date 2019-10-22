@@ -7,8 +7,7 @@ import java.util.Random;
  * This is my implementation of BigInteger. It stores the number as a digit array. The Arithmetic operations use
  * the paper-and-pen techniques.
  * <p>
- * This implementation copies arrays using OwnArrays.arraycopy because regular copying by assigning
- * arrays to each other leads to a shallow copy of the array that causes a lot of issues.
+ * This implementation copies arrays using OwnArrays.arraycopy.
  * <p>
  * Note: This implemenentation only implements the operations required for this program. It does not, for example,
  * allow for negative multiplications or square roots.
@@ -94,7 +93,7 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
      * @return sum of two bigIntegers
      */
     public OwnBigInteger add(OwnBigInteger otherNumber) {
-        TwoArrayHolder holder = this.manageBiggerAndSmallerArrays(this, otherNumber);
+        TwoArrayHolder holder = this.manageLongerAndShorterArrays(this, otherNumber);
         int[] biggerArray = holder.getBiggerArray();
         int[] smallerArray = holder.getSmallerArray();
         int carry = 0;
@@ -111,13 +110,15 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
             }
         }
         currentBiggerArrayIndex--;
-        while (carry == 1) {
+
+        boolean doCarry = carry == 1;
+
+        while (doCarry) {
             biggerArray[currentBiggerArrayIndex] += 1;
             if (biggerArray[currentBiggerArrayIndex] > 9) {
-                carry = 1;
                 biggerArray[currentBiggerArrayIndex] -= 10;
             } else {
-                carry = 0;
+                doCarry = false;
             }
             currentBiggerArrayIndex--;
         }
@@ -133,7 +134,7 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
      * @return subtracted bigInteger
      */
     public OwnBigInteger subtract(OwnBigInteger otherNumber) {
-        TwoArrayHolder holder = this.manageBiggerAndSmallerArrays(this, otherNumber);
+        TwoArrayHolder holder = this.manageLongerAndShorterArrays(this, otherNumber);
         int[] biggerArray = filterZeroesFromBeginning(holder.getBiggerArray());
         int[] smallerArray = filterZeroesFromBeginning(holder.getSmallerArray());
         int carry = 0;
@@ -150,13 +151,15 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
             }
         }
         biggerArrayIndex--;
-        while (carry == 1) {
+
+        boolean doCarry = (carry == 1);
+
+        while (doCarry) {
             biggerArray[biggerArrayIndex] -= 1;
             if (biggerArray[biggerArrayIndex] < 0) {
-                carry = 1;
                 biggerArray[biggerArrayIndex] += 10;
             } else {
-                carry = 0;
+                doCarry = false;
             }
             biggerArrayIndex--;
         }
@@ -172,14 +175,15 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
      * @return product of BigInteger
      */
     public OwnBigInteger multiply(OwnBigInteger otherNumber) {
-        TwoArrayHolder holder = this.manageBiggerAndSmallerArrays(this, otherNumber);
+        TwoArrayHolder holder = this.manageLongerAndShorterArrays(this, otherNumber);
         int[] biggerArray = holder.getBiggerArray();
         int[] smallerArray = holder.getSmallerArray();
         OwnBigInteger bigger = new OwnBigInteger(biggerArray);
         int[] result = new int[smallerArray.length + biggerArray.length + 1];
         for (int i = 0; i < smallerArray.length; i++) {
             OwnBigInteger currentTotal = OwnBigInteger.ZERO;
-            for (int j = 0; j < smallerArray[smallerArray.length - 1 - i]; j++) {
+            int times  = smallerArray[smallerArray.length - 1 -i];
+            for (int j = 0; j < times; j++) {
                 currentTotal = currentTotal.add(bigger);
             }
             for (int j = 0; j < currentTotal.digits.length; j++) {
@@ -246,7 +250,7 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
 
     /**
      * Raises a number to a power
-     * Isn't actually used anymore due to refactoring. However, is used in some performance tests.
+     * Isn't actually used anymore due to refactoring. However, it is used in some performance tests.
      *
      * @param power
      * @return n^p
@@ -340,23 +344,23 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
      * @return TwoArrayHolder that stores created arrays
      */
 
-    private TwoArrayHolder manageBiggerAndSmallerArrays(OwnBigInteger numberOne, OwnBigInteger numberTwo) {
+    private TwoArrayHolder manageLongerAndShorterArrays(OwnBigInteger numberOne, OwnBigInteger numberTwo) {
         TwoArrayHolder twoArrayHolder = new TwoArrayHolder();
-        int[] biggerNumber = null;
-        int[] smallerNumber = null;
+        int[] longerNumber = null;
+        int[] shorterNumber = null;
         if (numberOne.digits.length < numberTwo.digits.length) {
-            biggerNumber = new int[numberTwo.digits.length + 1];
-            OwnArrays.arraycopy(numberTwo.digits, 0, biggerNumber, 1, numberTwo.digits.length);
-            smallerNumber = new int[this.digits.length];
-            OwnArrays.arraycopy(this.digits, 0, smallerNumber, 0, this.digits.length);
+            longerNumber = new int[numberTwo.digits.length + 1];
+            OwnArrays.arraycopy(numberTwo.digits, 0, longerNumber, 1, numberTwo.digits.length);
+            shorterNumber = new int[this.digits.length];
+            OwnArrays.arraycopy(this.digits, 0, shorterNumber, 0, this.digits.length);
         } else {
-            biggerNumber = new int[this.digits.length + 1];
-            OwnArrays.arraycopy(this.digits, 0, biggerNumber, 1, this.digits.length);
-            smallerNumber = new int[numberTwo.digits.length];
-            OwnArrays.arraycopy(numberTwo.digits, 0, smallerNumber, 0, numberTwo.digits.length);
+            longerNumber = new int[this.digits.length + 1];
+            OwnArrays.arraycopy(this.digits, 0, longerNumber, 1, this.digits.length);
+            shorterNumber = new int[numberTwo.digits.length];
+            OwnArrays.arraycopy(numberTwo.digits, 0, shorterNumber, 0, numberTwo.digits.length);
         }
-        twoArrayHolder.setBiggerArray(biggerNumber);
-        twoArrayHolder.setSmallerArray(smallerNumber);
+        twoArrayHolder.setBiggerArray(longerNumber);
+        twoArrayHolder.setSmallerArray(shorterNumber);
         return twoArrayHolder;
     }
 

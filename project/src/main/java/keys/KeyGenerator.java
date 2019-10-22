@@ -4,7 +4,6 @@ import keys.keyimpl.OwnKeyPair;
 import keys.keyimpl.OwnPrivateKey;
 import keys.keyimpl.OwnPublicKey;
 
-import java.security.*;
 
 public class KeyGenerator {
 

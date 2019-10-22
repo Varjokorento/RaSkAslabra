@@ -1,12 +1,11 @@
 import rsatool.RSATool;
 import utils.OwnBigInteger;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws NoSuchAlgorithmException {
+    public static void main(String[] args)  {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("Please enter plain text. Exit quits the program.");
