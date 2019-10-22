@@ -274,10 +274,11 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
             return -1;
         } else {
             for (int index = 0; index < digits.length; index++) {
-                if (digits[index] > other.digits[index])
+                if (digits[index] > other.digits[index]) {
                     return 1;
-                else if (digits[index] < other.digits[index])
+                } else if (digits[index] < other.digits[index]) {
                     return -1;
+                }
             }
         }
         return 0;
@@ -285,12 +286,15 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
+        if (this == o) {
             return true;
-        if (o == null)
+        }
+        if (o == null) {
             return false;
-        if (getClass() != o.getClass())
+        }
+        if (getClass() != o.getClass()) {
             return false;
+        }
         OwnBigInteger other = (OwnBigInteger) o;
         if (this.digits.length != other.digits.length) {
             return false;
@@ -417,9 +421,9 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
             } else {
                 newMag = new int[magLen + nInts];
             }
-
             int j;
             for (j = 0; j < magLen - 1; newMag[i++] = mag[j++] << nBits | mag[j] >>> nBits2) {
+                //not needed
             }
             newMag[i] = mag[j] << nBits;
         }
