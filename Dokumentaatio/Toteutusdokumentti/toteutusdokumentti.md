@@ -22,7 +22,7 @@ Ohjelma toteuttaa avainten generoinnin seuraavasti:
     1. O(n)
     2. O(n)
     3. O(c * log(n)) (gcd:n aikavaativuus log(n) * kuinka monta kertaa täytyy yrittää.)
-    4. En oikein osaa sanoa. Funktio on otettu https://fi.wikipedia.org/wiki/Modulaariaritmetiikan_k%C3%A4%C3%A4nteisluku -linkistä ja aikavaativuudesta keskustellaan täällä : https://en.wikipedia.org/wiki/Euclidean_algorithm#Algorithmic_efficiency
+    4. En oikein osaa sanoa. Funktio on otettu https://fi.wikipedia.org/wiki/Modulaariaritmetiikan_k%C3%A4%C3%A4nteisluku -linkistä ja aikavaativuudesta keskustellaan muun muassa täällä : https://en.wikipedia.org/wiki/Euclidean_algorithm#Algorithmic_efficiency
 
 
 Laskun tuloksena saadaan julkinen avain, joka on jakojäännös n ja exponentti e. Yksityinen avain on exponentti d.
@@ -33,11 +33,16 @@ Laskun tuloksena saadaan julkinen avain, joka on jakojäännös n ja exponentti 
 2. RSATool-luokka purkaa merkkijonot puretaan sen merkkien ASCII-arvoon, josta tehdään OwnBigInteger-array. Esimerkiksi abc = {97, 98, 99}
 3. Tämän jälkeen Encrypter-luokka kryptaa OwnBigInteger-arrayn niin, että jokainen numero nostetaan a^e mod n. e ja n ovat julkisen avaimen osia. Lopputuloksena saadaan kryptattu versio BigInteger-arraystä.
 
+#### Aikavaativuus:
+    O(n * a log a), jossa n on syötteen pituus kirjaimina ja a on avainten numeroiden koko. 
+
 ### 3. Salauksen purkaminen
 1. Kryptattu OwnBigInteger-array annetaan Decrypter-luokalle, joka saa syötteenään myös julkisen avaimen ja yksityisen avaimen. 
 2. Jokaiselle alkiolle tehdään seuraava operaatio: a^d mod n. Tässä d on yksityinen avain ja n saadaan julkisesta avaimesta. 
 
-
+#### Aikavaativuus:
+    O(n * a log a), jossa n on syötteen pituus kirjaimina ja a on avainten numeroiden koko. 
+    
 ## OwnBigInteger-luokka
 
 Tämä luokka implementoi Javan BigInteger-luokan. Luokka säilöö suuria lukua Array-listoissa yksi numero kerrallaan. Luokan toiminnallisuus perustuu allekkain laskemiseen.
@@ -50,7 +55,7 @@ Jokainen lukuun lisätään allekkain toisen luvun vastaava. Jos mennään yli k
 
 2. Vähennys
 
-Jokainen lukuun lisätään allekkain toisen luvun vastaava. Jos mennään yli kymmenen, niin lisätään muistiin luku. Aikavaativuus on O(n), jossa n on suuremman numeron pituus. 
+Jokainen lukuun lisätään allekkain toisen luvun vastaava. Jos mennään yli kymmenen, niin lisätään muistiin luku. Aikavaativuus on O(n), jossa n on suuremman numeron pituus. Vähennyksessä ei voi vähentää numeroiltaan lyhyempää numeroa toisella. Tämä ei tuota ongelmia, sillä algoritmissa ei ole tuollaisia tilanteita vaan kaikista luvuista vähennetään aina pienempi numero. 
 
     Jakolaskun aikavaativuus on O(n), jossa n on jaettavan numeron pituus. 
 
@@ -64,7 +69,7 @@ Jakolasku tehdään jakokulmalla.
 
 Kertolasku tehdään niin, että otetaan pienemmästä numerosta viimeinen luku ja kerrotaan sillä kokonaan suurempi luku. Tämän jälkeen tämä luku lisätään tuloslistaan. Käydään näin läpi koko luku ja aina välitulokset lisätään allekkain toisiinsa niin, että välitulokset saavat aina matalamman indeksin kuin edellinen (eli saadaan '0' luvun perään). 
 
-    Kertolaskun aikavaativuus on O(n * m), jossa n ja m ovat kerrottavat luvut. 
+    Kertolaskun aikavaativuus on O(n^(n-1)), jossa n on on jaettavan numeron koko. 
 
 5. Modulo ja potenssi.
 
@@ -76,7 +81,7 @@ Modulo ja potenssi tehdään modulaari exponentaatiolla (ks. lähde Wikipediasta
 
 Pelkkä modulo tehdään operaatiolla, jossa numero jaetaan ja jaettu kokonaisluku kerrotaan jakajalla ja miinustetaan itse luvusta. 
 
-    Tämän aikavaativuus on O(n). 
+    Tämän aikavaativuus on O(n^(n-1)).
 
 ### Lähteet
 
