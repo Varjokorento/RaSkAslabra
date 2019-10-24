@@ -26,11 +26,19 @@ Testeissä on käytetty apuna satunnaislukujen generointiin BigInteger-luokkaa j
 
 Alla suorituskyky käyttäen 10, 100 ja 200 bitin avaimia. Jokainen testi ajettiin 100 kertaa ja otettiin keskiarvo.
 
-| Toiminto       | 10 | 100  | 200    |   |
-|----------------|----|------|--------|---|
-| Key-Generation | 58 ms | 8788 ms | 78423 ms  |   
-| Encryption     | 8 ms | 60 ms  | 216  ms  |   
-| End-to-End     | 75 ms | 6564 ms| 100940 ms |   
+##### Keygeneration
+
+![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/Dokumentaatio/Testausdokumentti/keygen.png)
+
+##### Encryption
+
+
+![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/Dokumentaatio/Testausdokumentti/Encryption.png)
+
+##### End-To-End
+
+![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/Dokumentaatio/Testausdokumentti/EndtoEnd.png)
+
 
 #### Testi käyttäen omaa satunnaislukugeneraattoria
 
@@ -43,6 +51,12 @@ Jokainen testi ajettiin sata kertaa ja otettiin keskiarvo.
 | Key-Generation | 1171 ms |
 | Encryption     | 33 ms |  
 | End-to-End     | 1430 ms |  
+
+![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/Dokumentaatio/Testausdokumentti/42bit.png)
+
+Testeissä huomasin, että avainten generoinnissa on huomattavaa varianssia ajallisessa kestossa. Koska avainten generointi on selkeästi aikaavievin vaihe, johtaa tämä myös ohjelman suorituskyvyn huomattavaan vaihteluun. Uskoisin, että vaihtelu johtuu alkuluvun generoimiseen liittyvästä sattumatekijästä. 
+
+![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/Dokumentaatio/Testausdokumentti/Varianssi.png)
 
 ### BigInteger-luokan suorituskyky:
 
@@ -57,6 +71,9 @@ Lisäystestissä liästtiin numeroon 20000000000000000000 tuhat kertaa numero 20
 |------------|---------------|------------|------------------------------------                                            
 | Lisäys     | 349973ns      | 226442ns   | 1.5x                               |
 
+
+![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/Dokumentaatio/Testausdokumentti/Lisäys.png)
+
 #### Vähennys
 
 Vähennystestissä vähennettiin numerosta 20000000000000000000 tuhat kertaa numero 10.
@@ -64,6 +81,9 @@ Vähennystestissä vähennettiin numerosta 20000000000000000000 tuhat kertaa num
 | Toiminto   | OwnBigInteger | BigInteger | BigIntegerin verrannollinen nopeus |
 |------------|---------------|------------|------------------------------------|
 | Vähennys   | 4665ns        | 1160ns     | 4.0x                               |
+
+
+![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/Dokumentaatio/Testausdokumentti/vähennys.png)
 
 #### Kertolasku
 
@@ -73,6 +93,9 @@ Kertolaskutestissä kerrottiin numero 200000000000000000 tuhat kertaa numerolla 
 |------------|---------------|------------|------------------------------------|
 | Kertolasku | 116971ns      | 955ns      | 122x                               |
 
+
+![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/Dokumentaatio/Testausdokumentti/kertolasku.png)
+
 #### Jakolasku
 
 Jakolaskutestissä jaettiin numeroa 20000000000 tuhat kertaa numerolla 10 tuhat kertaa.
@@ -80,6 +103,9 @@ Jakolaskutestissä jaettiin numeroa 20000000000 tuhat kertaa numerolla 10 tuhat 
 | Toiminto   | OwnBigInteger | BigInteger | BigIntegerin verrannollinen nopeus |
 |------------|---------------|------------|------------------------------------|
 | Jakolasku  | 5892ns        | 1135ns     | 5.19x                              |
+
+
+![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/Dokumentaatio/Testausdokumentti/Jakolasku.png)
 
 #### Jakojäännös
 
@@ -89,6 +115,9 @@ Jakojäännöstestissa otettiin numerosta 2000000000 jakojäännös luvulla 100 
 |------------|---------------|------------|------------------------------------|
 | mod        | 10005ns       | 1457ns     | 6.86x                              |
 
+
+![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/Dokumentaatio/Testausdokumentti/Jakojäännös.png)
+
 #### Potenssi
 
 Potenssitestissä numero 200 nostettiin potenssiin 3397 kymmenen kertaa. 
@@ -96,6 +125,9 @@ Potenssitestissä numero 200 nostettiin potenssiin 3397 kymmenen kertaa.
 | Toiminto   | OwnBigInteger | BigInteger | BigIntegerin verrannollinen nopeus |
 |------------|---------------|------------|------------------------------------|
 | pow        | 1571463ns     | 55ns       | 28572x                             |
+
+
+![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/Dokumentaatio/Testausdokumentti/potenssi.png)
 
 #### ModPow
 
@@ -105,4 +137,6 @@ ModPow-testissä numero 200 nostettiin potenssiin 3397 jonka jälkeen otettiin j
 |------------|---------------|------------|------------------------------------|
 | modPow     | 10434ns       | 1843ns     | 5.66x                              |
 
+
+![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/Dokumentaatio/Testausdokumentti/ModPow.png)
 
