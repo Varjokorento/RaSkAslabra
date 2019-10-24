@@ -38,9 +38,9 @@ Jokainen testi ajettiin sata kertaa ja otettiin keskiarvo.
 
 |Toiminto | Kesto (ms) |
 |---------|-----------|
-| Key-Generation | 3152 ms |
-| Encryption     | 8 ms |  
-| End-to-End     | 618 ms |  
+| Key-Generation | 1171 ms |
+| Encryption     | 33 ms |  
+| End-to-End     | 1430 ms |  
 
 ### BigInteger-luokan suorituskyky:
 
@@ -49,16 +49,58 @@ Koko algoritmin lisäksi on myös testattu BigIntegerin implementaatiota. Huomio
 
 ##### Lisäys
 
+Lisäystestissä liästtiin numeroon 20000000000000000000 tuhat kertaa numero 20000000000000000000.  
+
+| Toiminto   | OwnBigInteger | BigInteger | BigIntegerin verrannollinen nopeus |
+|------------|---------------|------------|------------------------------------                                            
+| Lisäys     | 349973ns      | 226442ns   | 1.5x                               |
+
+#### Vähennys
+
+Vähennystestissä vähennettiin numerosta 20000000000000000000 tuhat kertaa numero 10.
 
 | Toiminto   | OwnBigInteger | BigInteger | BigIntegerin verrannollinen nopeus |
 |------------|---------------|------------|------------------------------------|
-|            |               |            |                                    |
-| Lisäys     | 349973ns      | 226442ns   | 1.5x                               |
 | Vähennys   | 4665ns        | 1160ns     | 4.0x                               |
+
+#### Kertolasku
+
+Kertolaskutestissä kerrottiin numero 200000000000000000 tuhat kertaa numerolla 1000000.
+
+| Toiminto   | OwnBigInteger | BigInteger | BigIntegerin verrannollinen nopeus |
+|------------|---------------|------------|------------------------------------|
 | Kertolasku | 116971ns      | 955ns      | 122x                               |
+
+#### Jakolasku
+
+Jakolaskutestissä jaettiin numeroa 20000000000 tuhat kertaa numerolla 10 tuhat kertaa.
+
+| Toiminto   | OwnBigInteger | BigInteger | BigIntegerin verrannollinen nopeus |
+|------------|---------------|------------|------------------------------------|
 | Jakolasku  | 5892ns        | 1135ns     | 5.19x                              |
+
+#### Jakojäännös
+
+Jakojäännöstestissa otettiin numerosta 2000000000 jakojäännös luvulla 100 tuhat kertaa.
+
+| Toiminto   | OwnBigInteger | BigInteger | BigIntegerin verrannollinen nopeus |
+|------------|---------------|------------|------------------------------------|
 | mod        | 10005ns       | 1457ns     | 6.86x                              |
+
+#### Potenssi
+
+Potenssitestissä numero 200 nostettiin potenssiin 3397 kymmenen kertaa. 
+
+| Toiminto   | OwnBigInteger | BigInteger | BigIntegerin verrannollinen nopeus |
+|------------|---------------|------------|------------------------------------|
 | pow        | 1571463ns     | 55ns       | 28572x                             |
-| mulPow     | 10434ns       | 1843ns     | 5.66x                              |
+
+#### ModPow
+
+ModPow-testissä numero 200 nostettiin potenssiin 3397 jonka jälkeen otettiin jakojäännös luvulla 23323 tuhat kertaa.
+   
+| Toiminto   | OwnBigInteger | BigInteger | BigIntegerin verrannollinen nopeus |
+|------------|---------------|------------|------------------------------------|
+| modPow     | 10434ns       | 1843ns     | 5.66x                              |
 
 
