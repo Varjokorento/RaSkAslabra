@@ -8,7 +8,9 @@ Ohjelmassa on kattava yksikkötestaus, jonka rivikohtainen kattavuus on 72 prose
 
 ## Integraatiotestaus
 
-Tällä hetkellä integraatiotestausta on tehty käsin kokeilemalla eri syötteitä ja katsomalla toimivatko ne oikein halutulla tavalla. Tämän lisäksion RSAToolTest.java luokka, joka tekee End-to-End-testausta: Se generoiduilla avaimilla kryptaa ja dekryptaa syötteen oikein. 
+Tällä hetkellä integraatiotestausta on tehty käsin kokeilemalla eri syötteitä ja katsomalla toimivatko ne oikein halutulla tavalla. 
+
+Tämän lisäksi on RSAToolTest.java luokka, joka tekee End-to-End-testausta: Se generoiduilla avaimilla kryptaa ja dekryptaa syötteen oikein. 
 
 ## Suorituskykytestaus
 
