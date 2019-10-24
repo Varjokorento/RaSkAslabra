@@ -1,6 +1,5 @@
 package utils;
 
-import java.math.BigInteger;
 import java.util.Random;
 
 /**
@@ -30,9 +29,16 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
     }
 
 
-    public static OwnBigInteger getLargeRandom(Random random) {
-        BigInteger integer = new BigInteger(10, random);
-        return new OwnBigInteger(integer.toString());
+    /**
+     * Generates a random number based on the Microsoft formula for linear congruential generator
+     * @return a randon OwnBigInteger
+     */
+    public static OwnBigInteger getLargeRandom() {
+        long randomString = System.nanoTime();
+        OwnBigInteger random = new OwnBigInteger(Long.toString(randomString));
+        random = random.multiply(new OwnBigInteger("214013"));
+        random = random.add(new OwnBigInteger("2531011").mod(new OwnBigInteger("2").pow(new OwnBigInteger("31"))));
+        return random;
     }
 
     /**
@@ -179,7 +185,7 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
         int[] biggerArray = holder.getBiggerArray();
         int[] smallerArray = holder.getSmallerArray();
         OwnBigInteger bigger = new OwnBigInteger(biggerArray);
-        int[] result = new int[smallerArray.length + biggerArray.length + 1];
+        int[] result = new int[biggerArray.length + biggerArray.length];
         for (int i = 0; i < smallerArray.length; i++) {
             OwnBigInteger currentTotal = OwnBigInteger.ZERO;
             int times = smallerArray[smallerArray.length - 1 - i];

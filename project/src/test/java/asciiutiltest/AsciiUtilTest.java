@@ -11,13 +11,6 @@ public class AsciiUtilTest {
     private AsciiUtil asciiUtil = new AsciiUtil();
 
     @Test
-    public void asciiUtilReturnsCorrectStringForByteArray() {
-        String testString = "String";
-        byte[] byteArray = testString.getBytes();
-        assertEquals(testString, asciiUtil.getStringFromByteArray(byteArray));
-    }
-
-    @Test
     public void stringToCipherWorksCorrectly() {
         OwnBigInteger[] abc = asciiUtil.stringToCipher("abc");
         OwnBigInteger[] asciiValues = new OwnBigInteger[]{new OwnBigInteger("97"), new OwnBigInteger("98"), new OwnBigInteger("99")};

@@ -15,15 +15,8 @@ public class OwnPublicKey {
         return e;
     }
 
-    public void setE(OwnBigInteger e) {
-        this.e = e;
-    }
-
     public OwnBigInteger getN() {
         return n;
     }
 
-    public void setN(OwnBigInteger n) {
-        this.n = n;
-    }
 }

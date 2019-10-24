@@ -12,9 +12,9 @@ import java.util.Random;
 public class OwnKeyPairGenerator {
 
     /**
-     * Generates two public keys e,n and d.
+     * Generates two keys: Public key with e and n and a Private key with d.
      *
-     * @return
+     * @return OwnKeyPair that holds both keys
      */
 
     public OwnKeyPair generateKeyPair() {
@@ -28,11 +28,11 @@ public class OwnKeyPairGenerator {
     }
 
     /**
-     * Find mod n from large prime numbers
+     * Finds n from large prime numbers
      *
      * @param p a large prime number
      * @param q a large prime number
-     * @return mod n
+     * @return n
      */
 
     private OwnBigInteger findN(OwnBigInteger p, OwnBigInteger q) {
@@ -41,9 +41,8 @@ public class OwnKeyPairGenerator {
 
 
     /**
-     * Compute phi(n) (Euler's totient function)
-     * (Modern version uses Carmichael totient function.)
-     * phi(n) = (p-1)(q-1)
+     * Compute phi(pq) (Euler's totient function)
+     * phi(pq) = (p-1)(q-1)
      *
      * @return phi
      */
@@ -52,7 +51,7 @@ public class OwnKeyPairGenerator {
     }
 
     /**
-     * Generate e by finding a Phi such that the greatest common denominator is one
+     * Generate E so that E != 1, e >= 0 and gcd(phi, e) == 1.
      *
      * @param phi
      * @return e
@@ -65,13 +64,11 @@ public class OwnKeyPairGenerator {
                 || !gcd(phi, e).equals(OwnBigInteger.ONE)) {
             e = new OwnBigInteger(new Random());
         }
-        ;
         return e;
     }
 
     /**
-     * Recursively Returns greatest common denominator between two numbers
-     *
+     * Recursively returns greatest common denominator between two numbers
      * @param a
      * @param b
      * @return gcd(a, b)
@@ -87,9 +84,7 @@ public class OwnKeyPairGenerator {
 
     /**
      * Extended Euclidean algorithm to solve Bezout's identity INV(m,n)
-     * and finds the multiplicative inverse which is the solution to ax ≡ 1 (mod m)
-     * Read (https://fi.wikipedia.org/wiki/Modulaariaritmetiikan_käänteisluku) (in Finnish)
-     *
+     * INV(m,n) = ((1 + n(m - INV(MOD(n,m),m)))/m
      * @return INV(m, n)
      */
     static OwnBigInteger extendedEuclid(OwnBigInteger m, OwnBigInteger n) {

@@ -1,7 +1,7 @@
 package utils;
 
 /**
- * This is a class to hold two int[] arrays. Used in BigIntegerImpl
+ * This is a class to hold two int[] arrays. Used in OwnBigInteger when checking which array has more digits.
  */
 public class TwoArrayHolder {
     private int[] biggerArray;

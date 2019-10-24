@@ -15,11 +15,10 @@ public class PrimeNumberGeneratorTest {
 
     @Test
     public void testMillerRabinPrimality() {
-        Random random = new Random();
         int errors = 0;
         int totalPrimes = 0;
         for (int i = 0; i < 10000; i++) {
-            OwnBigInteger possiblePrime = OwnBigInteger.getLargeRandom(random);
+            OwnBigInteger possiblePrime = OwnBigInteger.getLargeRandom();
             BigInteger bi = new BigInteger(possiblePrime.valueOf());
             boolean answer = PrimeNumberGenerator.millerRabinPrimality(possiblePrime, 3);
 

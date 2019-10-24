@@ -6,9 +6,7 @@ import utils.OwnBigInteger;
 public class OwnEncrypter {
 
     /**
-     * OWN IMPLEMENTATION
-     * Encrypts a given BigInteger-array with
-     *
+     * Encrypts a given OwnBigInteger-array with publicKey
      * @param array
      * @param publicKey
      * @return encrypted BigInteger-array

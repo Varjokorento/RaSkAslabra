@@ -122,7 +122,7 @@ public class OwnBigIntegerPerformanceTest {
         System.out.println("Mod took " + duration/iterations + " with own implementation");
         startTime = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
-            bigInteger = bigInteger.mod(divideBI);
+            bigInteger.mod(divideBI);
         }
         endTime = System.nanoTime();
         duration = (endTime - startTime) ;

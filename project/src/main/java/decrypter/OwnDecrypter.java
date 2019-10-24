@@ -6,10 +6,11 @@ import utils.OwnBigInteger;
 
 public class OwnDecrypter {
     /**
+     * Decrypts a given OwnBigInteger-array with a given privateKey and publicKey
      * @param array
      * @param privateKey
      * @param publicKey
-     * @return
+     * @return decrypted OwnBigInteger[]
      */
     public OwnBigInteger[] decrypt(OwnBigInteger[] array, OwnPrivateKey privateKey, OwnPublicKey publicKey) {
         OwnBigInteger[] decrypted = new OwnBigInteger[array.length];

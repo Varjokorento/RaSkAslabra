@@ -8,17 +8,7 @@ public class AsciiUtil {
 
 
     /**
-     * Constructs a new String from byteArray.
-     *
-     * @return Stringified byteArray
-     */
-
-    public String getStringFromByteArray(byte[] byteArray) {
-        return new String(byteArray, StandardCharsets.UTF_8);
-    }
-
-    /**
-     * Converts plainText message to bigIntegerArray.
+     * Converts plainText message to OwnBigIntegerArray.
      *
      * @param message
      * @return BigInteger[] decipheredArray
@@ -37,7 +27,7 @@ public class AsciiUtil {
     }
 
     /**
-     * Converts cipher BigInteger[] to a plainText String
+     * Converts cipher OwnBigInteger[] to a plainText String
      *
      * @param message
      * @return message

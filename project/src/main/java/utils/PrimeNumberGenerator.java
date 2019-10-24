@@ -20,7 +20,7 @@ public class PrimeNumberGenerator {
      * @return a BigInteger that should be a prime
      */
     private static OwnBigInteger generatePrime() {
-        OwnBigInteger prime = OwnBigInteger.getLargeRandom(new Random());
+        OwnBigInteger prime = OwnBigInteger.getLargeRandom();
         while (true) {
             if (!millerRabinPrimality(prime, 4)) {
                 prime = prime.add(OwnBigInteger.ONE);
@@ -33,7 +33,6 @@ public class PrimeNumberGenerator {
 
     /**
      * Miller-Rabin test for primality
-     *
      * @param possiblePrime
      * @param iterations
      * @return boolean isPrime
@@ -62,7 +61,6 @@ public class PrimeNumberGenerator {
 
     /**
      * Generates A to use in the Miller Rabin test
-     *
      * @param n
      * @return a
      */
@@ -77,7 +75,6 @@ public class PrimeNumberGenerator {
 
     /**
      * Tests number n for primality
-     *
      * @param d
      * @param n
      * @return boolean isPrime

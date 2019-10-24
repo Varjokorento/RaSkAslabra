@@ -28,7 +28,7 @@ public class PerformanceTest {
         }
         long endTime = System.nanoTime();
         long duration = (endTime - startTime);
-        System.out.println("It took " + duration / (1000000) + " milliseconds without libraries");
+        System.out.println("Key generation took " + duration / (1000000*10) + " milliseconds");
         System.out.println("-----------");
     }
 
@@ -38,12 +38,10 @@ public class PerformanceTest {
         System.out.println("ENCRYPTION PERFORMANCE");
         rsaTool.generateKeys();
         long startTime = System.nanoTime();
-        for (int i = 0; i < 1; i++) {
-            rsaTool.encrypt("message");
-        }
+        rsaTool.encrypt("message");
         long endTime = System.nanoTime();
         long duration = (endTime - startTime);
-        System.out.println("It took " + duration / (1000000) + " milliseconds without libraries");
+        System.out.println("Encryption took " + duration / (1000000) + " milliseconds without libraries");
 
         System.out.println("-----------------");
     }
@@ -52,14 +50,14 @@ public class PerformanceTest {
     public void comparingEndToEndPerformance() throws NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, NoSuchPaddingException, IllegalBlockSizeException {
         System.out.println("END-TO-END-PERFORMANCE");
         long startTime = System.nanoTime();
-        rsaTool.generateKeys();
         for (int i = 0; i < 1; i++) {
+            rsaTool.generateKeys();
             OwnBigInteger[] encrypted = rsaTool.encrypt("message");
             rsaTool.decrypt(encrypted);
         }
         long endTime = System.nanoTime();
         long duration = (endTime - startTime);
-        System.out.println("It took " + duration / (1000000) + " milliseconds without libraries");
+        System.out.println("End to End took " + duration / (1000000 * 100) + " milliseconds without libraries");
         System.out.println("------------------");
 
     }

@@ -95,6 +95,22 @@ public class OwnBigIntegerTest {
         assertEquals("11", int3.valueOf());
     }
 
+    @Test
+    public void testDivisionWithLargerDividingASmallerOne() {
+        OwnBigInteger int1 = new OwnBigInteger("18000");
+        OwnBigInteger int2 = new OwnBigInteger("200501");
+        OwnBigInteger int3 = int1.divide(int2);
+        assertEquals("0", int3.valueOf());
+    }
+
+    @Test
+    public void testDivisionWithLargeNumers() {
+        OwnBigInteger int1 = new OwnBigInteger("140032332320");
+        OwnBigInteger int2 = new OwnBigInteger("30023323232501");
+        OwnBigInteger int3 = int2.divide(int1);
+        assertEquals("214", int3.valueOf());
+    }
+
 
     @Test
     public void shiftLeft() {
