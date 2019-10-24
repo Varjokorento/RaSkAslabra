@@ -52,6 +52,8 @@ Ohjelmaan voi syöttää lyhyitä tekstipätkiä, jotka ohjelma sitten salaa num
  [Toteutusdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Toteutusdokumentti/toteutusdokumentti.md)    
 [Testausdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Testausdokumentti/testausdokumentti.md)
 
+[Javadoc](https://varjokorento.github.io/RaSkAslabra/javadocs/)
+
 ## Huomio tarkastajalle:
 
 Viikkopalautuksissa olen suunnitellut, että tekisin vertailuja Javan RSA-algoritmin kirjastototeutukselle. Tätä ei ollut alkuperäisessä määrittelyssäni ja tämä idea tavallaan tuli kesken kurssin. Tekemäni lopputulos on kuitenkin sen verran tehoton, etteivät vertailut olisi olleet erityisen mielekkäitä. Näin ollen poistin kirjastototeutuksen kokonaan ohjelmasta. Mielestäni ei ollut järkeä vertailla ohjelmaa, joka pystyy luomaan vain maksimissaan 100-bittisen avaimen ohjelmaan, joka voi luoda 1024-bittisen, koska vertailut eivät oikeastaan kerro mitään muuta, kuin että Javan versio on huomattavasti parempi. 
