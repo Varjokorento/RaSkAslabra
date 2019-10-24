@@ -4,11 +4,6 @@
 
 Tämä sovelluksen tarkoitus on implementoida RSA-salaus algoritmi Java-ohjelmointikielellä. 
 
-## Omat toteutukset v Kirjasto-toteutukset
-
-Projektissa implementoidaan RSA-salaus Javan valmiilla kirjastoilla sekä omilla implementaatioilla. Tämä tehdään sen vuoksi, että voidaan vertailla näiden kahden toteututuksen eroja. RSA-algoritmi on hyvin vanha algoritmi ja sen "klassinen" toteutus eroaa mahdollisesti sen nykyisestä kirjastototeutuksesta. 
-
-
 ## Projektin tavoite:
 
 Tavoitteena on saada aikaan ohjelma, joka tekee seuraavat asiat: 
@@ -20,7 +15,7 @@ Tavoitteena on saada aikaan ohjelma, joka tekee seuraavat asiat:
 
 ### Testaus
 
-Testit suoritetaan komennolla
+Testit suoritetaan komennolla. Varoitus: Testit vievät jonkin aikaa. 
 
 ```
 mvn test
@@ -30,33 +25,38 @@ Jacoco generoidaan seuraavalla komennolla (Sijaitsee target/site-kansiossa)
 mvn jacoco:report
 ```
 
-
 ### Checkstyle
 
 Checkstyle-raportti luodaan komennolla
 
-
 ```
 mvn jxr:jxr checkstyle:checkstyle
 ```
+Ohjelman BigInteger-luokan checkstyle-virheet on jätetty koodiin. Tämä sen vuoksi, että refaktoroituna nuo allekkain laskettavat metodit olivat hyvin vaikeita luettavia. 
 
 ### Ohjelman ajo
 
-src-kansiossa: 
+Ohjelman voi ladata Release-linkistä. Ohjelma on suoritettava jar-tiedosto. 
 
 ```
-1. javac Main.class 2. java Main
+java -jar *jartiedoston_nimi*.jar
 ```
+
+### Ohjelman käyttö
+
+Ohjelmaan voi syöttää lyhyitä tekstipätkiä, jotka ohjelma sitten salaa numeroiksi. Syöttämällä "exit" ohjelma lopettaa suorituksen.
     
  ## Dokumentaatio
  
  [Määritysdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Maarittelydokumentti/Maarittelydokumentti.md)       
- 
-
  [Toteutusdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Toteutusdokumentti/toteutusdokumentti.md)    
 [Testausdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Testausdokumentti/testausdokumentti.md)
- 
- 
+
+## Huomio tarkastajalle:
+
+Viikkopalautuksissa olen suunnitellut, että tekisin vertailuja Javan RSA-algoritmin kirjastototeutukselle. Tätä ei ollut alkuperäisessä määrittelyssäni ja tämä idea tavallaan tuli kesken kurssin. Tekemäni lopputulos on kuitenkin sen verran tehoton, etteivät vertailut olisi olleet erityisen mielekkäitä. Näin ollen poistin kirjastototeutuksen kokonaan ohjelmasta. Mielestäni ei ollut järkeä vertailla ohjelmaa, joka pystyy luomaan vain maksimissaan 100-bittisen avaimen ohjelmaan, joka voi luoda 1024-bittisen, koska vertailut eivät oikeastaan kerro mitään muuta, kuin että Javan versio on huomattavasti parempi. 
+
+Tämän sijaan BigInteger-luokan ja OwnBigInteger-luokan performansseja vertaillaan. 
     
     
 ## Viikkopalautukset
@@ -70,7 +70,6 @@ src-kansiossa:
  [Viikkopalautus4](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Viikkopalautukset/Viikkopalautus4.md)
  
  [Viikkopalautus5](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Viikkopalautukset/Viikkopalautus5.md)
- 
  
  [Viikkopalautus6](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Viikkopalautukset/Viikkopalautus6.md)
  

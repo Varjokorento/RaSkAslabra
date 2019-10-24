@@ -8,22 +8,25 @@ Aikavaativuudet ovat itse laskettuja ellei lähdettä ole mainittu.
 
 Ohjelma toteuttaa avainten generoinnin seuraavasti:
 
-1. Ohjelman PrimeNumberGenerator-luokka generoi kaksi alkulukua p ja q, joilla on bittipituus n. Alkuluvut generoidaan käyttäen suurta satunnaista lukua, jonka alkulukuluonne testataan Miller-Rabin testillä. Tämän aikavaativuus on  O(k log3n) (ks Wikipedia-artikkeli aiheesta). 
+1. Ohjelman PrimeNumberGenerator-luokka generoi kaksi alkulukua p ja q, joilla on bittipituus n. Alkuluvut generoidaan käyttäen suurta satunnaista lukua, jonka alkulukuluonne testataan Miller-Rabin testillä. 
+    1. Satunnainen luku generoidaan Linear Congruential Generator -menetelmällä käyttäen Microsoftin kaavaa. 
+
+#### Aikavaativuus
+    Tämän aikavaativuus on  O(k log 3n) (ks. Wikipedia-artikkeli aiheesta). 
 
 2. Ohjelman KeyPairGeneratorImpl-luokka tekee tämän jälkeen seuraavat laskutoimitukset.
     1. Etsii n laskemalla p*q. (Tämä on avainten jakojäännös). 
     2. Laskee Eulerin  φ-funktiolla λ(n)
-        1. Usein vaiheessa tässä käytetään Carmichaelin φ-funktiota. Alkuperäisessä patentissa käytetään kuitenkin Euleria. 
+        a. Usein vaiheessa tässä käytetään Carmichaelin φ-funktiota. Alkuperäisessä patentissa käytetään kuitenkin Euleria. 
     3. Laskee e:n niin, että 1 < e < λ(n)  ja e:n ja λ(n) suurin yhteinen nimittäjä on yksi, eli luvut ovat keskenään jaottomia.
     4. Laskee d niin, että d ≡ e−1 (mod λ(n))
-        1. Tämä lasketaan Euclideanin algoritmin laajennetulla versiolla (Extended Euclidean Algorithm).
+        b. Tämä lasketaan Euclideanin algoritmin laajennetulla versiolla (Extended Euclidean Algorithm).
 
 ##### Aikavaativuudet:
-    1. O(n)
-    2. O(n)
-    3. O(c * log(n)) (gcd:n aikavaativuus log(n) * kuinka monta kertaa täytyy yrittää.)
-    4. En oikein osaa sanoa. Funktio on otettu https://fi.wikipedia.org/wiki/Modulaariaritmetiikan_k%C3%A4%C3%A4nteisluku -linkistä ja aikavaativuudesta keskustellaan täällä : https://en.wikipedia.org/wiki/Euclidean_algorithm#Algorithmic_efficiency
-
+    i. O(n)
+    ii. O(n)
+    iii. O(c * log(n)) (gcd:n aikavaativuus log(n) * kuinka monta kertaa täytyy yrittää.)
+    iv. En oikein osaa sanoa. Funktio on otettu https://fi.wikipedia.org/wiki/Modulaariaritmetiikan_k%C3%A4%C3%A4nteisluku -linkistä ja aikavaativuudesta keskustellaan muun muassa täällä : https://en.wikipedia.org/wiki/Euclidean_algorithm#Algorithmic_efficiency
 
 Laskun tuloksena saadaan julkinen avain, joka on jakojäännös n ja exponentti e. Yksityinen avain on exponentti d.
 
@@ -33,50 +36,60 @@ Laskun tuloksena saadaan julkinen avain, joka on jakojäännös n ja exponentti 
 2. RSATool-luokka purkaa merkkijonot puretaan sen merkkien ASCII-arvoon, josta tehdään OwnBigInteger-array. Esimerkiksi abc = {97, 98, 99}
 3. Tämän jälkeen Encrypter-luokka kryptaa OwnBigInteger-arrayn niin, että jokainen numero nostetaan a^e mod n. e ja n ovat julkisen avaimen osia. Lopputuloksena saadaan kryptattu versio BigInteger-arraystä.
 
+#### Aikavaativuus:
+    O(n * a log a), jossa n on syötteen pituus kirjaimina ja a on avainten numeroiden koko. 
+
 ### 3. Salauksen purkaminen
 1. Kryptattu OwnBigInteger-array annetaan Decrypter-luokalle, joka saa syötteenään myös julkisen avaimen ja yksityisen avaimen. 
 2. Jokaiselle alkiolle tehdään seuraava operaatio: a^d mod n. Tässä d on yksityinen avain ja n saadaan julkisesta avaimesta. 
 
-
+#### Aikavaativuus:
+    O(n * a log a), jossa n on syötteen pituus kirjaimina ja a on avainten numeroiden koko. 
+    
 ## OwnBigInteger-luokka
 
-Tämä luokka implementoi Javan BigInteger-luokan. Luokka säilöö suuria lukua Array-listoissa yksi numero kerrallaan. Luokan toiminnallisuus perustuu allekkain laskemiseen.
+Tämä luokka implementoi Javan BigInteger-luokan. Luokka säilöö suuria lukua taulukoissa yksi numero kerrallaan. Luokan toiminnallisuus perustuu siis allekkain laskemiseen.
 
-1. Lisäys
+#### 1. Lisäys
 
-Jokainen lukuun lisätään allekkain toisen luvun vastaava. Jos mennään yli kymmenen, niin lisätään muistiin luku. 
+Jokainen lukuun lisätään allekkain toisen luvun vastaava. Jos mennään yli kymmenen, niin lisätään muistiin luku ja lisätään ykkönen seuraavaan lukuun vasemmalla. 
 
     Aikavaativuus on O(n), jossa n on suuremman numeron pituus. 
 
-2. Vähennys
+#### 2. Vähennys
 
-Jokainen lukuun lisätään allekkain toisen luvun vastaava. Jos mennään yli kymmenen, niin lisätään muistiin luku. Aikavaativuus on O(n), jossa n on suuremman numeron pituus. 
+Jokainen lukuun lisätään allekkain toisen luvun vastaava. Jos mennään yli kymmenen, niin lisätään muistiin ykkönen. Ykkönen vähennetään sitten seuraavasta vasemmalle. Aikavaativuus on O(n), jossa n on suuremman numeron pituus. Vähennyksessä ei voi vähentää numeroiltaan lyhyempää numeroa toisella. Tämä ei tuota ongelmia, sillä algoritmissa ei ole tuollaisia tilanteita vaan kaikista luvuista vähennetään aina pienempi numero. 
 
     Jakolaskun aikavaativuus on O(n), jossa n on jaettavan numeron pituus. 
 
-3. Jakolasku
+#### 3. Jakolasku
 
-Jakolasku tehdään jakokulmalla.
+Jakolasku tehdään jakokulmalla. Jakolasku toimii seuraavanlaisesti: 
+ 
+    18000|200501
+	18000|18000 mahtuu kerran 20050, tulos = 0000010;
+	      20501
+	      18000 | 18000 mahtuu kerran 20501, tulos = 0000011         
 
     Kertolaskun aikavaativuus on O(n), jossa n ja m ovat jaettavat luvut. 
 
-4. Kertolasku
+#### 4. Kertolasku
 
 Kertolasku tehdään niin, että otetaan pienemmästä numerosta viimeinen luku ja kerrotaan sillä kokonaan suurempi luku. Tämän jälkeen tämä luku lisätään tuloslistaan. Käydään näin läpi koko luku ja aina välitulokset lisätään allekkain toisiinsa niin, että välitulokset saavat aina matalamman indeksin kuin edellinen (eli saadaan '0' luvun perään). 
 
-    Kertolaskun aikavaativuus on O(n * m), jossa n ja m ovat kerrottavat luvut. 
+    Kertolaskun aikavaativuus on O(n^(n-1)), jossa n on on jaettavan numeron koko. 
 
-5. Modulo ja potenssi.
+#### 5. Modulo ja potenssi.
 
 Modulo ja potenssi tehdään modulaari exponentaatiolla (ks. lähde Wikipediasta). 
 
     Modulaariexponentaatio artikkelin pseudokoodin implementaatio, jonka aikavaativuus on lähteiden mukana O(n log n).  
 
-6. Modulo
+#### 6. Modulo
 
 Pelkkä modulo tehdään operaatiolla, jossa numero jaetaan ja jaettu kokonaisluku kerrotaan jakajalla ja miinustetaan itse luvusta. 
 
-    Tämän aikavaativuus on O(n). 
+    Tämän aikavaativuus on O(n^(n-1)).
 
 ### Lähteet
 
@@ -91,4 +104,5 @@ Pelkkä modulo tehdään operaatiolla, jossa numero jaetaan ja jaettu kokonaislu
 - https://fi.wikipedia.org/wiki/Modulaariaritmetiikan_k%C3%A4%C3%A4nteisluku
 - https://en.wikipedia.org/wiki/Modular_exponentiation
 - https://cp-algorithms.com/algebra/binary-exp.html
+- https://rosettacode.org/wiki/Linear_congruential_generator
 
