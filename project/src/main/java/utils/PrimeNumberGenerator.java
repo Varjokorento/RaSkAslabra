@@ -33,8 +33,8 @@ public class PrimeNumberGenerator {
 
     /**
      * Miller-Rabin test for primality
-     * @param possiblePrime
-     * @param iterations
+     * @param possiblePrime number to be tested
+     * @param iterations how many times tested
      * @return boolean isPrime
      */
     public static boolean millerRabinPrimality(OwnBigInteger possiblePrime, int iterations) {
@@ -61,8 +61,8 @@ public class PrimeNumberGenerator {
 
     /**
      * Generates A to use in the Miller Rabin test
-     * @param n
-     * @return a
+     * @param n n
+     * @return a 2 + random % (n-4)
      */
 
     private static OwnBigInteger generateA(OwnBigInteger n) {
@@ -75,8 +75,8 @@ public class PrimeNumberGenerator {
 
     /**
      * Tests number n for primality
-     * @param d
-     * @param n
+     * @param d d <= n - 1
+     * @param n n
      * @return boolean isPrime
      */
     private static boolean millerRabinTest(OwnBigInteger d, OwnBigInteger n) {

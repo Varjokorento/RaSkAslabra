@@ -53,7 +53,7 @@ public class OwnKeyPairGenerator {
     /**
      * Generate E so that E != 1, e >= 0 and gcd(phi, e) == 1.
      *
-     * @param phi
+     * @param phi phi
      * @return e
      */
     static OwnBigInteger genE(OwnBigInteger phi) {
@@ -69,8 +69,8 @@ public class OwnKeyPairGenerator {
 
     /**
      * Recursively returns greatest common denominator between two numbers
-     * @param a
-     * @param b
+     * @param a number a
+     * @param b number b
      * @return gcd(a, b)
      */
 
@@ -85,6 +85,8 @@ public class OwnKeyPairGenerator {
     /**
      * Extended Euclidean algorithm to solve Bezout's identity INV(m,n)
      * INV(m,n) = ((1 + n(m - INV(MOD(n,m),m)))/m
+     * @param m number m
+     * @param n number n
      * @return INV(m, n)
      */
     static OwnBigInteger extendedEuclid(OwnBigInteger m, OwnBigInteger n) {

@@ -7,8 +7,8 @@ public class OwnEncrypter {
 
     /**
      * Encrypts a given OwnBigInteger-array with publicKey
-     * @param array
-     * @param publicKey
+     * @param array array to be encrypted
+     * @param publicKey publicKey to encrypt with
      * @return encrypted BigInteger-array
      */
     public OwnBigInteger[] encrypt(OwnBigInteger[] array, OwnPublicKey publicKey) {

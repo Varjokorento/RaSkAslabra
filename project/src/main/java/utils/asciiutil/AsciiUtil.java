@@ -10,7 +10,7 @@ public class AsciiUtil {
     /**
      * Converts plainText message to OwnBigIntegerArray.
      *
-     * @param message
+     * @param message message in plaintext
      * @return BigInteger[] decipheredArray
      */
 
@@ -29,8 +29,8 @@ public class AsciiUtil {
     /**
      * Converts cipher OwnBigInteger[] to a plainText String
      *
-     * @param message
-     * @return message
+     * @param message as OwnBigInteger[]
+     * @return message plainText message
      */
 
     public String cipherToString(OwnBigInteger[] message) {

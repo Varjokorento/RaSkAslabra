@@ -7,9 +7,9 @@ import utils.OwnBigInteger;
 public class OwnDecrypter {
     /**
      * Decrypts a given OwnBigInteger-array with a given privateKey and publicKey
-     * @param array
-     * @param privateKey
-     * @param publicKey
+     * @param array array to be decrypted
+     * @param privateKey privateKey to decrypt with
+     * @param publicKey publicKey to decrypt with
      * @return decrypted OwnBigInteger[]
      */
     public OwnBigInteger[] decrypt(OwnBigInteger[] array, OwnPrivateKey privateKey, OwnPublicKey publicKey) {

@@ -37,7 +37,6 @@ public class RSATool {
     }
 
     /**
-     * OWN IMPLEMENTATION
      * Generates keys for the tool
      */
     public void generateKeys() {

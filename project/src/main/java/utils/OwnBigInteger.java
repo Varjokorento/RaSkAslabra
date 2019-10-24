@@ -31,7 +31,7 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
 
     /**
      * Generates a random number based on the Microsoft formula for linear congruential generator
-     * @return a randon OwnBigInteger
+     * @return a random OwnBigInteger
      */
     public static OwnBigInteger getLargeRandom() {
         long randomString = System.nanoTime();
@@ -44,7 +44,7 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
     /**
      * Constructor with String value
      *
-     * @param number
+     * @param number String value of the number to be created
      */
     public OwnBigInteger(String number) {
         this.digits = new int[number.length()];
@@ -57,7 +57,7 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
     /**
      * Constructor with digit array
      *
-     * @param digits
+     * @param digits the digits of the number in an array form
      */
 
     public OwnBigInteger(int[] digits) {
@@ -67,7 +67,7 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
     /**
      * Shifts BigInt by n bytes
      *
-     * @param n
+     * @param n how many bytes are shifted
      * @return BigIntegerImpl that has been shifted left
      */
 
@@ -95,7 +95,7 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
     /**
      * Adds a bigInteger to another BigInteger
      *
-     * @param otherNumber
+     * @param otherNumber the number to be added
      * @return sum of two bigIntegers
      */
     public OwnBigInteger add(OwnBigInteger otherNumber) {
@@ -136,7 +136,7 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
      * Does not support an operation where the subtracting number
      * has more digits that the number to subtract from.
      *
-     * @param otherNumber
+     * @param otherNumber number that is used to subtract
      * @return subtracted bigInteger
      */
     public OwnBigInteger subtract(OwnBigInteger otherNumber) {
@@ -177,7 +177,7 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
      * It adds each number n times from smallerNumber index and then adds the resulting numbers
      * together. Works like long multiplication.
      *
-     * @param otherNumber
+     * @param otherNumber number to be multiplied with
      * @return product of BigInteger
      */
     public OwnBigInteger multiply(OwnBigInteger otherNumber) {
@@ -210,7 +210,7 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
      * Divides a this with BigInteger
      * Long division algorithm implemented
      *
-     * @param dividor
+     * @param dividor the dividor
      * @return result of division
      */
     public OwnBigInteger divide(OwnBigInteger dividor) {
@@ -246,7 +246,7 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
      * Returns a mod divisor. As divide operation only returns the result without the decimal
      * the modulo is simply originalNumber - (result*divisor)
      *
-     * @param divisor
+     * @param divisor the divisor
      * @return modulus
      */
     public OwnBigInteger mod(OwnBigInteger divisor) {
@@ -258,7 +258,7 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
      * Raises a number to a power
      * Isn't actually used anymore due to refactoring. However, it is used in some performance tests.
      *
-     * @param power
+     * @param power the power to be raised to
      * @return n^p
      */
     public OwnBigInteger pow(OwnBigInteger power) {
@@ -323,8 +323,8 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
      * Uses modular exponentiation to raise a number to it's n power and then
      * takes its modulus.
      *
-     * @param exponent
-     * @param modulus
+     * @param exponent the power to be raised to
+     * @param modulus the modulo
      * @return a^exponent mod modulus
      */
 
@@ -349,8 +349,8 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
     /**
      * Helper method to ensure that smallerArray is below biggerArray in operations
      *
-     * @param numberOne
-     * @param numberTwo
+     * @param numberOne one number
+     * @param numberTwo another number
      * @return TwoArrayHolder that stores created arrays
      */
 
@@ -379,7 +379,7 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
      * As this causes problems after the number has been
      * generated this filters them out.
      *
-     * @param array
+     * @param array array with possible zeroes
      * @return a number without the leading zeroes
      */
 
