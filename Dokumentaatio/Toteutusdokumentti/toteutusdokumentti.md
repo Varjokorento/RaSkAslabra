@@ -8,21 +8,24 @@ Aikavaativuudet ovat itse laskettuja ellei lähdettä ole mainittu.
 
 Ohjelma toteuttaa avainten generoinnin seuraavasti:
 
-1. Ohjelman PrimeNumberGenerator-luokka generoi kaksi alkulukua p ja q, joilla on bittipituus n. Alkuluvut generoidaan käyttäen suurta satunnaista lukua, jonka alkulukuluonne testataan Miller-Rabin testillä. Tämän aikavaativuus on  O(k log3n) (ks Wikipedia-artikkeli aiheesta). 
+1. Ohjelman PrimeNumberGenerator-luokka generoi kaksi alkulukua p ja q, joilla on bittipituus n. Alkuluvut generoidaan käyttäen suurta satunnaista lukua, jonka alkulukuluonne testataan Miller-Rabin testillä. 
+
+#### Aikavaativuus
+    Tämän aikavaativuus on  O(k log 3n) (ks. Wikipedia-artikkeli aiheesta). 
 
 2. Ohjelman KeyPairGeneratorImpl-luokka tekee tämän jälkeen seuraavat laskutoimitukset.
-    1. Etsii n laskemalla p*q. (Tämä on avainten jakojäännös). 
-    2. Laskee Eulerin  φ-funktiolla λ(n)
-        1. Usein vaiheessa tässä käytetään Carmichaelin φ-funktiota. Alkuperäisessä patentissa käytetään kuitenkin Euleria. 
-    3. Laskee e:n niin, että 1 < e < λ(n)  ja e:n ja λ(n) suurin yhteinen nimittäjä on yksi, eli luvut ovat keskenään jaottomia.
-    4. Laskee d niin, että d ≡ e−1 (mod λ(n))
-        1. Tämä lasketaan Euclideanin algoritmin laajennetulla versiolla (Extended Euclidean Algorithm).
+    i. Etsii n laskemalla p*q. (Tämä on avainten jakojäännös). 
+    ii. Laskee Eulerin  φ-funktiolla λ(n)
+        a. Usein vaiheessa tässä käytetään Carmichaelin φ-funktiota. Alkuperäisessä patentissa käytetään kuitenkin Euleria. 
+    iii. Laskee e:n niin, että 1 < e < λ(n)  ja e:n ja λ(n) suurin yhteinen nimittäjä on yksi, eli luvut ovat keskenään jaottomia.
+    iv. Laskee d niin, että d ≡ e−1 (mod λ(n))
+        b. Tämä lasketaan Euclideanin algoritmin laajennetulla versiolla (Extended Euclidean Algorithm).
 
 ##### Aikavaativuudet:
-    1. O(n)
-    2. O(n)
-    3. O(c * log(n)) (gcd:n aikavaativuus log(n) * kuinka monta kertaa täytyy yrittää.)
-    4. En oikein osaa sanoa. Funktio on otettu https://fi.wikipedia.org/wiki/Modulaariaritmetiikan_k%C3%A4%C3%A4nteisluku -linkistä ja aikavaativuudesta keskustellaan muun muassa täällä : https://en.wikipedia.org/wiki/Euclidean_algorithm#Algorithmic_efficiency
+    i. O(n)
+    ii. O(n)
+    iii. O(c * log(n)) (gcd:n aikavaativuus log(n) * kuinka monta kertaa täytyy yrittää.)
+    iv. En oikein osaa sanoa. Funktio on otettu https://fi.wikipedia.org/wiki/Modulaariaritmetiikan_k%C3%A4%C3%A4nteisluku -linkistä ja aikavaativuudesta keskustellaan muun muassa täällä : https://en.wikipedia.org/wiki/Euclidean_algorithm#Algorithmic_efficiency
 
 
 Laskun tuloksena saadaan julkinen avain, joka on jakojäännös n ja exponentti e. Yksityinen avain on exponentti d.
