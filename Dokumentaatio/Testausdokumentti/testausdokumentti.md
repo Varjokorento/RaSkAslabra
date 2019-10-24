@@ -14,21 +14,41 @@ Tällä hetkellä integraatiotestausta on tehty käsin kokeilemalla eri syöttei
 
 ### Koko algoritmin suorituskyky
 
-Suorituskykytestausta on tehty koneellisesti. Koko algoritmia on testattu käyttäen eri pituisia avaimia. Yli 200 bitin avaimia on yritetty, mutta näiden suoritusaika on niin pitkä, ettei sen testaaminen ollut mielekästä.  
+Suorituskykytestausta on tehty koneellisesti. Testauksessa kryptattiin viesti 'message'. Testeissä otettiin pois kaikki testattavissa metodeissa tehdyt tulostukset. 
 
-HUOM: Testeissä on käytetty apuna satunnaislukujen generointiin BigInteger-luokkaa ja sen konstruktoria new BigInteger(int bitlength, Random random). Lopullinen versio generoi satunnaisluvut käyttäen omaa metodia, mutta tämä ei kyennyt generoimaan tarpeeksi suuria lukuja järkevissä ajoissa. 
+Koko algoritmia on testattu käyttäen eri pituisia avaimia. Yli 200 bitin avaimia on yritetty, mutta näiden suoritus ei päättynyt järkevän ajan sisällä. 
 
-Alla suorituskyky käyttäen 10, 100 ja 200 bitin avaimia. 
+#### Testi käyttäen new BigInteger(int bitlength, Random random)
+
+Testeissä on käytetty apuna satunnaislukujen generointiin BigInteger-luokkaa ja sen konstruktoria new BigInteger(int bitlength, Random random). Lopullinen versio generoi satunnaisluvut käyttäen omaa metodia, mutta tämä ei kyennyt generoimaan tarpeeksi suuria lukuja järkevissä ajoissa. 
+
+Alla suorituskyky käyttäen 10, 100 ja 200 bitin avaimia. Jokainen testi ajettiin 100 kertaa ja otettiin keskiarvo.
 
 | Toiminto       | 10 | 100  | 200    |   |
 |----------------|----|------|--------|---|
-| Key-Generation | 58 ms | 8788 ms | 78423 ms  |   |
-| Encryption     | 8 ms | 60 ms  | 216  ms  |   |
-| End-to-End     | 75 ms | 6564 ms| 100940 ms |   |
+| Key-Generation | 58 ms | 8788 ms | 78423 ms  |   
+| Encryption     | 8 ms | 60 ms  | 216  ms  |   
+| End-to-End     | 75 ms | 6564 ms| 100940 ms |   
+
+#### Testi käyttäen omaa satunnaislukugeneraattoria
+
+Alla suorituskyky käyttäen OwnBigInteger-luokan getLargeNumber -metodia, joka generoi 40 bittisiä avaimia.
+
+Jokainen testi ajettiin sata kertaa ja otettiin keskiarvo.
+
+|Toiminto | Kesto (ms) |
+|---------|-----------|
+| Key-Generation | 3152 ms |
+| Encryption     | 8 ms |  
+| End-to-End     | 618 ms |  
 
 ### BigInteger-luokan suorituskyky:
 
-Koko algoritmin lisäksi on myös testattu BigIntegerin implementaatiota. Huomioitavaa on, ettei lopullisessa versiossa käytetä pow-metodia lainkaan vaan se on korvattu modulaarisella eksponentaatiolla (ks määrittelydokumentin lähteet), joka on merkittävästi nopeampi. 
+Koko algoritmin lisäksi on myös testattu BigIntegerin implementaatiota. Huomioitavaa on, ettei lopullisessa versiossa käytetä pow-metodia lainkaan vaan se on korvattu modulaarisella eksponentaatiolla (ks määrittelydokumentin lähteet), joka on merkittävästi nopeampi
+
+
+##### Lisäys
+
 
 | Toiminto   | OwnBigInteger | BigInteger | BigIntegerin verrannollinen nopeus |
 |------------|---------------|------------|------------------------------------|
@@ -40,3 +60,5 @@ Koko algoritmin lisäksi on myös testattu BigIntegerin implementaatiota. Huomio
 | mod        | 10005ns       | 1457ns     | 6.86x                              |
 | pow        | 1571463ns     | 55ns       | 28572x                             |
 | mulPow     | 10434ns       | 1843ns     | 5.66x                              |
+
+
