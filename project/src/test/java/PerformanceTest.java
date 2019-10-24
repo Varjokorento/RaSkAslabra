@@ -28,7 +28,7 @@ public class PerformanceTest {
         }
         long endTime = System.nanoTime();
         long duration = (endTime - startTime);
-        System.out.println("Key generation took " + duration / (1000000*10) + " milliseconds");
+        System.out.println("Key generation took " + duration / (1000000) + " milliseconds");
         System.out.println("-----------");
     }
 
@@ -57,7 +57,7 @@ public class PerformanceTest {
         }
         long endTime = System.nanoTime();
         long duration = (endTime - startTime);
-        System.out.println("End to End took " + duration / (1000000 * 100) + " milliseconds without libraries");
+        System.out.println("End to End took " + duration / (1000000) + " milliseconds without libraries");
         System.out.println("------------------");
 
     }

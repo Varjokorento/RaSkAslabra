@@ -22,7 +22,7 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
     /**
      * Constructor for random number
      *
-     * @param random
+     * @param random a random number
      */
     public OwnBigInteger(Random random) {
         this(String.valueOf(random.nextInt(1000000000)));
