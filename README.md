@@ -15,7 +15,7 @@ Tavoitteena on saada aikaan ohjelma, joka tekee seuraavat asiat:
 
 ### Testaus
 
-Testit suoritetaan komennolla
+Testit suoritetaan komennolla. Varoitus: Testit vievät jonkin aikaa. 
 
 ```
 mvn test
