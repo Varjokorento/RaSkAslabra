@@ -2,15 +2,15 @@
 
 ## Yksikkötestaus
  
-Ohjelmassa on kattava yksikkötestaus, jonka rivikohtainen kattavuus on 72 prosenttia ja haarakohtainen 77 prosenttia.
+Ohjelmassa on kattava yksikkötestaus, jonka rivikohtainen kattavuus on 88 prosenttia ja haarakohtainen 83 prosenttia.
 
 [Jacoco-raportti](https://varjokorento.github.io/RaSkAslabra/jacoco/)
 
 ## Integraatiotestaus
 
-Tällä hetkellä integraatiotestausta on tehty käsin kokeilemalla eri syötteitä ja katsomalla toimivatko ne oikein halutulla tavalla. 
+Tällä hetkellä integraatiotestausta on tehty käsin kokeilemalla eri syötteitä ja katsomalla toimivatko ne oikein halutulla tavalla. Ohjelmaan on yritetty laittaa kaikenlaisia syötteitä ja kokeilla rikkovatko ne ohjelman. Käsin testaamalla ohjelmaa ei ole saatu kaatamaan. 
 
-Tämän lisäksi on RSAToolTest.java luokka, joka tekee End-to-End-testausta: Se generoiduilla avaimilla kryptaa ja dekryptaa syötteen oikein. 
+Tämän lisäksi on RSAToolTest.java luokka, joka tekee automaattista End-to-End-testausta: Se generoi avaimet ja generoiduilla avaimilla kryptaa ja dekryptaa syötteen oikein. 
 
 ## Suorituskykytestaus
 
