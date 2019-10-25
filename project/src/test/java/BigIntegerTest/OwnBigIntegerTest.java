@@ -98,6 +98,14 @@ public class OwnBigIntegerTest {
     }
 
     @Test
+    public void multiplyWithZero() {
+        OwnBigInteger int1 = new OwnBigInteger("2");
+        OwnBigInteger int2 = OwnBigInteger.ZERO;
+        OwnBigInteger int3 = int2.multiply(int1);
+        assertEquals("0", int3.valueOf());
+    }
+
+    @Test
     public void testDivision() {
         OwnBigInteger int1 = new OwnBigInteger("18000");
         OwnBigInteger int2 = new OwnBigInteger("200501");
