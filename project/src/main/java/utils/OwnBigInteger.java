@@ -100,17 +100,17 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
      */
     public OwnBigInteger add(OwnBigInteger otherNumber) {
         TwoArrayHolder holder = this.manageLongerAndShorterArrays(this, otherNumber);
-        int[] biggerArray = holder.getBiggerArray();
-        int[] smallerArray = holder.getSmallerArray();
+        int[] longerArray = holder.getLongerArray();
+        int[] shorterArray = holder.getShorterArray();
         int carry = 0;
         int currentBiggerArrayIndex = 0;
-        for (int i = 0; i < smallerArray.length; i++) {
-            currentBiggerArrayIndex = biggerArray.length - 1 - i;
-            biggerArray[currentBiggerArrayIndex] += carry;
-            biggerArray[currentBiggerArrayIndex] += smallerArray[smallerArray.length - 1 - i];
-            if (biggerArray[currentBiggerArrayIndex] > 9) {
+        for (int i = 0; i < shorterArray.length; i++) {
+            currentBiggerArrayIndex = longerArray.length - 1 - i;
+            longerArray[currentBiggerArrayIndex] += carry;
+            longerArray[currentBiggerArrayIndex] += shorterArray[shorterArray.length - 1 - i];
+            if (longerArray[currentBiggerArrayIndex] > 9) {
                 carry = 1;
-                biggerArray[currentBiggerArrayIndex] -= 10;
+                longerArray[currentBiggerArrayIndex] -= 10;
             } else {
                 carry = 0;
             }
@@ -120,15 +120,15 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
         boolean doCarry = carry == 1;
 
         while (doCarry) {
-            biggerArray[currentBiggerArrayIndex] += 1;
-            if (biggerArray[currentBiggerArrayIndex] > 9) {
-                biggerArray[currentBiggerArrayIndex] -= 10;
+            longerArray[currentBiggerArrayIndex] += 1;
+            if (longerArray[currentBiggerArrayIndex] > 9) {
+                longerArray[currentBiggerArrayIndex] -= 10;
             } else {
                 doCarry = false;
             }
             currentBiggerArrayIndex--;
         }
-        return new OwnBigInteger(biggerArray);
+        return new OwnBigInteger(longerArray);
     }
 
     /**
@@ -141,17 +141,17 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
      */
     public OwnBigInteger subtract(OwnBigInteger otherNumber) {
         TwoArrayHolder holder = this.manageLongerAndShorterArrays(this, otherNumber);
-        int[] biggerArray = filterZeroesFromBeginning(holder.getBiggerArray());
-        int[] smallerArray = filterZeroesFromBeginning(holder.getSmallerArray());
+        int[] longerArray = filterZeroesFromBeginning(holder.getLongerArray());
+        int[] shorterArray = filterZeroesFromBeginning(holder.getShorterArray());
         int carry = 0;
         int biggerArrayIndex = 0;
-        for (int i = 0; i < smallerArray.length; i++) {
-            biggerArrayIndex = biggerArray.length - 1 - i;
-            biggerArray[biggerArrayIndex] -= carry;
-            biggerArray[biggerArrayIndex] -= smallerArray[smallerArray.length - 1 - i];
-            if (biggerArray[biggerArrayIndex] < 0 && biggerArrayIndex != 0) {
+        for (int i = 0; i < shorterArray.length; i++) {
+            biggerArrayIndex = longerArray.length - 1 - i;
+            longerArray[biggerArrayIndex] -= carry;
+            longerArray[biggerArrayIndex] -= shorterArray[shorterArray.length - 1 - i];
+            if (longerArray[biggerArrayIndex] < 0 && biggerArrayIndex != 0) {
                 carry = 1;
-                biggerArray[biggerArrayIndex] += 10;
+                longerArray[biggerArrayIndex] += 10;
             } else {
                 carry = 0;
             }
@@ -161,15 +161,15 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
         boolean doCarry = (carry == 1);
 
         while (doCarry) {
-            biggerArray[biggerArrayIndex] -= 1;
-            if (biggerArray[biggerArrayIndex] < 0) {
-                biggerArray[biggerArrayIndex] += 10;
+            longerArray[biggerArrayIndex] -= 1;
+            if (longerArray[biggerArrayIndex] < 0) {
+                longerArray[biggerArrayIndex] += 10;
             } else {
                 doCarry = false;
             }
             biggerArrayIndex--;
         }
-        return new OwnBigInteger(filterZeroesFromBeginning(biggerArray));
+        return new OwnBigInteger(filterZeroesFromBeginning(longerArray));
     }
 
     /**
@@ -182,13 +182,13 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
      */
     public OwnBigInteger multiply(OwnBigInteger otherNumber) {
         TwoArrayHolder holder = this.manageLongerAndShorterArrays(this, otherNumber);
-        int[] biggerArray = holder.getBiggerArray();
-        int[] smallerArray = holder.getSmallerArray();
-        OwnBigInteger bigger = new OwnBigInteger(biggerArray);
-        int[] result = new int[biggerArray.length + biggerArray.length];
-        for (int i = 0; i < smallerArray.length; i++) {
+        int[] longerArray = holder.getLongerArray();
+        int[] shorterArray = holder.getShorterArray();
+        OwnBigInteger bigger = new OwnBigInteger(longerArray);
+        int[] result = new int[longerArray.length + longerArray.length];
+        for (int i = 0; i < shorterArray.length; i++) {
             OwnBigInteger currentTotal = OwnBigInteger.ZERO;
-            int times = smallerArray[smallerArray.length - 1 - i];
+            int times = shorterArray[shorterArray.length - 1 - i];
             for (int j = 0; j < times; j++) {
                 currentTotal = currentTotal.add(bigger);
             }
@@ -369,8 +369,8 @@ public class OwnBigInteger implements Comparable<OwnBigInteger> {
             shorterNumber = new int[numberTwo.digits.length];
             OwnArrays.arraycopy(numberTwo.digits, 0, shorterNumber, 0, numberTwo.digits.length);
         }
-        twoArrayHolder.setBiggerArray(longerNumber);
-        twoArrayHolder.setSmallerArray(shorterNumber);
+        twoArrayHolder.setLongerArray(longerNumber);
+        twoArrayHolder.setShorterArray(shorterNumber);
         return twoArrayHolder;
     }
 

@@ -4,22 +4,22 @@ package utils;
  * This is a class to hold two int[] arrays. Used in OwnBigInteger when checking which array has more digits.
  */
 public class TwoArrayHolder {
-    private int[] biggerArray;
-    private int[] smallerArray;
+    private int[] longerArray;
+    private int[] shorterArray;
 
-    public int[] getBiggerArray() {
-        return biggerArray;
+    public int[] getLongerArray() {
+        return longerArray;
     }
 
-    public void setBiggerArray(int[] biggerArray) {
-        this.biggerArray = biggerArray;
+    public void setLongerArray(int[] longerArray) {
+        this.longerArray = longerArray;
     }
 
-    public int[] getSmallerArray() {
-        return smallerArray;
+    public int[] getShorterArray() {
+        return shorterArray;
     }
 
-    public void setSmallerArray(int[] smallerArray) {
-        this.smallerArray = smallerArray;
+    public void setShorterArray(int[] shorterArray) {
+        this.shorterArray = shorterArray;
     }
 }
