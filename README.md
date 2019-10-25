@@ -48,9 +48,9 @@ Ohjelmaan voi syöttää lyhyitä tekstipätkiä, jotka ohjelma sitten salaa num
     
  ## Dokumentaatio
  
- [Määritysdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Maarittelydokumentti/Maarittelydokumentti.md)       
- [Toteutusdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Toteutusdokumentti/toteutusdokumentti.md)    
-[Testausdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Testausdokumentti/testausdokumentti.md)
+ [Määritysdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/docs/Maarittelydokumentti/Maarittelydokumentti.md)       
+ [Toteutusdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/docs/Toteutusdokumentti/toteutusdokumentti.md)    
+[Testausdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/docs/Testausdokumentti/testausdokumentti.md)
 
 [Javadoc](https://varjokorento.github.io/RaSkAslabra/javadocs/)
 
