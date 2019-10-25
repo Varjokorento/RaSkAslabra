@@ -22,7 +22,6 @@ Ohjelman voi ladata Release-linkistä. Ohjelma on suoritettava jar-tiedosto. Ohj
 
 [Release 1.0](https://github.com/Varjokorento/RaSkAslabra/releases/tag/1.0)
 
-
 ```
 java -jar *jartiedoston_nimi*.jar
 ```
@@ -33,7 +32,7 @@ Ohjelmaan voi syöttää lyhyitä, maksimissaan 40 merkkiä pitkiä, tekstipätk
 
 ### Tunnetut bugit
 
-Ohjelma ei tue ääkkösiä.  
+Ohjelma ei tue kunnolla ääkkösiä.  
 
 ### Testaus
 
