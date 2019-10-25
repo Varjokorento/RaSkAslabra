@@ -17,7 +17,7 @@ public class PrimeNumberGeneratorTest {
     public void testMillerRabinPrimality() {
         int errors = 0;
         int totalPrimes = 0;
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 100; i++) {
             OwnBigInteger possiblePrime = OwnBigInteger.getLargeRandom();
             BigInteger bi = new BigInteger(possiblePrime.valueOf());
             boolean answer = PrimeNumberGenerator.millerRabinPrimality(possiblePrime, 3);

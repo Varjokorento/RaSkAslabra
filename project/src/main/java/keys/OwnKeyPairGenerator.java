@@ -7,12 +7,13 @@ import keys.keyimpl.OwnPublicKey;
 import utils.OwnBigInteger;
 import utils.PrimeNumberGenerator;
 
-import java.util.Random;
 
 public class OwnKeyPairGenerator {
 
     /**
      * Generates two keys: Public key with e and n and a Private key with d.
+     * If the generation fails because genE goes to endless loop the
+     * method loops until it succeeds.
      *
      * @return OwnKeyPair that holds both keys
      */
