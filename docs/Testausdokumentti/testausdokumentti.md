@@ -56,7 +56,7 @@ Jokainen testi ajettiin sata kertaa ja otettiin keskiarvo.
 
 Testeissä huomasin, että avainten generoinnissa on huomattavaa varianssia ajallisessa kestossa. Koska avainten generointi on selkeästi aikaavievin vaihe, johtaa tämä myös ohjelman suorituskyvyn huomattavaan vaihteluun. Uskoisin, että vaihtelu johtuu alkuluvun generoimiseen liittyvästä sattumatekijästä. 
 
-![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/Dokumentaatio/Testausdokumentti/Varianssi.png)
+![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/docs/Testausdokumentti/Varianssi.png)
 
 ### BigInteger-luokan suorituskyky:
 
