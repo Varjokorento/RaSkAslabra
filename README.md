@@ -40,13 +40,16 @@ Ohjelman BigInteger-luokan checkstyle-virheet on jätetty koodiin. Tämä sen vu
 
 Ohjelman voi ladata Release-linkistä. Ohjelma on suoritettava jar-tiedosto. 
 
+[Release 1.0](https://github.com/Varjokorento/RaSkAslabra/releases/tag/1.0)
+
+
 ```
 java -jar *jartiedoston_nimi*.jar
 ```
 
 ### Ohjelman käyttö
 
-Ohjelmaan voi syöttää lyhyitä tekstipätkiä, jotka ohjelma sitten salaa numeroiksi. Syöttämällä "exit" ohjelma lopettaa suorituksen.
+Ohjelmaan voi syöttää lyhyitä, maksimissaan 40 merkkiä pitkiä, tekstipätkiä, jotka ohjelma sitten salaa numeroiksi. Syöttämällä "exit" ohjelma lopettaa suorituksen.
     
  ## Dokumentaatio
  
