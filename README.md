@@ -11,7 +11,9 @@ Tämä sovelluksen tarkoitus on implementoida RSA-salaus algoritmi Java-ohjelmoi
 Tavoitteena on saada aikaan ohjelma, joka tekee seuraavat asiat: 
 
     1. Saatuaan tekstisyötteen se salaa sen RSA-salauksella
-    2. Tekstisyötteen voi purkaa yksityisellä avaimella.
+    2. Tekstisyötteen puretaan yksityisellä avaimella.
+    
+Jossain vaiheessa projektissa oli tavoite, että vertailtaisiin kirjastototeutuksia omiin toteutuksiin. Lopputuloksena saatu projekti on niin tehoton eikä kykene generoimaan kuin maksimissaan 42-bittisiä avaimia ettei tälläinen vertailu oikein olisi ollut erityisen hedelmällistä. Javan RSA-toteutus kun generoi minimissään 512-bittisiä avaimia. Tästä syystä tämä vertailu poistettiin. 
     
 ## Käyttöohje
 
