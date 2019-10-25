@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OwnBigInteger.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">raskaslabra</a> &gt; <a href="index.source.html" class="el_package">utils</a> &gt; <span class="el_source">OwnBigInteger.java</span></div><h1>OwnBigInteger.java</h1><pre class="source lang-java linenums">package utils;
+
+import java.util.Random;
+
+/**
+ * This is my implementation of BigInteger. It stores the number as a digit array. The Arithmetic operations use
+ * the paper-and-pen techniques.
+ * &lt;p&gt;
+ * This implementation copies arrays using OwnArrays.arraycopy.
+ * &lt;p&gt;
+ * Note: This implemenentation only implements the operations required for this program. It does not, for example,
+ * allow for negative multiplications or square roots.
+ */
+
+public class OwnBigInteger implements Comparable&lt;OwnBigInteger&gt; {
+
+    private int[] digits;
+
+<span class="fc" id="L19">    public static final OwnBigInteger ONE = new OwnBigInteger(&quot;1&quot;);</span>
+<span class="fc" id="L20">    public static final OwnBigInteger ZERO = new OwnBigInteger(&quot;0&quot;);</span>
+
+    /**
+     * Constructor for random number
+     *
+     * @param random a random number
+     */
+    public OwnBigInteger(Random random) {
+<span class="fc" id="L28">        this(String.valueOf(random.nextInt(1000000000)));</span>
+<span class="fc" id="L29">    }</span>
+
+
+    /**
+     * Generates a random number based on the Microsoft formula for linear congruential generator
+     * @return a random OwnBigInteger
+     */
+    public static OwnBigInteger getLargeRandom() {
+<span class="fc" id="L37">        long randomString = System.nanoTime();</span>
+<span class="fc" id="L38">        OwnBigInteger random = new OwnBigInteger(Long.toString(randomString));</span>
+<span class="fc" id="L39">        random = random.multiply(new OwnBigInteger(&quot;214013&quot;));</span>
+<span class="fc" id="L40">        random = random.add(new OwnBigInteger(&quot;2531011&quot;).mod(new OwnBigInteger(&quot;2&quot;).pow(new OwnBigInteger(&quot;31&quot;))));</span>
+<span class="fc" id="L41">        return random;</span>
+    }
+
+    /**
+     * Constructor with String value
+     *
+     * @param number String value of the number to be created
+     */
+<span class="fc" id="L49">    public OwnBigInteger(String number) {</span>
+<span class="fc" id="L50">        this.digits = new int[number.length()];</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        for (int index = 0; index &lt; number.length(); index++) {</span>
+<span class="fc" id="L52">            int digitNumberValue = Character.getNumericValue(number.charAt(index));</span>
+<span class="fc" id="L53">            digits[index] = digitNumberValue;</span>
+        }
+<span class="fc" id="L55">    }</span>
+
+    /**
+     * Constructor with digit array
+     *
+     * @param digits the digits of the number in an array form
+     */
+
+<span class="fc" id="L63">    public OwnBigInteger(int[] digits) {</span>
+<span class="fc" id="L64">        this.digits = filterZeroesFromBeginning(digits);</span>
+<span class="fc" id="L65">    }</span>
+
+    /**
+     * Shifts BigInt by n bytes
+     *
+     * @param n how many bytes are shifted
+     * @return BigIntegerImpl that has been shifted left
+     */
+
+    public OwnBigInteger shiftLeft(int n) {
+<span class="fc" id="L75">        return new OwnBigInteger(shiftLeft(this.digits, n));</span>
+    }
+
+    /**
+     * String value of the number
+     *
+     * @return String value of number
+     */
+    public String valueOf() {
+<span class="fc" id="L84">        String value = &quot;&quot;;</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">        for (int digit : digits) {</span>
+<span class="fc" id="L86">            value = value + digit;</span>
+        }
+<span class="fc" id="L88">        return value;</span>
+    }
+
+    public int[] getDigits() {
+<span class="nc" id="L92">        return this.digits;</span>
+    }
+
+    /**
+     * Adds a bigInteger to another BigInteger
+     *
+     * @param otherNumber the number to be added
+     * @return sum of two bigIntegers
+     */
+    public OwnBigInteger add(OwnBigInteger otherNumber) {
+<span class="fc" id="L102">        TwoArrayHolder holder = this.manageLongerAndShorterArrays(this, otherNumber);</span>
+<span class="fc" id="L103">        int[] biggerArray = holder.getBiggerArray();</span>
+<span class="fc" id="L104">        int[] smallerArray = holder.getSmallerArray();</span>
+<span class="fc" id="L105">        int carry = 0;</span>
+<span class="fc" id="L106">        int currentBiggerArrayIndex = 0;</span>
+<span class="fc bfc" id="L107" title="All 2 branches covered.">        for (int i = 0; i &lt; smallerArray.length; i++) {</span>
+<span class="fc" id="L108">            currentBiggerArrayIndex = biggerArray.length - 1 - i;</span>
+<span class="fc" id="L109">            biggerArray[currentBiggerArrayIndex] += carry;</span>
+<span class="fc" id="L110">            biggerArray[currentBiggerArrayIndex] += smallerArray[smallerArray.length - 1 - i];</span>
+<span class="fc bfc" id="L111" title="All 2 branches covered.">            if (biggerArray[currentBiggerArrayIndex] &gt; 9) {</span>
+<span class="fc" id="L112">                carry = 1;</span>
+<span class="fc" id="L113">                biggerArray[currentBiggerArrayIndex] -= 10;</span>
+            } else {
+<span class="fc" id="L115">                carry = 0;</span>
+            }
+        }
+<span class="fc" id="L118">        currentBiggerArrayIndex--;</span>
+
+<span class="fc bfc" id="L120" title="All 2 branches covered.">        boolean doCarry = carry == 1;</span>
+
+<span class="fc bfc" id="L122" title="All 2 branches covered.">        while (doCarry) {</span>
+<span class="fc" id="L123">            biggerArray[currentBiggerArrayIndex] += 1;</span>
+<span class="fc bfc" id="L124" title="All 2 branches covered.">            if (biggerArray[currentBiggerArrayIndex] &gt; 9) {</span>
+<span class="fc" id="L125">                biggerArray[currentBiggerArrayIndex] -= 10;</span>
+            } else {
+<span class="fc" id="L127">                doCarry = false;</span>
+            }
+<span class="fc" id="L129">            currentBiggerArrayIndex--;</span>
+        }
+<span class="fc" id="L131">        return new OwnBigInteger(biggerArray);</span>
+    }
+
+    /**
+     * Subtracts a BigInteger from BigInteger
+     * Does not support an operation where the subtracting number
+     * has more digits that the number to subtract from.
+     *
+     * @param otherNumber number that is used to subtract
+     * @return subtracted bigInteger
+     */
+    public OwnBigInteger subtract(OwnBigInteger otherNumber) {
+<span class="fc" id="L143">        TwoArrayHolder holder = this.manageLongerAndShorterArrays(this, otherNumber);</span>
+<span class="fc" id="L144">        int[] biggerArray = filterZeroesFromBeginning(holder.getBiggerArray());</span>
+<span class="fc" id="L145">        int[] smallerArray = filterZeroesFromBeginning(holder.getSmallerArray());</span>
+<span class="fc" id="L146">        int carry = 0;</span>
+<span class="fc" id="L147">        int biggerArrayIndex = 0;</span>
+<span class="fc bfc" id="L148" title="All 2 branches covered.">        for (int i = 0; i &lt; smallerArray.length; i++) {</span>
+<span class="fc" id="L149">            biggerArrayIndex = biggerArray.length - 1 - i;</span>
+<span class="fc" id="L150">            biggerArray[biggerArrayIndex] -= carry;</span>
+<span class="fc" id="L151">            biggerArray[biggerArrayIndex] -= smallerArray[smallerArray.length - 1 - i];</span>
+<span class="fc bfc" id="L152" title="All 4 branches covered.">            if (biggerArray[biggerArrayIndex] &lt; 0 &amp;&amp; biggerArrayIndex != 0) {</span>
+<span class="fc" id="L153">                carry = 1;</span>
+<span class="fc" id="L154">                biggerArray[biggerArrayIndex] += 10;</span>
+            } else {
+<span class="fc" id="L156">                carry = 0;</span>
+            }
+        }
+<span class="fc" id="L159">        biggerArrayIndex--;</span>
+
+<span class="fc bfc" id="L161" title="All 2 branches covered.">        boolean doCarry = (carry == 1);</span>
+
+<span class="fc bfc" id="L163" title="All 2 branches covered.">        while (doCarry) {</span>
+<span class="fc" id="L164">            biggerArray[biggerArrayIndex] -= 1;</span>
+<span class="fc bfc" id="L165" title="All 2 branches covered.">            if (biggerArray[biggerArrayIndex] &lt; 0) {</span>
+<span class="fc" id="L166">                biggerArray[biggerArrayIndex] += 10;</span>
+            } else {
+<span class="fc" id="L168">                doCarry = false;</span>
+            }
+<span class="fc" id="L170">            biggerArrayIndex--;</span>
+        }
+<span class="fc" id="L172">        return new OwnBigInteger(filterZeroesFromBeginning(biggerArray));</span>
+    }
+
+    /**
+     * Multiplies a BigInteger with another BigInteger
+     * It adds each number n times from smallerNumber index and then adds the resulting numbers
+     * together. Works like long multiplication.
+     *
+     * @param otherNumber number to be multiplied with
+     * @return product of BigInteger
+     */
+    public OwnBigInteger multiply(OwnBigInteger otherNumber) {
+<span class="fc" id="L184">        TwoArrayHolder holder = this.manageLongerAndShorterArrays(this, otherNumber);</span>
+<span class="fc" id="L185">        int[] biggerArray = holder.getBiggerArray();</span>
+<span class="fc" id="L186">        int[] smallerArray = holder.getSmallerArray();</span>
+<span class="fc" id="L187">        OwnBigInteger bigger = new OwnBigInteger(biggerArray);</span>
+<span class="fc" id="L188">        int[] result = new int[biggerArray.length + biggerArray.length];</span>
+<span class="fc bfc" id="L189" title="All 2 branches covered.">        for (int i = 0; i &lt; smallerArray.length; i++) {</span>
+<span class="fc" id="L190">            OwnBigInteger currentTotal = OwnBigInteger.ZERO;</span>
+<span class="fc" id="L191">            int times = smallerArray[smallerArray.length - 1 - i];</span>
+<span class="fc bfc" id="L192" title="All 2 branches covered.">            for (int j = 0; j &lt; times; j++) {</span>
+<span class="fc" id="L193">                currentTotal = currentTotal.add(bigger);</span>
+            }
+<span class="fc bfc" id="L195" title="All 2 branches covered.">            for (int j = 0; j &lt; currentTotal.digits.length; j++) {</span>
+<span class="fc" id="L196">                int resultIndex = result.length - i - j - 1;</span>
+<span class="fc" id="L197">                int totalIndex = currentTotal.digits.length - j - 1;</span>
+<span class="fc" id="L198">                result[resultIndex] += currentTotal.digits[totalIndex];</span>
+<span class="fc bfc" id="L199" title="All 2 branches covered.">                if (result[resultIndex] &gt; 9) {</span>
+<span class="fc" id="L200">                    int carry = 1;</span>
+<span class="fc" id="L201">                    result[resultIndex] -= 10;</span>
+<span class="fc" id="L202">                    result[resultIndex - 1] += carry;</span>
+                }
+            }
+        }
+<span class="fc" id="L206">        return new OwnBigInteger(filterZeroesFromBeginning(result));</span>
+    }
+
+    /**
+     * Divides a this with BigInteger
+     * Long division algorithm implemented
+     *
+     * @param dividor the dividor
+     * @return result of division
+     */
+    public OwnBigInteger divide(OwnBigInteger dividor) {
+<span class="fc" id="L217">        int[] copy = new int[this.digits.length];</span>
+<span class="fc" id="L218">        OwnArrays.arraycopy(this.digits, 0, copy, 0, this.digits.length);</span>
+<span class="fc" id="L219">        OwnBigInteger dividend = new OwnBigInteger(copy);</span>
+<span class="fc" id="L220">        int beginningIndex = 0;</span>
+<span class="fc" id="L221">        int[] result = new int[this.digits.length];</span>
+<span class="fc bfc" id="L222" title="All 2 branches covered.">        for (int endingIndex = 1; endingIndex &lt;= this.digits.length; endingIndex++) {</span>
+<span class="fc" id="L223">            int[] longDividerArray = new int[endingIndex - beginningIndex];</span>
+<span class="fc" id="L224">            OwnArrays.arraycopy(dividend.digits, beginningIndex, longDividerArray, 0, endingIndex - beginningIndex);</span>
+<span class="fc" id="L225">            OwnBigInteger currDiv = new OwnBigInteger(longDividerArray);</span>
+<span class="fc" id="L226">            int multiple = 0;</span>
+<span class="fc bfc" id="L227" title="All 2 branches covered.">            if (currDiv.compareTo(dividor) &gt;= 0) {</span>
+<span class="fc bfc" id="L228" title="All 2 branches covered.">                while (currDiv.compareTo(dividor) &gt;= 0) {</span>
+<span class="fc" id="L229">                    currDiv = currDiv.subtract(dividor);</span>
+<span class="fc" id="L230">                    multiple++;</span>
+                }
+<span class="fc bfc" id="L232" title="All 2 branches covered.">                if (currDiv.compareTo(OwnBigInteger.ZERO) == 0) {</span>
+<span class="fc" id="L233">                    beginningIndex = endingIndex;</span>
+                } else {
+<span class="fc" id="L235">                    int leftDigits = currDiv.digits.length;</span>
+<span class="fc" id="L236">                    beginningIndex = endingIndex - leftDigits;</span>
+<span class="fc" id="L237">                    OwnArrays.arraycopy(currDiv.digits, 0, dividend.digits, beginningIndex, leftDigits);</span>
+                }
+            }
+<span class="fc" id="L240">            result[endingIndex - 1] = multiple;</span>
+        }
+<span class="fc" id="L242">        return new OwnBigInteger(filterZeroesFromBeginning(result));</span>
+    }
+
+    /**
+     * Returns a mod divisor. As divide operation only returns the result without the decimal
+     * the modulo is simply originalNumber - (result*divisor)
+     *
+     * @param divisor the divisor
+     * @return modulus
+     */
+    public OwnBigInteger mod(OwnBigInteger divisor) {
+<span class="fc" id="L253">        OwnBigInteger divided = this.divide(divisor);</span>
+<span class="fc" id="L254">        return this.subtract(divided.multiply(divisor));</span>
+    }
+
+    /**
+     * Raises a number to a power
+     * Isn't actually used anymore due to refactoring. However, it is used in some performance tests.
+     *
+     * @param power the power to be raised to
+     * @return n^p
+     */
+    public OwnBigInteger pow(OwnBigInteger power) {
+<span class="fc" id="L265">        OwnBigInteger result = new OwnBigInteger(&quot;1&quot;);</span>
+<span class="fc bfc" id="L266" title="All 2 branches covered.">        if (power.equals(OwnBigInteger.ZERO)) {</span>
+<span class="fc" id="L267">            return new OwnBigInteger(&quot;1&quot;);</span>
+<span class="pc bpc" id="L268" title="1 of 2 branches missed.">        } else if (power.compareTo(OwnBigInteger.ZERO) &gt; 0) {</span>
+<span class="fc" id="L269">            OwnBigInteger newPower = power.subtract(new OwnBigInteger(&quot;1&quot;));</span>
+<span class="fc" id="L270">            return this.multiply(pow(newPower));</span>
+        }
+<span class="nc" id="L272">        return result;</span>
+    }
+
+    @Override
+    public int compareTo(OwnBigInteger other) {
+<span class="fc bfc" id="L277" title="All 2 branches covered.">        if (digits.length &gt; other.digits.length) {</span>
+<span class="fc" id="L278">            return 1;</span>
+<span class="fc bfc" id="L279" title="All 2 branches covered.">        } else if (digits.length &lt; other.digits.length) {</span>
+<span class="fc" id="L280">            return -1;</span>
+        } else {
+<span class="fc bfc" id="L282" title="All 2 branches covered.">            for (int index = 0; index &lt; digits.length; index++) {</span>
+<span class="fc bfc" id="L283" title="All 2 branches covered.">                if (digits[index] &gt; other.digits[index]) {</span>
+<span class="fc" id="L284">                    return 1;</span>
+<span class="fc bfc" id="L285" title="All 2 branches covered.">                } else if (digits[index] &lt; other.digits[index]) {</span>
+<span class="fc" id="L286">                    return -1;</span>
+                }
+            }
+        }
+<span class="fc" id="L290">        return 0;</span>
+    }
+
+    @Override
+    public boolean equals(Object o) {
+<span class="pc bpc" id="L295" title="1 of 2 branches missed.">        if (this == o) {</span>
+<span class="nc" id="L296">            return true;</span>
+        }
+<span class="pc bpc" id="L298" title="1 of 2 branches missed.">        if (o == null) {</span>
+<span class="nc" id="L299">            return false;</span>
+        }
+<span class="pc bpc" id="L301" title="1 of 2 branches missed.">        if (getClass() != o.getClass()) {</span>
+<span class="nc" id="L302">            return false;</span>
+        }
+<span class="fc" id="L304">        OwnBigInteger other = (OwnBigInteger) o;</span>
+<span class="fc bfc" id="L305" title="All 2 branches covered.">        if (this.digits.length != other.digits.length) {</span>
+<span class="fc" id="L306">            return false;</span>
+        }
+
+<span class="fc bfc" id="L309" title="All 2 branches covered.">        for (int i = 0; i &lt; this.digits.length; i++) {</span>
+<span class="fc bfc" id="L310" title="All 2 branches covered.">            if (this.digits[i] != other.digits[i]) {</span>
+<span class="fc" id="L311">                return false;</span>
+            }
+        }
+<span class="fc" id="L314">        return true;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L319">        return this.valueOf();</span>
+    }
+
+    /**
+     * Uses modular exponentiation to raise a number to it's n power and then
+     * takes its modulus.
+     *
+     * @param exponent the power to be raised to
+     * @param modulus the modulo
+     * @return a^exponent mod modulus
+     */
+
+    public OwnBigInteger modPow(OwnBigInteger exponent, OwnBigInteger modulus) {
+<span class="fc" id="L332">        OwnBigInteger base = this;</span>
+<span class="pc bpc" id="L333" title="1 of 2 branches missed.">        if (modulus.compareTo(OwnBigInteger.ONE) == 0) {</span>
+<span class="nc" id="L334">            return OwnBigInteger.ZERO;</span>
+        }
+<span class="fc" id="L336">        OwnBigInteger result = OwnBigInteger.ONE;</span>
+<span class="fc" id="L337">        base = base.mod(modulus);</span>
+<span class="fc bfc" id="L338" title="All 2 branches covered.">        while (exponent.compareTo(OwnBigInteger.ZERO) &gt; 0) {</span>
+<span class="fc bfc" id="L339" title="All 2 branches covered.">            if (exponent.mod(new OwnBigInteger(&quot;2&quot;)).compareTo(OwnBigInteger.ONE) == 0) {</span>
+<span class="fc" id="L340">                result = (result.multiply(base)).mod(modulus);</span>
+            }
+<span class="fc" id="L342">            exponent = exponent.divide(new OwnBigInteger(&quot;2&quot;));</span>
+<span class="fc" id="L343">            base = (base.multiply(base)).mod(modulus);</span>
+        }
+<span class="fc" id="L345">        return result;</span>
+    }
+
+
+    /**
+     * Helper method to ensure that smallerArray is below biggerArray in operations
+     *
+     * @param numberOne one number
+     * @param numberTwo another number
+     * @return TwoArrayHolder that stores created arrays
+     */
+
+    private TwoArrayHolder manageLongerAndShorterArrays(OwnBigInteger numberOne, OwnBigInteger numberTwo) {
+<span class="fc" id="L358">        TwoArrayHolder twoArrayHolder = new TwoArrayHolder();</span>
+<span class="fc" id="L359">        int[] longerNumber = null;</span>
+<span class="fc" id="L360">        int[] shorterNumber = null;</span>
+<span class="fc bfc" id="L361" title="All 2 branches covered.">        if (numberOne.digits.length &lt; numberTwo.digits.length) {</span>
+<span class="fc" id="L362">            longerNumber = new int[numberTwo.digits.length + 1];</span>
+<span class="fc" id="L363">            OwnArrays.arraycopy(numberTwo.digits, 0, longerNumber, 1, numberTwo.digits.length);</span>
+<span class="fc" id="L364">            shorterNumber = new int[this.digits.length];</span>
+<span class="fc" id="L365">            OwnArrays.arraycopy(this.digits, 0, shorterNumber, 0, this.digits.length);</span>
+        } else {
+<span class="fc" id="L367">            longerNumber = new int[this.digits.length + 1];</span>
+<span class="fc" id="L368">            OwnArrays.arraycopy(this.digits, 0, longerNumber, 1, this.digits.length);</span>
+<span class="fc" id="L369">            shorterNumber = new int[numberTwo.digits.length];</span>
+<span class="fc" id="L370">            OwnArrays.arraycopy(numberTwo.digits, 0, shorterNumber, 0, numberTwo.digits.length);</span>
+        }
+<span class="fc" id="L372">        twoArrayHolder.setBiggerArray(longerNumber);</span>
+<span class="fc" id="L373">        twoArrayHolder.setSmallerArray(shorterNumber);</span>
+<span class="fc" id="L374">        return twoArrayHolder;</span>
+    }
+
+    /**
+     * The arithmetic operations often copy arrays so that there are leading zeroes.
+     * As this causes problems after the number has been
+     * generated this filters them out.
+     *
+     * @param array array with possible zeroes
+     * @return a number without the leading zeroes
+     */
+
+    private int[] filterZeroesFromBeginning(int[] array) {
+<span class="fc" id="L387">        int[] arrayWithoutZeroes = array;</span>
+<span class="pc bpc" id="L388" title="1 of 2 branches missed.">        for (int i = 0; i &lt; array.length; i++) {</span>
+<span class="fc bfc" id="L389" title="All 2 branches covered.">            if (array[i] != 0) {</span>
+<span class="fc bfc" id="L390" title="All 2 branches covered.">                if (i == 0) {</span>
+<span class="fc" id="L391">                    return arrayWithoutZeroes;</span>
+                }
+<span class="fc" id="L393">                arrayWithoutZeroes = new int[array.length - i];</span>
+<span class="fc" id="L394">                OwnArrays.arraycopy(array, i, arrayWithoutZeroes, 0, arrayWithoutZeroes.length);</span>
+<span class="fc" id="L395">                return arrayWithoutZeroes;</span>
+            }
+<span class="fc bfc" id="L397" title="All 2 branches covered.">            if (i == array.length - 1) {</span>
+<span class="fc" id="L398">                return new int[1];</span>
+            }
+        }
+<span class="nc" id="L401">        return arrayWithoutZeroes;</span>
+    }
+
+
+    /**
+     * Shifts a number to left. Ends up multiplying the number
+     *
+     * @param mag the digits of the number
+     * @param n   the shift length
+     * @return number shifted n to the left
+     */
+    private String shiftLeft(int[] mag, int n) {
+<span class="fc" id="L413">        int nInts = n &gt;&gt;&gt; 5;</span>
+<span class="fc" id="L414">        int nBits = n &amp; 31;</span>
+<span class="fc" id="L415">        int magLen = mag.length;</span>
+<span class="fc" id="L416">        int[] newMag = null;</span>
+<span class="pc bpc" id="L417" title="1 of 2 branches missed.">        if (nBits == 0) {</span>
+<span class="nc" id="L418">            newMag = new int[magLen + nInts];</span>
+<span class="nc" id="L419">            OwnArrays.arraycopy(mag, 0, newMag, 0, magLen);</span>
+        } else {
+<span class="fc" id="L421">            int i = 0;</span>
+<span class="fc" id="L422">            int nBits2 = 32 - nBits;</span>
+<span class="fc" id="L423">            int highBits = mag[0] &gt;&gt;&gt; nBits2;</span>
+<span class="pc bpc" id="L424" title="1 of 2 branches missed.">            if (highBits != 0) {</span>
+<span class="nc" id="L425">                newMag = new int[magLen + nInts + 1];</span>
+<span class="nc" id="L426">                newMag[i++] = highBits;</span>
+            } else {
+<span class="fc" id="L428">                newMag = new int[magLen + nInts];</span>
+            }
+            int j;
+<span class="pc bpc" id="L431" title="1 of 2 branches missed.">            for (j = 0; j &lt; magLen - 1; newMag[i++] = mag[j++] &lt;&lt; nBits | mag[j] &gt;&gt;&gt; nBits2) {</span>
+                //not needed
+            }
+<span class="fc" id="L434">            newMag[i] = mag[j] &lt;&lt; nBits;</span>
+        }
+<span class="fc" id="L436">        StringBuilder number = new StringBuilder();</span>
+<span class="fc bfc" id="L437" title="All 2 branches covered.">        for (int i : newMag) {</span>
+<span class="fc" id="L438">            number.append(String.valueOf(i));</span>
+        }
+<span class="fc" id="L440">        return number.toString();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

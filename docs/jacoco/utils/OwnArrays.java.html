@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OwnArrays.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">raskaslabra</a> &gt; <a href="index.source.html" class="el_package">utils</a> &gt; <span class="el_source">OwnArrays.java</span></div><h1>OwnArrays.java</h1><pre class="source lang-java linenums">package utils;
+
+<span class="nc" id="L3">public class OwnArrays {</span>
+
+    /**
+     * Copies an array to another array starting from specified index and copying to
+     * a specified index for length len.
+     * @param source the source array
+     * @param sourceIndex  index where the copying begins from
+     * @param destinationArray the destination array
+     * @param destinationInt the index from where the copying to begins from
+     * @param len the length of how much is copied.
+     */
+
+    public static void arraycopy(int[] source, int sourceIndex, int[] destinationArray, int destinationInt, int len) {
+<span class="fc" id="L16">        int s = sourceIndex;</span>
+<span class="fc" id="L17">        int times = 0;</span>
+<span class="fc bfc" id="L18" title="All 2 branches covered.">        for (int a = destinationInt; s &lt; source.length; a++) {</span>
+<span class="fc bfc" id="L19" title="All 2 branches covered.">            if (times &gt;= len) {</span>
+<span class="fc" id="L20">                break;</span>
+            }
+<span class="fc" id="L22">            destinationArray[a] = source[s];</span>
+<span class="fc" id="L23">            s++;</span>
+<span class="fc" id="L24">            times++;</span>
+        }
+<span class="fc" id="L26">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

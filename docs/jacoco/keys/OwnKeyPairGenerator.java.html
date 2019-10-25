@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OwnKeyPairGenerator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">raskaslabra</a> &gt; <a href="index.source.html" class="el_package">keys</a> &gt; <span class="el_source">OwnKeyPairGenerator.java</span></div><h1>OwnKeyPairGenerator.java</h1><pre class="source lang-java linenums">package keys;
+
+
+import keys.keyimpl.OwnKeyPair;
+import keys.keyimpl.OwnPrivateKey;
+import keys.keyimpl.OwnPublicKey;
+import utils.OwnBigInteger;
+import utils.PrimeNumberGenerator;
+
+import java.util.Random;
+
+<span class="fc" id="L12">public class OwnKeyPairGenerator {</span>
+
+    /**
+     * Generates two keys: Public key with e and n and a Private key with d.
+     *
+     * @return OwnKeyPair that holds both keys
+     */
+
+    public OwnKeyPair generateKeyPair() {
+<span class="fc" id="L21">        OwnBigInteger p = PrimeNumberGenerator.generateLargePrime();</span>
+<span class="fc" id="L22">        OwnBigInteger q = PrimeNumberGenerator.generateLargePrime();</span>
+<span class="fc" id="L23">        OwnBigInteger n = findN(p, q);</span>
+<span class="fc" id="L24">        OwnBigInteger phi = getPhi(p, q);</span>
+<span class="fc" id="L25">        OwnBigInteger e = genE(phi);</span>
+<span class="fc" id="L26">        OwnBigInteger d = extendedEuclid(e, phi);</span>
+<span class="fc" id="L27">        return new OwnKeyPair(new OwnPublicKey(e, n), new OwnPrivateKey(d));</span>
+    }
+
+    /**
+     * Finds n from large prime numbers
+     *
+     * @param p a large prime number
+     * @param q a large prime number
+     * @return n
+     */
+
+    private OwnBigInteger findN(OwnBigInteger p, OwnBigInteger q) {
+<span class="fc" id="L39">        return p.multiply(q);</span>
+    }
+
+
+    /**
+     * Compute phi(pq) (Euler's totient function)
+     * phi(pq) = (p-1)(q-1)
+     *
+     * @return phi
+     */
+    private OwnBigInteger getPhi(OwnBigInteger p, OwnBigInteger q) {
+<span class="fc" id="L50">        return (p.subtract(OwnBigInteger.ONE)).multiply(q.subtract(OwnBigInteger.ONE));</span>
+    }
+
+    /**
+     * Generate E so that E != 1, e &gt;= 0 and gcd(phi, e) == 1.
+     *
+     * @param phi phi
+     * @return e
+     */
+    static OwnBigInteger genE(OwnBigInteger phi) {
+<span class="fc" id="L60">        OwnBigInteger e = OwnBigInteger.getLargeRandom();</span>
+
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">        while (e.compareTo(OwnBigInteger.ONE) &lt;= 0</span>
+<span class="pc bpc" id="L63" title="1 of 2 branches missed.">                || e.compareTo(phi) &gt;= 0</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">                || !gcd(phi, e).equals(OwnBigInteger.ONE)) {</span>
+<span class="fc" id="L65">            e = OwnBigInteger.getLargeRandom();</span>
+        }
+<span class="fc" id="L67">        return e;</span>
+    }
+
+    /**
+     * Recursively returns greatest common denominator between two numbers
+     * @param a number a
+     * @param b number b
+     * @return gcd(a, b)
+     */
+
+    static OwnBigInteger gcd(OwnBigInteger a, OwnBigInteger b) {
+<span class="fc bfc" id="L78" title="All 2 branches covered.">        if (b.equals(OwnBigInteger.ZERO)) {</span>
+<span class="fc" id="L79">            return a;</span>
+        } else {
+<span class="fc" id="L81">            return gcd(b, a.mod(b));</span>
+        }
+    }
+
+    /**
+     * Extended Euclidean algorithm to solve Bezout's identity INV(m,n)
+     * INV(m,n) = ((1 + n(m - INV(MOD(n,m),m)))/m
+     * @param m number m
+     * @param n number n
+     * @return INV(m, n)
+     */
+    static OwnBigInteger extendedEuclid(OwnBigInteger m, OwnBigInteger n) {
+        // for the formula to work 0 &lt; m &lt; n
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">        if (m.compareTo(n) &gt; 0) {</span>
+<span class="nc" id="L95">            OwnBigInteger store = n;</span>
+<span class="nc" id="L96">            n = m;</span>
+<span class="nc" id="L97">            m = store;</span>
+        }
+<span class="fc bfc" id="L99" title="All 2 branches covered.">        if (m.compareTo(OwnBigInteger.ONE) == 0) {</span>
+<span class="fc" id="L100">            return OwnBigInteger.ONE;</span>
+        }
+<span class="fc" id="L102">        OwnBigInteger d = OwnBigInteger.ONE.add(n.multiply(m.subtract(extendedEuclid(n.mod(m), m)))).divide(m);</span>
+<span class="fc" id="L103">        return d;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RSATool.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">raskaslabra</a> &gt; <a href="index.source.html" class="el_package">rsatool</a> &gt; <span class="el_source">RSATool.java</span></div><h1>RSATool.java</h1><pre class="source lang-java linenums">package rsatool;
+
+import utils.OwnBigInteger;
+import utils.asciiutil.AsciiUtil;
+import decrypter.OwnDecrypter;
+import encrypter.OwnEncrypter;
+import keys.KeyGenerator;
+import keys.keyimpl.OwnPrivateKey;
+import keys.keyimpl.OwnPublicKey;
+
+public class RSATool {
+    private KeyGenerator keyGenerator;
+    private OwnPublicKey publicKey;
+    private OwnPrivateKey privateKey;
+    private AsciiUtil asciiUtil;
+    private OwnEncrypter ownEncrypter;
+    private OwnDecrypter decrypter;
+
+    /**
+     * Constructor for RSATool.
+     * RSATool functions as a sort of facade for the algorithm
+     */
+<span class="fc" id="L23">    public RSATool() {</span>
+<span class="fc" id="L24">        this.keyGenerator = new KeyGenerator();</span>
+<span class="fc" id="L25">        this.asciiUtil = new AsciiUtil();</span>
+<span class="fc" id="L26">        this.decrypter = new OwnDecrypter();</span>
+<span class="fc" id="L27">        this.ownEncrypter = new OwnEncrypter();</span>
+
+<span class="fc" id="L29">    }</span>
+
+    private OwnPublicKey getPublicKey() {
+<span class="fc" id="L32">        return publicKey;</span>
+    }
+
+    private OwnPrivateKey getPrivateKey() {
+<span class="fc" id="L36">        return privateKey;</span>
+    }
+
+    /**
+     * Generates keys for the tool
+     */
+    public void generateKeys() {
+<span class="fc" id="L43">        keyGenerator.generateKeyPair();</span>
+<span class="fc" id="L44">        System.out.println(&quot;PublicKey: e: &quot; + keyGenerator.getPublicKey().getE() + &quot; n: &quot; + keyGenerator.getPublicKey().getN());</span>
+<span class="fc" id="L45">        this.publicKey = keyGenerator.getPublicKey();</span>
+<span class="fc" id="L46">        System.out.println(&quot;Privatekey:&quot; + keyGenerator.getPrivateKey().getPrivateKey().toString());</span>
+<span class="fc" id="L47">        this.privateKey = keyGenerator.getPrivateKey();</span>
+<span class="fc" id="L48">    }</span>
+
+
+    /**
+     * Calls encrypter to encrypt a plaintext String.
+     *
+     * @return encrypted OwnBigInteger[] of String.
+     */
+    public OwnBigInteger[] encrypt(String plainText) {
+<span class="fc" id="L57">        OwnBigInteger[] cipherAsIntArray = asciiUtil.stringToCipher(plainText);</span>
+<span class="fc" id="L58">        return ownEncrypter.encrypt(cipherAsIntArray, this.getPublicKey());</span>
+    }
+
+    /**
+     * Calls decrypter to decipher a cryptedByteArray
+     *
+     * @return decrypted OwnBigInteger[] of String.
+     */
+    public OwnBigInteger[] decrypt(OwnBigInteger[] encrypted) {
+<span class="fc" id="L67">        return decrypter.decrypt(encrypted, this.getPrivateKey(), this.getPublicKey());</span>
+    }
+
+    /**
+     * Converts decrypted OwnBigInteger-array to String
+     * @return deciphered message
+     */
+    public String cipherToString(OwnBigInteger[] decrypted) {
+<span class="fc" id="L75">        return asciiUtil.cipherToString(decrypted);</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

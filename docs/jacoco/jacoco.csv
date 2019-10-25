@@ -1,0 +1,15 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+raskaslabra,keys.keyimpl,OwnKeyPair,0,15,0,0,0,6,0,3,0,3
+raskaslabra,keys.keyimpl,OwnPublicKey,0,15,0,0,0,6,0,3,0,3
+raskaslabra,keys.keyimpl,OwnPrivateKey,0,9,0,0,0,4,0,2,0,2
+raskaslabra,default,Main,120,0,8,0,29,0,7,0,3,0
+raskaslabra,encrypter,OwnEncrypter,0,28,0,2,0,5,0,3,0,2
+raskaslabra,utils.asciiutil,AsciiUtil,0,62,0,4,0,16,0,5,0,3
+raskaslabra,utils,OwnBigInteger,57,959,9,83,11,187,10,57,1,20
+raskaslabra,utils,TwoArrayHolder,0,17,0,0,0,7,0,5,0,5
+raskaslabra,utils,OwnArrays,3,25,0,4,1,9,1,3,1,1
+raskaslabra,utils,PrimeNumberGenerator,9,161,4,20,4,34,5,13,1,5
+raskaslabra,keys,OwnKeyPairGenerator,6,108,3,9,3,24,3,10,0,7
+raskaslabra,keys,KeyGenerator,0,22,0,0,0,7,0,4,0,4
+raskaslabra,rsatool,RSATool,0,103,0,0,0,18,0,7,0,7
+raskaslabra,decrypter,OwnDecrypter,0,28,0,2,0,5,0,3,0,2
