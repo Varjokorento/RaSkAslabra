@@ -4,7 +4,7 @@
  
 Ohjelmassa on kattava yksikkötestaus, jonka rivikohtainen kattavuus on 72 prosenttia ja haarakohtainen 77 prosenttia.
 
-![alt text](https://github.com/Varjokorento/RaSkAslabra/blob/master/docs/Testausdokumentti/testaus2.PNG "Raportti")
+[Jacoco-raportti](https://varjokorento.github.io/RaSkAslabra/jacoco/)
 
 ## Integraatiotestaus
 
