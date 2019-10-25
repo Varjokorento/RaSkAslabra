@@ -33,15 +33,8 @@ Ohjelmaan voi syöttää lyhyitä, maksimissaan 40 merkkiä pitkiä, tekstipätk
 
 ### Tunnetut bugit
 
-Ohjelmassa itsessään ei ole löytynyt bugeja, mutta mvn test -komento on joskus OSX-ympäristössä jäätynyt.
+Ohjelmassa itsessään ei ole löytynyt bugeja, mutta mvn test -komento on joskus OSX-ympäristössä jäätynyt. Ohjelma on myös melko raskas, joten hitaammilla koneilla ohjelma on jäätynyt suurilla syötteillä. Ohjelma ei tue ääkkösiä. 
     
- ## Dokumentaatio
- 
- [Määritysdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/docs/Maarittelydokumentti/Maarittelydokumentti.md)       
- [Toteutusdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/docs/Toteutusdokumentti/toteutusdokumentti.md)    
-[Testausdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/docs/Testausdokumentti/testausdokumentti.md)
-
-[Javadoc](https://varjokorento.github.io/RaSkAslabra/javadocs/)
 
 ### Testaus
 
@@ -63,6 +56,14 @@ Checkstyle-raportti luodaan komennolla
 mvn jxr:jxr checkstyle:checkstyle
 ```
 Ohjelman BigInteger-luokan checkstyle-virheet on jätetty koodiin. Tämä sen vuoksi, että refaktoroituna nuo allekkain laskettavat metodit olivat hyvin vaikeita luettavia. 
+
+ ## Dokumentaatio
+ 
+ [Määritysdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/docs/Maarittelydokumentti/Maarittelydokumentti.md)       
+ [Toteutusdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/docs/Toteutusdokumentti/toteutusdokumentti.md)    
+[Testausdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/docs/Testausdokumentti/testausdokumentti.md)
+
+[Javadoc](https://varjokorento.github.io/RaSkAslabra/javadocs/)
     
 ## Viikkopalautukset
 
