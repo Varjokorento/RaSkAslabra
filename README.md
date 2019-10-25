@@ -67,17 +67,17 @@ Ohjelman OwnBigInteger-luokan checkstyle-virheet on jätetty koodiin. Tämä sen
     
 ## Viikkopalautukset
 
- [Viikkopalautus1](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Viikkopalautukset/Viikkopalautus1.md)
+ [Viikkopalautus1](https://github.com/Varjokorento/RaSkAslabra/blob/master/docs/Viikkopalautukset/Viikkopalautus1.md)
  
- [Viikkopalautus2](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Viikkopalautukset/Viikkopalautus2.md)
+ [Viikkopalautus2](https://github.com/Varjokorento/RaSkAslabra/blob/master/docs/Viikkopalautukset/Viikkopalautus2.md)
  
- [Viikkopalautus3](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Viikkopalautukset/Viikkopalautus3.md)
+ [Viikkopalautus3](https://github.com/Varjokorento/RaSkAslabra/blob/master/docs/Viikkopalautukset/Viikkopalautus3.md)
  
- [Viikkopalautus4](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Viikkopalautukset/Viikkopalautus4.md)
+ [Viikkopalautus4](https://github.com/Varjokorento/RaSkAslabra/blob/master/docs/Viikkopalautukset/Viikkopalautus4.md)
  
- [Viikkopalautus5](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Viikkopalautukset/Viikkopalautus5.md)
+ [Viikkopalautus5](https://github.com/Varjokorento/RaSkAslabra/blob/master/docs/Viikkopalautukset/Viikkopalautus5.md)
  
- [Viikkopalautus6](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Viikkopalautukset/Viikkopalautus6.md)
+ [Viikkopalautus6](https://github.com/Varjokorento/RaSkAslabra/blob/master/docs/Viikkopalautukset/Viikkopalautus6.md)
  
  
 
