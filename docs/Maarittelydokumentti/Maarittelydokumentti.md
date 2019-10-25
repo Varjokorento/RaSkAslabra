@@ -12,9 +12,7 @@ Ohjelma tekee kolme RSA-salauksen osiota.
 
   1. Generoi julkisen ja yksityisen avaimen
   2. Salaa annetun syötteen syötetyllä julkisella avaimella.
-  3. Purkaa salauksen, kun ohjelmalle syötetään yksityinen avain.
-  
-Tämän lisäksi ohjelma vertailee ilman kirjastoja tehtyä toteutusta sekä kirjastojen kanssa tehtyä toteutusta.   
+  3. Purkaa salauksen yksityisellä avaimella.
   
 ### 1. Julkisen ja yksityisen avaimen generointi
 
