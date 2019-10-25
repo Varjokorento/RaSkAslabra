@@ -55,7 +55,7 @@ Checkstyle-raportti luodaan komennolla
 ```
 mvn jxr:jxr checkstyle:checkstyle
 ```
-Ohjelman BigInteger-luokan checkstyle-virheet on jätetty koodiin. Tämä sen vuoksi, että refaktoroituna nuo allekkain laskettavat metodit olivat hyvin vaikeita luettavia. 
+Ohjelman OwnBigInteger-luokan checkstyle-virheet on jätetty koodiin. Tämä sen vuoksi, että refaktoroituna nuo allekkain laskettavat metodit olivat hyvin vaikeita luettavia. 
 
  ## Dokumentaatio
  
