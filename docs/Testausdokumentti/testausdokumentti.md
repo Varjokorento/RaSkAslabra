@@ -4,7 +4,7 @@
  
 Ohjelmassa on kattava yksikkötestaus, jonka rivikohtainen kattavuus on 72 prosenttia ja haarakohtainen 77 prosenttia.
 
-![alt text](https://github.com/Varjokorento/RaSkAslabra/blob/master/Dokumentaatio/Testausdokumentti/testaus2.PNG "Raportti")
+![alt text](https://github.com/Varjokorento/RaSkAslabra/blob/master/docs/Testausdokumentti/testaus2.PNG "Raportti")
 
 ## Integraatiotestaus
 
@@ -28,16 +28,16 @@ Alla suorituskyky käyttäen 10, 100 ja 200 bitin avaimia. Jokainen testi ajetti
 
 ##### Keygeneration
 
-![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/Dokumentaatio/Testausdokumentti/keygen.png)
+![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/docs/Testausdokumentti/keygen.png)
 
 ##### Encryption
 
 
-![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/Dokumentaatio/Testausdokumentti/Encryption.png)
+![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/docs/Testausdokumentti/Encryption.png)
 
 ##### End-To-End
 
-![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/Dokumentaatio/Testausdokumentti/EndtoEnd.png)
+![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/docs/Testausdokumentti/EndtoEnd.png)
 
 
 #### Testi käyttäen omaa satunnaislukugeneraattoria
@@ -52,7 +52,7 @@ Jokainen testi ajettiin sata kertaa ja otettiin keskiarvo.
 | Encryption     | 33 ms |  
 | End-to-End     | 1430 ms |  
 
-![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/Dokumentaatio/Testausdokumentti/42bit.png)
+![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/docs/Testausdokumentti/42bit.png)
 
 Testeissä huomasin, että avainten generoinnissa on huomattavaa varianssia ajallisessa kestossa. Koska avainten generointi on selkeästi aikaavievin vaihe, johtaa tämä myös ohjelman suorituskyvyn huomattavaan vaihteluun. Uskoisin, että vaihtelu johtuu alkuluvun generoimiseen liittyvästä sattumatekijästä. 
 
@@ -72,7 +72,7 @@ Lisäystestissä liästtiin numeroon 20000000000000000000 tuhat kertaa numero 20
 | Lisäys     | 349973ns      | 226442ns   | 1.5x                               |
 
 
-![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/Dokumentaatio/Testausdokumentti/Lisäys.png)
+![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/docs/Testausdokumentti/Lisäys.png)
 
 #### Vähennys
 
@@ -83,7 +83,7 @@ Vähennystestissä vähennettiin numerosta 20000000000000000000 tuhat kertaa num
 | Vähennys   | 4665ns        | 1160ns     | 4.0x                               |
 
 
-![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/Dokumentaatio/Testausdokumentti/vähennys.png)
+![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/docs/Testausdokumentti/vähennys.png)
 
 #### Kertolasku
 
@@ -94,7 +94,7 @@ Kertolaskutestissä kerrottiin numero 200000000000000000 tuhat kertaa numerolla 
 | Kertolasku | 116971ns      | 955ns      | 122x                               |
 
 
-![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/Dokumentaatio/Testausdokumentti/kertolasku.png)
+![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/docs/Testausdokumentti/kertolasku.png)
 
 #### Jakolasku
 
@@ -105,7 +105,7 @@ Jakolaskutestissä jaettiin numeroa 20000000000 tuhat kertaa numerolla 10 tuhat 
 | Jakolasku  | 5892ns        | 1135ns     | 5.19x                              |
 
 
-![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/Dokumentaatio/Testausdokumentti/Jakolasku.png)
+![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/docs/Testausdokumentti/Jakolasku.png)
 
 #### Jakojäännös
 
@@ -116,7 +116,7 @@ Jakojäännöstestissa otettiin numerosta 2000000000 jakojäännös luvulla 100 
 | mod        | 10005ns       | 1457ns     | 6.86x                              |
 
 
-![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/Dokumentaatio/Testausdokumentti/Jakojäännös.png)
+![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/docs/Testausdokumentti/Jakojäännös.png)
 
 #### Potenssi
 
@@ -127,7 +127,7 @@ Potenssitestissä numero 200 nostettiin potenssiin 3397 kymmenen kertaa.
 | pow        | 1571463ns     | 55ns       | 28572x                             |
 
 
-![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/Dokumentaatio/Testausdokumentti/potenssi.png)
+![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/docs/Testausdokumentti/potenssi.png)
 
 #### ModPow
 
@@ -138,5 +138,5 @@ ModPow-testissä numero 200 nostettiin potenssiin 3397 jonka jälkeen otettiin j
 | modPow     | 10434ns       | 1843ns     | 5.66x                              |
 
 
-![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/Dokumentaatio/Testausdokumentti/ModPow.png)
+![alt text](https://raw.githubusercontent.com/Varjokorento/RaSkAslabra/master/docs/Testausdokumentti/ModPow.png)
 
