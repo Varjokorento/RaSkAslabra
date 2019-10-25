@@ -17,13 +17,14 @@ public class RSAToolTest {
 
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         this.rsaTool = new RSATool();
         rsaTool.generateKeys();
     }
 
     @Test
-    public void rsaToolEncryptsAndDecryptsAGivenString() {
+    public void rsaToolEncryptsAndDecryptsAGivenString() throws Exception {
+        rsaTool.generateKeys();
         OwnBigInteger[] array = rsaTool.encrypt(testString);
         OwnBigInteger[] decrypted = rsaTool.decrypt(array);
         assertEquals(testString, rsaTool.cipherToString(decrypted));

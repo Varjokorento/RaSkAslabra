@@ -13,9 +13,10 @@ import static org.junit.Assert.assertEquals;
 public class KeyPairGeneratorImplTest {
 
     @Test
-    public void generateKeyPairGeneratesKeysThatAreKeysToEachOther() {
+    public void generateKeyPairGeneratesKeysThatAreKeysToEachOther() throws Exception {
         OwnKeyPairGenerator keyPairGenerator = new OwnKeyPairGenerator();
-        OwnKeyPair kp = keyPairGenerator.generateKeyPair();
+        OwnKeyPair kp = null;
+        kp = keyPairGenerator.generateKeyPair();
         OwnBigInteger test = new OwnBigInteger("97");
         OwnBigInteger eModN = test.modPow(kp.getPublicKey().getE(), kp.getPublicKey().getN());
         OwnBigInteger dModN = eModN.modPow(kp.getPrivateKey().getPrivateKey(), kp.getPublicKey().getN());

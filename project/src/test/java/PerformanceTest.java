@@ -20,7 +20,7 @@ public class PerformanceTest {
     }
 
     @Test
-    public void comparingKeyGenerationPerformance() throws NoSuchAlgorithmException {
+    public void comparingKeyGenerationPerformance() throws Exception {
         System.out.println("KEY-GENERATION-PERFORMANCE");
         long startTime = System.nanoTime();
         for (int i = 0; i < 1; i++) {
@@ -34,7 +34,7 @@ public class PerformanceTest {
 
 
     @Test
-    public void comparingEncryptionPerformance() throws NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, NoSuchPaddingException, IllegalBlockSizeException {
+    public void comparingEncryptionPerformance() throws Exception {
         System.out.println("ENCRYPTION PERFORMANCE");
         rsaTool.generateKeys();
         long startTime = System.nanoTime();
@@ -47,7 +47,7 @@ public class PerformanceTest {
     }
 
     @Test
-    public void comparingEndToEndPerformance() throws NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, NoSuchPaddingException, IllegalBlockSizeException {
+    public void comparingEndToEndPerformance() throws Exception {
         System.out.println("END-TO-END-PERFORMANCE");
         long startTime = System.nanoTime();
         for (int i = 0; i < 1; i++) {

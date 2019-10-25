@@ -18,13 +18,17 @@ public class OwnKeyPairGenerator {
      */
 
     public OwnKeyPair generateKeyPair() {
-        OwnBigInteger p = PrimeNumberGenerator.generateLargePrime();
-        OwnBigInteger q = PrimeNumberGenerator.generateLargePrime();
-        OwnBigInteger n = findN(p, q);
-        OwnBigInteger phi = getPhi(p, q);
-        OwnBigInteger e = genE(phi);
-        OwnBigInteger d = extendedEuclid(e, phi);
-        return new OwnKeyPair(new OwnPublicKey(e, n), new OwnPrivateKey(d));
+        while (true) {
+            OwnBigInteger p = PrimeNumberGenerator.generateLargePrime();
+            OwnBigInteger q = PrimeNumberGenerator.generateLargePrime();
+            OwnBigInteger n = findN(p, q);
+            OwnBigInteger phi = getPhi(p, q);
+            OwnBigInteger e = genE(phi);
+            if (e != null) {
+                OwnBigInteger d = extendedEuclid(e, phi);
+                return new OwnKeyPair(new OwnPublicKey(e, n), new OwnPrivateKey(d));
+            }
+        }
     }
 
     /**
@@ -58,11 +62,15 @@ public class OwnKeyPairGenerator {
      */
     static OwnBigInteger genE(OwnBigInteger phi) {
         OwnBigInteger e = OwnBigInteger.getLargeRandom();
-
+        int it = 0;
         while (e.compareTo(OwnBigInteger.ONE) <= 0
                 || e.compareTo(phi) >= 0
                 || !gcd(phi, e).equals(OwnBigInteger.ONE)) {
             e = OwnBigInteger.getLargeRandom();
+            it += 1;
+            if (it > 10000) {
+                return null;
+            }
         }
         return e;
     }

@@ -39,7 +39,7 @@ public class RSATool {
     /**
      * Generates keys for the tool
      */
-    public void generateKeys() {
+    public void generateKeys() throws Exception {
         keyGenerator.generateKeyPair();
         System.out.println("PublicKey: e: " + keyGenerator.getPublicKey().getE() + " n: " + keyGenerator.getPublicKey().getN());
         this.publicKey = keyGenerator.getPublicKey();
