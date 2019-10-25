@@ -136,7 +136,6 @@ public class OwnBigIntegerPerformanceTest {
         OwnBigInteger number = new OwnBigInteger(numberString);
         BigInteger bigInteger = new BigInteger(numberString);
         OwnBigInteger powerImpl = new OwnBigInteger(numberPow);
-        BigInteger powerBI = new BigInteger(numberPow);
         long startTime = System.nanoTime();
         for (int i = 0; i < powIterations; i++) {
             number.pow(powerImpl);
@@ -153,6 +152,7 @@ public class OwnBigIntegerPerformanceTest {
         duration = (endTime - startTime);
         System.out.println("Power took " + duration/iterations + "nanoseconds with libraries");
     }
+
 
     @Test
     public void testMulPow() {

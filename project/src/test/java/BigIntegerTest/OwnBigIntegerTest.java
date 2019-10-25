@@ -5,10 +5,20 @@ import utils.OwnBigInteger;
 
 import java.math.BigInteger;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class OwnBigIntegerTest {
+
+
+    @Test
+    public void getLargeNumberRandomsReturnsDifferentNumbers() {
+        for (int i = 0; i < 10; i++) {
+            OwnBigInteger bigInteger = OwnBigInteger.getLargeRandom();
+            OwnBigInteger anotherBigInteger = OwnBigInteger.getLargeRandom();
+            assertNotEquals(bigInteger, anotherBigInteger);
+        }
+
+    }
 
 
     @Test
@@ -135,8 +145,16 @@ public class OwnBigIntegerTest {
         BigInteger twoBI = new BigInteger("22");
         BigInteger result = twoBI.pow(75);
         OwnBigInteger newNumber = two.pow(four);
-        OwnBigInteger modulo = newNumber.mod(new OwnBigInteger("22"));
         assertEquals(result.toString(), newNumber.valueOf());
+    }
+
+    @Test
+    public void powerTestWithTwoToThirtyFive() {
+        OwnBigInteger two = new OwnBigInteger("2");
+        OwnBigInteger result = two.pow(new OwnBigInteger("31"));
+        BigInteger integer = new BigInteger("2");
+        integer = integer.pow(31);
+        assertEquals(integer.toString(), result.toString());
     }
 
 
