@@ -35,10 +35,6 @@ Ohjelmaan voi syöttää lyhyitä, maksimissaan 40 merkkiä pitkiä, tekstipätk
 
 Ohjelma ei tue ääkkösiä.
 
-Ohjelmassa on olemassa bugi, joka aiheuttaa sen jäätymisen. Uskoisin sen johtuvan alkukugeneroinnista, jossa ohjelma jää ikuiseen looppiin. Tätä bugia en kuitenkaan ole onnistunut toistamaan luotettavasti enkä myöskään sen juurisyitä ole löytänyt. Tämän tapahtuessa ainoa tapa ratkaista se on lopettaa ohjelman suorittaminen ja yrittää uudelleen.  
-
-Mvn test -komento on joskus jäätynyt. Uskoisin tämän johtuvan alkulukugeneroinnista. 
-
 Ohjelma on myös melko raskas, joten hitaammilla koneilla ohjelma on jäätynyt suurilla syötteillä.  
     
 
