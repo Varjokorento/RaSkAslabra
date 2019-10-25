@@ -33,10 +33,7 @@ Ohjelmaan voi syöttää lyhyitä, maksimissaan 40 merkkiä pitkiä, tekstipätk
 
 ### Tunnetut bugit
 
-Ohjelma ei tue ääkkösiä.
-
-Ohjelma on myös melko raskas, joten hitaammilla koneilla ohjelma on jäätynyt suurilla syötteillä.  
-    
+Ohjelma ei tue ääkkösiä.  
 
 ### Testaus
 
