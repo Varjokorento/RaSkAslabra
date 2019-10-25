@@ -4,6 +4,8 @@
 
 Tämä sovelluksen tarkoitus on implementoida RSA-salaus algoritmi Java-ohjelmointikielellä. 
 
+[Release 1.0](https://github.com/Varjokorento/RaSkAslabra/releases/tag/1.0)
+
 ## Projektin tavoite:
 
 Tavoitteena on saada aikaan ohjelma, joka tekee seuraavat asiat: 
