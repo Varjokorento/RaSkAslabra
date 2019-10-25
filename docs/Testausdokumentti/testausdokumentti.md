@@ -14,6 +14,8 @@ Tämän lisäksi on RSAToolTest.java luokka, joka tekee automaattista End-to-End
 
 ## Suorituskykytestaus
 
+Ajat osiossa "Koko algoritmin suorituskyky" ovat millisekunteja ja ajat osiossa BigIntegerin testaus ovat nanosekunneissa.
+
 ### Koko algoritmin suorituskyky
 
 Suorituskykytestausta on tehty koneellisesti. Testauksessa kryptattiin viesti 'message'. Testeissä otettiin pois kaikki testattavissa metodeissa tehdyt tulostukset. 
