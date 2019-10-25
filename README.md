@@ -15,6 +15,34 @@ Tavoitteena on saada aikaan ohjelma, joka tekee seuraavat asiat:
     
 ## Käyttöohje
 
+
+### Ohjelman ajo
+
+Ohjelman voi ladata Release-linkistä. Ohjelma on suoritettava jar-tiedosto. Ohjelmaa on testattu OSX- sekä Windows-ympäristöissä.
+
+[Release 1.0](https://github.com/Varjokorento/RaSkAslabra/releases/tag/1.0)
+
+
+```
+java -jar *jartiedoston_nimi*.jar
+```
+
+### Ohjelman käyttö
+
+Ohjelmaan voi syöttää lyhyitä, maksimissaan 40 merkkiä pitkiä, tekstipätkiä, jotka ohjelma sitten salaa numeroiksi. Syöttämällä "exit" ohjelma lopettaa suorituksen.
+
+### Tunnetut bugit
+
+Ohjelmassa itsessään ei ole löytynyt bugeja, mutta mvn test -komento on joskus OSX-ympäristössä jäätynyt.
+    
+ ## Dokumentaatio
+ 
+ [Määritysdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/docs/Maarittelydokumentti/Maarittelydokumentti.md)       
+ [Toteutusdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/docs/Toteutusdokumentti/toteutusdokumentti.md)    
+[Testausdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/docs/Testausdokumentti/testausdokumentti.md)
+
+[Javadoc](https://varjokorento.github.io/RaSkAslabra/javadocs/)
+
 ### Testaus
 
 Testit suoritetaan komennolla. Varoitus: Testit vievät jonkin aikaa. 
@@ -35,29 +63,6 @@ Checkstyle-raportti luodaan komennolla
 mvn jxr:jxr checkstyle:checkstyle
 ```
 Ohjelman BigInteger-luokan checkstyle-virheet on jätetty koodiin. Tämä sen vuoksi, että refaktoroituna nuo allekkain laskettavat metodit olivat hyvin vaikeita luettavia. 
-
-### Ohjelman ajo
-
-Ohjelman voi ladata Release-linkistä. Ohjelma on suoritettava jar-tiedosto. 
-
-[Release 1.0](https://github.com/Varjokorento/RaSkAslabra/releases/tag/1.0)
-
-
-```
-java -jar *jartiedoston_nimi*.jar
-```
-
-### Ohjelman käyttö
-
-Ohjelmaan voi syöttää lyhyitä, maksimissaan 40 merkkiä pitkiä, tekstipätkiä, jotka ohjelma sitten salaa numeroiksi. Syöttämällä "exit" ohjelma lopettaa suorituksen.
-    
- ## Dokumentaatio
- 
- [Määritysdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/docs/Maarittelydokumentti/Maarittelydokumentti.md)       
- [Toteutusdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/docs/Toteutusdokumentti/toteutusdokumentti.md)    
-[Testausdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/docs/Testausdokumentti/testausdokumentti.md)
-
-[Javadoc](https://varjokorento.github.io/RaSkAslabra/javadocs/)
     
 ## Viikkopalautukset
 
