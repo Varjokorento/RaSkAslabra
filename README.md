@@ -4,6 +4,8 @@
 
 Tämä sovelluksen tarkoitus on implementoida RSA-salaus algoritmi Java-ohjelmointikielellä. 
 
+[Release 1.0](https://github.com/Varjokorento/RaSkAslabra/releases/tag/1.0)
+
 ## Projektin tavoite:
 
 Tavoitteena on saada aikaan ohjelma, joka tekee seuraavat asiat: 
@@ -12,6 +14,33 @@ Tavoitteena on saada aikaan ohjelma, joka tekee seuraavat asiat:
     2. Tekstisyötteen voi purkaa yksityisellä avaimella.
     
 ## Käyttöohje
+
+
+### Ohjelman ajo
+
+Ohjelman voi ladata Release-linkistä. Ohjelma on suoritettava jar-tiedosto. Ohjelmaa on testattu OSX- sekä Windows-ympäristöissä.
+
+[Release 1.0](https://github.com/Varjokorento/RaSkAslabra/releases/tag/1.0)
+
+
+```
+java -jar *jartiedoston_nimi*.jar
+```
+
+### Ohjelman käyttö
+
+Ohjelmaan voi syöttää lyhyitä, maksimissaan 40 merkkiä pitkiä, tekstipätkiä, jotka ohjelma sitten salaa numeroiksi. Syöttämällä "exit" ohjelma lopettaa suorituksen.
+
+### Tunnetut bugit
+
+Ohjelma ei tue ääkkösiä.
+
+Ohjelmassa on olemassa bugi, joka aiheuttaa sen jäätymisen. Uskoisin sen johtuvan alkukugeneroinnista, jossa ohjelma jää ikuiseen looppiin. Tätä bugia en kuitenkaan ole onnistunut toistamaan luotettavasti enkä myöskään sen juurisyitä ole löytänyt. Tämän tapahtuessa ainoa tapa ratkaista se on lopettaa ohjelman suorittaminen ja yrittää uudelleen.  
+
+Mvn test -komento on joskus jäätynyt. Uskoisin tämän johtuvan alkulukugeneroinnista. 
+
+Ohjelma on myös melko raskas, joten hitaammilla koneilla ohjelma on jäätynyt suurilla syötteillä.  
+    
 
 ### Testaus
 
@@ -34,18 +63,6 @@ mvn jxr:jxr checkstyle:checkstyle
 ```
 Ohjelman BigInteger-luokan checkstyle-virheet on jätetty koodiin. Tämä sen vuoksi, että refaktoroituna nuo allekkain laskettavat metodit olivat hyvin vaikeita luettavia. 
 
-### Ohjelman ajo
-
-Ohjelman voi ladata Release-linkistä. Ohjelma on suoritettava jar-tiedosto. 
-
-```
-java -jar *jartiedoston_nimi*.jar
-```
-
-### Ohjelman käyttö
-
-Ohjelmaan voi syöttää lyhyitä tekstipätkiä, jotka ohjelma sitten salaa numeroiksi. Syöttämällä "exit" ohjelma lopettaa suorituksen.
-    
  ## Dokumentaatio
  
  [Määritysdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/docs/Maarittelydokumentti/Maarittelydokumentti.md)       
@@ -53,13 +70,6 @@ Ohjelmaan voi syöttää lyhyitä tekstipätkiä, jotka ohjelma sitten salaa num
 [Testausdokumentti](https://github.com/Varjokorento/RaSkAslabra/blob/master/docs/Testausdokumentti/testausdokumentti.md)
 
 [Javadoc](https://varjokorento.github.io/RaSkAslabra/javadocs/)
-
-## Huomio tarkastajalle:
-
-Viikkopalautuksissa olen suunnitellut, että tekisin vertailuja Javan RSA-algoritmin kirjastototeutukselle. Tätä ei ollut alkuperäisessä määrittelyssäni ja tämä idea tavallaan tuli kesken kurssin. Tekemäni lopputulos on kuitenkin sen verran tehoton, etteivät vertailut olisi olleet erityisen mielekkäitä. Näin ollen poistin kirjastototeutuksen kokonaan ohjelmasta. Mielestäni ei ollut järkeä vertailla ohjelmaa, joka pystyy luomaan vain maksimissaan 100-bittisen avaimen ohjelmaan, joka voi luoda 1024-bittisen, koska vertailut eivät oikeastaan kerro mitään muuta, kuin että Javan versio on huomattavasti parempi. 
-
-Tämän sijaan BigInteger-luokan ja OwnBigInteger-luokan performansseja vertaillaan. 
-    
     
 ## Viikkopalautukset
 
